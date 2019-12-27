@@ -11,8 +11,17 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<build>
-		<!-- <sourceDirectory>src</sourceDirectory> <resources> <resource> <directory>src</directory> 
-			<excludes> <exclude>**/*.java</exclude> </excludes> </resource> </resources> -->
+		<!-- 
+		<sourceDirectory>src</sourceDirectory> 
+		<resources> 
+			<resource> 
+				<directory>src</directory> 
+				<excludes> 
+					<exclude>**/*.java</exclude> 
+				</excludes> 
+			</resource> 
+		</resources> 
+		-->
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -65,6 +74,11 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 			<version>3.9</version>
+		</dependency>
+		<dependency>
+		    <groupId>commons-io</groupId>
+		    <artifactId>commons-io</artifactId>
+		    <version>2.6</version>
 		</dependency>
 	</dependencies>
 </project>

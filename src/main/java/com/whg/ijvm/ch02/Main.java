@@ -1,4 +1,4 @@
-package com.whg.ijvm.ch01;
+package com.whg.ijvm.ch02;
 
 import java.util.Arrays;
 
