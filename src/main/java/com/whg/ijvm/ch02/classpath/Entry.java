@@ -2,13 +2,14 @@ package com.whg.ijvm.ch02.classpath;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.zip.ZipException;
 
 public interface Entry {
 
-	byte[] readClass(String className) throws IOException;
+	byte[] readClass(String className);
 	
-	default Entry newEntry(String path){
-		if(path.contains(File.separator)){
+	static Entry newEntry(String path){
+		if(path.contains(File.pathSeparator)){
 			return new CompositeEntry(path);
 		}
 		if(path.contains("\\*")){

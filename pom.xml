@@ -41,7 +41,7 @@
 					</descriptorRefs>
 					<archive>
 						<manifest>
-							<mainClass>com.whg.ijvm.ch01.Main</mainClass>
+							<mainClass>com.whg.ijvm.ch02.Main</mainClass>
 						</manifest>
 					</archive>
 					<finalName>ijvm</finalName>
@@ -80,5 +80,12 @@
 		    <artifactId>commons-io</artifactId>
 		    <version>2.6</version>
 		</dependency>
+		<!-- 
+		<dependency>
+			<groupId>org.apache.ant</groupId>
+			<artifactId>ant</artifactId>
+			<version>1.9.7</version>
+		</dependency>
+		 -->
 	</dependencies>
 </project>

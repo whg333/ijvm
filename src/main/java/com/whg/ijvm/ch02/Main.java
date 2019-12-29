@@ -6,7 +6,7 @@ import com.beust.jcommander.JCommander;
 
 public class Main {
 
-	//java -jar ijvm-jar-with-dependencies.jar -cp foo/bar MyApp arg1 arg2
+	//java -jar ijvm-jar-with-dependencies.jar -Xjre "C:\Program Files\Java\jdk1.8.0_51\jre" java.lang.Object
 	public static void main(String[] args) {
 		JvmCmder jvmCmder = new JvmCmder();
 		JCommander jCommander = JCommander.newBuilder().addObject(jvmCmder).build();
