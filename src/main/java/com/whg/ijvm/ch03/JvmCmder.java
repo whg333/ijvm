@@ -74,7 +74,8 @@ public class JvmCmder {
 	private String[] unsignedBytes(byte[] bytes){
 		String[] uints = new String[bytes.length];
 		for(int i=0;i<bytes.length;i++){
-			uints[i] = Integer.toHexString(Byte.toUnsignedInt(bytes[i])).toUpperCase();
+			String hex = Integer.toHexString(Byte.toUnsignedInt(bytes[i])).toUpperCase();
+			uints[i] = hex.length() == 1 ? "0"+hex : hex;
 		}
 		return uints;
 	}

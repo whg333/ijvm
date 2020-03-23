@@ -38,13 +38,29 @@ public class ClassFile {
 	
 	private void readAndCheckMagic(ClassReader reader){
 		magic = reader.readUint32();
-		if(magic.value() != Integer.toUnsignedLong(0xCAFEBABE)){
-			throw new ClassFormatError("magic error!");
+		long magicVal = magic.value();
+		String magicValHexStr = Long.toHexString(magicVal).toUpperCase();
+		System.out.println("magic="+magicValHexStr);
+		if(magicVal != Integer.toUnsignedLong(0xCAFEBABE)){
+			throw new ClassFormatError("magic error!"+magicValHexStr);
 		}
 	}
 	
 	private void readAndCheckVersion(ClassReader reader){
-		
+		minorVersion = reader.readUint16();
+		majorVersion = reader.readUint16();
+		int majorVerVal = majorVersion.value();
+		int minorVerVal = minorVersion.value();
+		String version = majorVerVal+"."+minorVerVal;
+		System.out.println("version="+version);
+		if(majorVerVal == 45){
+			return;
+		}
+		if(majorVerVal >= 46 && majorVerVal <= 52 
+				&& minorVerVal == 0){
+			return;
+		}
+		throw new UnsupportedClassVersionError("version error!"+version);
 	}
 	
 	private ConstantPool readConstantPool(ClassReader reader){

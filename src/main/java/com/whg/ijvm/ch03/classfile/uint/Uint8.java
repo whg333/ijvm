@@ -8,7 +8,7 @@ public class Uint8 {
 		this.buf = buf;
 	}
 	
-	public int value() {
+	public short value() {
 		int firstByte = (0x000000FF & ((int)buf[0]));
 		short anUnsignedByte = (short)firstByte;
 		return anUnsignedByte;
