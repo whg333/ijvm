@@ -26,13 +26,13 @@ public class ClassFile {
 	private void read(ClassReader reader){
 		readAndCheckMagic(reader);
 		readAndCheckVersion(reader);
-		constantPool = readConstantPool(reader);
+		constantPool = ConstantPool.readConstantPool(reader);
 		accessFlags = reader.readUint16();
 		thisClass = reader.readUint16();
 		superClass = reader.readUint16();
 		interfaces = reader.readUint16s();
-		fields = readMembers(reader, constantPool);
-		methods = readMembers(reader, constantPool);
+		fields = MemberInfo.readMembers(reader, constantPool);
+		methods = MemberInfo.readMembers(reader, constantPool);
 		attributes = readAttributes(reader, constantPool);
 	}
 	
@@ -61,14 +61,6 @@ public class ClassFile {
 			return;
 		}
 		throw new UnsupportedClassVersionError("version error!"+version);
-	}
-	
-	private ConstantPool readConstantPool(ClassReader reader){
-		return new ConstantPool();
-	}
-	
-	private MemberInfo[] readMembers(ClassReader reader, ConstantPool constantPool){
-		return new MemberInfo[0];
 	}
 	
 	private AttributeInfo[] readAttributes(ClassReader reader, ConstantPool constantPool){

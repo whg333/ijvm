@@ -1,5 +1,6 @@
 package com.whg.ijvm.ch03.classfile.uint;
 
+@Deprecated
 public class Uint64 {
 
 	private final byte[] data;

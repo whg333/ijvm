@@ -1,7 +1,6 @@
 package com.whg.ijvm.ch03.classfile;
 
 import java.util.LinkedList;
-import java.util.List;
 
 import com.whg.ijvm.ch03.classfile.uint.Uint16;
 import com.whg.ijvm.ch03.classfile.uint.Uint32;
@@ -30,7 +29,8 @@ public class ClassReader {
 	public Uint32 readUint32(){
 		return new Uint32(readBytes(4));
 	}
-	
+
+	@Deprecated
 	public Uint64 readUint64(){
 		return new Uint64(readBytes(8));
 	}
