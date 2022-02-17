@@ -45,7 +45,7 @@ public class ClassReader {
 		return result;
 	}
 	
-	private byte[] readBytes(int length){
+	public byte[] readBytes(int length){
 		byte[] result = new byte[length];
 		for(int i=0;i<length;i++){
 			result[i] = bytes.removeFirst();
