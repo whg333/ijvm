@@ -10,7 +10,7 @@ public class ConstantStringInfo implements ConstantInfo {
     ConstantPool cp;
     Uint16 stringIndex;
 
-    ConstantStringInfo(ConstantPool cp){
+    public ConstantStringInfo(ConstantPool cp){
         this.cp = cp;
     }
 

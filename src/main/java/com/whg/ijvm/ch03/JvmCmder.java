@@ -9,7 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.internal.Console;
-import com.whg.ijvm.ch02.classpath.Classpath;
+import com.whg.ijvm.ch03.classpath.Classpath;
 import com.whg.ijvm.ch03.classfile.ClassFile;
 
 public class JvmCmder {
@@ -57,7 +57,7 @@ public class JvmCmder {
 		console.println(info);
 		
 		clazz = clazz.replaceAll("\\.", "/");
-//		clazz = RegExUtils.replaceAll(clazz, "/.", "////");
+		// clazz = RegExUtils.replaceAll(clazz, "/.", "////");
 		byte[] bytes = cp.readClass(clazz);
 		String[] unsignedBytes = unsignedBytes(bytes);
 		if(bytes == null){
@@ -67,7 +67,8 @@ public class JvmCmder {
 		}
 		console.println(info);
 		if(bytes != null){
-			ClassFile.parse(bytes);
+			ClassFile classFile = ClassFile.parse(bytes);
+			classFile.printInfo();
 		}
 	}
 	

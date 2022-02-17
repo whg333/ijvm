@@ -19,6 +19,7 @@ public enum ConstantTag {
     ;
 
     public int code;
+
     ConstantTag(int code){
         this.code = code;
     }
@@ -29,7 +30,7 @@ public enum ConstantTag {
                 return tag;
             }
         }
-        throw new IllegalArgumentException("ConstantTag code="+code);
+        throw new IllegalArgumentException("Not Found ConstantTag code="+code);
     }
 
 }

@@ -1,5 +1,6 @@
 package com.whg.ijvm.ch03.classfile;
 
+import com.whg.ijvm.ch03.classfile.attribute.AttributeInfo;
 import com.whg.ijvm.ch03.classfile.uint.Uint16;
 
 public class MemberInfo {
@@ -25,7 +26,7 @@ public class MemberInfo {
 			reader.readUint16(), 
 			reader.readUint16(), 
 			reader.readUint16(),
-			null//readAttributes(reader, constantPool)
+			ClassFile.readAttributes(reader, constantPool)
 		);
 	}
 	

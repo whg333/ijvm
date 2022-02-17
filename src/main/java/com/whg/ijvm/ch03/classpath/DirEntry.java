@@ -16,6 +16,7 @@ public class DirEntry implements Entry {
 
 	@Override
 	public byte[] readClass(String className) {
+		// System.out.println(Thread.currentThread().getContextClassLoader().getResource(".").getPath());
 		// String fullName = absDir + File.separator +className;
 		// String fullName = StringUtils.joinWith(File.separator, absDir, className);
 		String fullName = FilePath.join(absDir, className);
