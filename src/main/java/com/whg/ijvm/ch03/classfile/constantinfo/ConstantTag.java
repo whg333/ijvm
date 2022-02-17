@@ -18,15 +18,12 @@ public enum ConstantTag {
     InvokeDynamic(18),
     ;
 
-    public short code;
+    public int code;
     ConstantTag(int code){
-        this((short)code);
-    }
-    ConstantTag(short code){
         this.code = code;
     }
 
-    public static ConstantTag valueOf(short code){
+    public static ConstantTag valueOf(int code){
         for(ConstantTag tag: values()){
             if(tag.code == code){
                 return tag;

@@ -45,5 +45,6 @@ public interface ConstantInfo {
             case InvokeDynamic:
                 break;
         }
+        return null;
     }
 }

@@ -1,7 +1,10 @@
 package com.whg.ijvm.ch03.classfile;
 
 import com.whg.ijvm.ch03.Pair;
+import com.whg.ijvm.ch03.classfile.constantinfo.ConstantClassInfo;
 import com.whg.ijvm.ch03.classfile.constantinfo.ConstantInfo;
+import com.whg.ijvm.ch03.classfile.constantinfo.NameAndTypeInfo;
+import com.whg.ijvm.ch03.classfile.constantinfo.string.ConstantUtf8Info;
 import com.whg.ijvm.ch03.classfile.uint.Uint16;
 
 public class ConstantPool {
@@ -9,12 +12,10 @@ public class ConstantPool {
 	private ConstantInfo[] infos;
 	
 	static ConstantPool readConstantPool(ClassReader reader){
-		int cpCount = reader.readUint16().value();
-
-		return null;
+		return new ConstantPool(reader);
 	}
 
-	public ConstantPool(ClassReader reader){
+	private ConstantPool(ClassReader reader){
 		int cpCount = reader.readUint16().value();
 		infos = new ConstantInfo[cpCount];
 		for(int i=1;i<cpCount;i++){
@@ -30,20 +31,23 @@ public class ConstantPool {
 		return null;
 	}
 	
-	public ConstantInfo getConstantInfo(Uint16 index){
-		return infos[index.value()];
+	public <T extends ConstantInfo> T getConstantInfo(Uint16 index){
+		return (T)(infos[index.value()]);
 	}
 	
-	public Pair<String> getNameAndType(Uint16 index){
-		return Pair.of(null, null);
+	public Pair<String, String> getNameAndType(Uint16 index){
+		NameAndTypeInfo info = getConstantInfo(index);
+		return Pair.of(getUtf8(info.nameIndex), getUtf8(info.descriptorIndex));
 	}
 
 	public String getClassName(Uint16 index) {
-		return null;
+		ConstantClassInfo info = getConstantInfo(index);
+		return getUtf8(info.nameIndex);
 	}
 
 	public String getUtf8(Uint16 index) {
-		return null;
+		ConstantUtf8Info info = getConstantInfo(index);
+		return info.str;
 	}
 
 }
