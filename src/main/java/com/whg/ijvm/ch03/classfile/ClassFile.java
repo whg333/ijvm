@@ -126,6 +126,11 @@ public class ClassFile {
 			sb.append(String.format("\t%s\n", method.getName()));
 		}
 
+		sb.append(String.format("attributes count : %d\n", attributes.length));
+		for(AttributeInfo attribute: attributes){
+			sb.append(String.format("\t%s\n", attribute.getName()));
+		}
+
 		System.out.println(sb);
 	}
 

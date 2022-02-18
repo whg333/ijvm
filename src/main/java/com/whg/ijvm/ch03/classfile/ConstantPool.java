@@ -1,10 +1,10 @@
 package com.whg.ijvm.ch03.classfile;
 
 import com.whg.ijvm.ch03.Pair;
-import com.whg.ijvm.ch03.classfile.constantinfo.ConstantClassInfo;
-import com.whg.ijvm.ch03.classfile.constantinfo.ConstantInfoFactory;
 import com.whg.ijvm.ch03.classfile.constantinfo.ConstantInfo;
-import com.whg.ijvm.ch03.classfile.constantinfo.NameAndTypeInfo;
+import com.whg.ijvm.ch03.classfile.constantinfo.ConstantInfoFactory;
+import com.whg.ijvm.ch03.classfile.constantinfo.member.ConstantClassInfo;
+import com.whg.ijvm.ch03.classfile.constantinfo.member.NameAndTypeInfo;
 import com.whg.ijvm.ch03.classfile.constantinfo.numeric.ConstantDoubleInfo;
 import com.whg.ijvm.ch03.classfile.constantinfo.numeric.ConstantLongInfo;
 import com.whg.ijvm.ch03.classfile.constantinfo.string.ConstantUtf8Info;
@@ -36,12 +36,12 @@ public class ConstantPool {
 	
 	public Pair<String, String> getNameAndType(Uint16 index){
 		NameAndTypeInfo info = getConstantInfo(index);
-		return Pair.of(getUtf8(info.nameIndex), getUtf8(info.descriptorIndex));
+		return info.getNameAndType();
 	}
 
 	public String getClassName(Uint16 index) {
 		ConstantClassInfo info = getConstantInfo(index);
-		return getUtf8(info.nameIndex);
+		return info.getName();
 	}
 
 	public String getUtf8(Uint16 index) {

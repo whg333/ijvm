@@ -14,4 +14,8 @@ public abstract class AbstractAttribute implements AttributeInfo{
         this.cp = cp;
     }
 
+    public String getName(){
+        return name;
+    }
+
 }

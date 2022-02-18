@@ -1,15 +1,16 @@
-package com.whg.ijvm.ch03.classfile.constantinfo;
+package com.whg.ijvm.ch03.classfile.constantinfo.member;
 
 import com.whg.ijvm.ch03.classfile.ClassReader;
 import com.whg.ijvm.ch03.classfile.ConstantPool;
+import com.whg.ijvm.ch03.classfile.constantinfo.ConstantInfo;
 import com.whg.ijvm.ch03.classfile.uint.Uint16;
 
-public class ConstantClassInfo implements ConstantInfo{
+public class ConstantClassInfo implements ConstantInfo {
 
     ConstantPool cp;
-    public Uint16 nameIndex;
+    Uint16 nameIndex;
 
-    ConstantClassInfo(ConstantPool cp){
+    public ConstantClassInfo(ConstantPool cp){
         this.cp = cp;
     }
 

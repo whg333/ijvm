@@ -2,9 +2,7 @@ package com.whg.ijvm.ch03.classfile.constantinfo;
 
 import com.whg.ijvm.ch03.classfile.ClassReader;
 import com.whg.ijvm.ch03.classfile.ConstantPool;
-import com.whg.ijvm.ch03.classfile.constantinfo.member.FieldRefInfo;
-import com.whg.ijvm.ch03.classfile.constantinfo.member.InterfaceMethodRefInfo;
-import com.whg.ijvm.ch03.classfile.constantinfo.member.MemberRefInfo;
+import com.whg.ijvm.ch03.classfile.constantinfo.member.*;
 import com.whg.ijvm.ch03.classfile.constantinfo.numeric.ConstantDoubleInfo;
 import com.whg.ijvm.ch03.classfile.constantinfo.numeric.ConstantFloatInfo;
 import com.whg.ijvm.ch03.classfile.constantinfo.numeric.ConstantIntegerInfo;
@@ -27,26 +25,29 @@ public class ConstantInfoFactory {
         switch (constantTag) {
             case Clazz:
                 return new ConstantClassInfo(cp);
+            case NameAndType:
+                return new NameAndTypeInfo(cp);
             case FieldRef:
                 return new FieldRefInfo(cp);
             case MethodRef:
                 return new MemberRefInfo(cp);
             case InterfaceMethodRef:
                 return new InterfaceMethodRefInfo(cp);
+
             case String:
                 return new ConstantStringInfo(cp);
-            case Integer:
-                return new ConstantIntegerInfo();
-            case Float:
-                return new ConstantFloatInfo();
-            case Long:
-                return new ConstantLongInfo();
-            case Double:
-                return new ConstantDoubleInfo();
-            case NameAndType:
-                return new NameAndTypeInfo();
             case Utf8:
                 return new ConstantUtf8Info();
+
+            case Integer:
+                return new ConstantIntegerInfo();
+            case Long:
+                return new ConstantLongInfo();
+            case Float:
+                return new ConstantFloatInfo();
+            case Double:
+                return new ConstantDoubleInfo();
+
             case MethodHandle:
             case MethodType:
             case InvokeDynamic:
