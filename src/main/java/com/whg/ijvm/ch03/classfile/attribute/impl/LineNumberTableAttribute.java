@@ -1,14 +1,15 @@
-package com.whg.ijvm.ch03.classfile.attribute;
+package com.whg.ijvm.ch03.classfile.attribute.impl;
 
 import com.whg.ijvm.ch03.classfile.ClassReader;
 import com.whg.ijvm.ch03.classfile.ConstantPool;
+import com.whg.ijvm.ch03.classfile.attribute.AbstractAttribute;
 import com.whg.ijvm.ch03.classfile.attribute.table.LineNumberTableEntry;
 
-public class LineNumberTableAttribute extends AbstractAttribute{
+public class LineNumberTableAttribute extends AbstractAttribute {
 
     LineNumberTableEntry[] lineNumberTable;
 
-    LineNumberTableAttribute(String name, int length, ConstantPool cp) {
+    public LineNumberTableAttribute(String name, int length, ConstantPool cp) {
         super(name, length, cp);
     }
 

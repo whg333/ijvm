@@ -1,14 +1,15 @@
-package com.whg.ijvm.ch03.classfile.attribute;
+package com.whg.ijvm.ch03.classfile.attribute.impl;
 
 import com.whg.ijvm.ch03.classfile.ClassReader;
 import com.whg.ijvm.ch03.classfile.ConstantPool;
+import com.whg.ijvm.ch03.classfile.attribute.AbstractAttribute;
 import com.whg.ijvm.ch03.classfile.uint.Uint16;
 
-public class ConstantValueAttribute extends AbstractAttribute{
+public class ConstantValueAttribute extends AbstractAttribute {
 
     private Uint16 constantValueIndex;
 
-    ConstantValueAttribute(String name, int length, ConstantPool cp) {
+    public ConstantValueAttribute(String name, int length, ConstantPool cp) {
         super(name, length, cp);
     }
 

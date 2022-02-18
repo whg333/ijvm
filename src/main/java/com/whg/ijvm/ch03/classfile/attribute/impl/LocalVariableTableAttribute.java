@@ -1,14 +1,15 @@
-package com.whg.ijvm.ch03.classfile.attribute;
+package com.whg.ijvm.ch03.classfile.attribute.impl;
 
 import com.whg.ijvm.ch03.classfile.ClassReader;
 import com.whg.ijvm.ch03.classfile.ConstantPool;
+import com.whg.ijvm.ch03.classfile.attribute.AbstractAttribute;
 import com.whg.ijvm.ch03.classfile.attribute.table.LocalVariableTableEntry;
 
-public class LocalVariableTableAttribute extends AbstractAttribute{
+public class LocalVariableTableAttribute extends AbstractAttribute {
 
     LocalVariableTableEntry[] localVariableTable;
 
-    LocalVariableTableAttribute(String name, int length, ConstantPool cp) {
+    public LocalVariableTableAttribute(String name, int length, ConstantPool cp) {
         super(name, length, cp);
     }
 

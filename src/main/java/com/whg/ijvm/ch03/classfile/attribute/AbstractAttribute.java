@@ -8,7 +8,7 @@ public abstract class AbstractAttribute implements AttributeInfo{
     protected int length;
     protected ConstantPool cp;
 
-    AbstractAttribute(String name, int length, ConstantPool cp){
+    public AbstractAttribute(String name, int length, ConstantPool cp){
         this.name = name;
         this.length = length;
         this.cp = cp;

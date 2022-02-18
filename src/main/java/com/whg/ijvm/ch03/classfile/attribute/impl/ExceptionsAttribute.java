@@ -1,14 +1,15 @@
-package com.whg.ijvm.ch03.classfile.attribute;
+package com.whg.ijvm.ch03.classfile.attribute.impl;
 
 import com.whg.ijvm.ch03.classfile.ClassReader;
 import com.whg.ijvm.ch03.classfile.ConstantPool;
+import com.whg.ijvm.ch03.classfile.attribute.AbstractAttribute;
 import com.whg.ijvm.ch03.classfile.uint.Uint16;
 
-public class ExceptionsAttribute extends AbstractAttribute{
+public class ExceptionsAttribute extends AbstractAttribute {
 
     Uint16[] exceptionIndexTable;
 
-    ExceptionsAttribute(String name, int length, ConstantPool cp) {
+    public ExceptionsAttribute(String name, int length, ConstantPool cp) {
         super(name, length, cp);
     }
 

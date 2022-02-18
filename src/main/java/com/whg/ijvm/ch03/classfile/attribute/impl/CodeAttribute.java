@@ -1,12 +1,14 @@
-package com.whg.ijvm.ch03.classfile.attribute;
+package com.whg.ijvm.ch03.classfile.attribute.impl;
 
 import com.whg.ijvm.ch03.classfile.ClassFile;
 import com.whg.ijvm.ch03.classfile.ClassReader;
 import com.whg.ijvm.ch03.classfile.ConstantPool;
+import com.whg.ijvm.ch03.classfile.attribute.AbstractAttribute;
+import com.whg.ijvm.ch03.classfile.attribute.AttributeInfo;
 import com.whg.ijvm.ch03.classfile.attribute.table.ExceptionTableEntry;
 import com.whg.ijvm.ch03.classfile.uint.Uint16;
 
-public class CodeAttribute extends AbstractAttribute{
+public class CodeAttribute extends AbstractAttribute {
 
     Uint16 maxStack;
     Uint16 maxLocals;
@@ -14,7 +16,7 @@ public class CodeAttribute extends AbstractAttribute{
     ExceptionTableEntry[] exceptionTable;
     AttributeInfo[] attributes;
 
-    CodeAttribute(String name, int length, ConstantPool cp) {
+    public CodeAttribute(String name, int length, ConstantPool cp) {
         super(name, length, cp);
     }
 

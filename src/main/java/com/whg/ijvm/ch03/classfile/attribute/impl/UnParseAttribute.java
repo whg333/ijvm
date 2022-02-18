@@ -1,13 +1,14 @@
-package com.whg.ijvm.ch03.classfile.attribute;
+package com.whg.ijvm.ch03.classfile.attribute.impl;
 
 import com.whg.ijvm.ch03.classfile.ClassReader;
 import com.whg.ijvm.ch03.classfile.ConstantPool;
+import com.whg.ijvm.ch03.classfile.attribute.AbstractAttribute;
 
 public class UnParseAttribute extends AbstractAttribute {
 
     byte[] info;
 
-    UnParseAttribute(String name, int length, ConstantPool cp) {
+    public UnParseAttribute(String name, int length, ConstantPool cp) {
         super(name, length, cp);
     }
 
