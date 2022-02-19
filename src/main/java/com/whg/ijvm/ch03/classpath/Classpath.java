@@ -58,7 +58,7 @@ public class Classpath {
 		if(StringUtils.isEmpty(cpOption)){
 			// cpOption = ".";
 			// cpOption = this.getClass().getClassLoader().getResource("").getPath();
-			cpOption = Paths.get("").toAbsolutePath() +File.separator;
+			cpOption = Paths.get("").toAbsolutePath()+File.separator;
 		}
 		userClasspath = Entry.newEntry(cpOption);
 	}

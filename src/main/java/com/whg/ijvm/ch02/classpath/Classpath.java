@@ -12,24 +12,24 @@ public class Classpath {
 	private Entry bootClasspath;
 	private Entry extClasspath;
 	private Entry userClasspath;
-	
+
 	public void parse(String jreOption, String cpOption){
 		parseBootAndExtClasspath(jreOption);
 		parseUserClasspath(cpOption);
 	}
-	
+
 	private void parseBootAndExtClasspath(String jreOption){
 		String jreDir = getJreDir(jreOption);
-		
+
 		// jre/lib/*
 		String jreLibPath = FilePath.join(jreDir, "lib", "*");
 		bootClasspath = Entry.newEntry(jreLibPath);
-		
+
 		// jre/lib/ext/*
 		String jreExtPath = FilePath.join(jreDir, "lib", "ext", "*");
 		extClasspath = Entry.newEntry(jreExtPath);
 	}
-	
+
 	private String getJreDir(String jreOption){
 		if(!StringUtils.isEmpty(jreOption) && FilePath.exists(jreOption)){
 			return jreOption;
@@ -39,24 +39,30 @@ public class Classpath {
 		}
 		String javaHome = System.getProperty("JAVA_HOME");
 		if(!StringUtils.isEmpty(javaHome)){
+			if(javaHome.contains("jre")){
+				return javaHome;
+			}
 			return FilePath.join(javaHome, "jre");
 		}
 		javaHome = System.getProperty("java.home");
 		if(!StringUtils.isEmpty(javaHome)){
+			if(javaHome.contains("jre")){
+				return javaHome;
+			}
 			return FilePath.join(javaHome, "jre");
 		}
 		throw new IllegalArgumentException("Can not find jre folder!");
 	}
-	
+
 	private void parseUserClasspath(String cpOption){
 		if(StringUtils.isEmpty(cpOption)){
 			// cpOption = ".";
 			// cpOption = this.getClass().getClassLoader().getResource("").getPath();
-			cpOption = Paths.get("").toAbsolutePath().toString()+File.separator;
+			cpOption = Paths.get("").toAbsolutePath()+File.separator;
 		}
 		userClasspath = Entry.newEntry(cpOption);
 	}
-	
+
 	public byte[] readClass(String className) {
 		className = className + ".class";
 		byte[] bytes = bootClasspath.readClass(className);
@@ -69,10 +75,10 @@ public class Classpath {
 		}
 		return userClasspath.readClass(className);
 	}
-	
+
 	@Override
 	public String toString() {
 		return userClasspath.toString();
 	}
-	
+
 }
