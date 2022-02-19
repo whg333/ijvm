@@ -1,10 +1,10 @@
 package com.whg.ijvm.ch04.classfile.constantinfo.member;
 
-import com.whg.ijvm.ch04.util.Pair;
 import com.whg.ijvm.ch04.classfile.ClassReader;
 import com.whg.ijvm.ch04.classfile.ConstantPool;
 import com.whg.ijvm.ch04.classfile.constantinfo.ConstantInfo;
 import com.whg.ijvm.ch04.classfile.uint.Uint16;
+import org.apache.commons.lang3.tuple.Pair;
 
 public class NameAndTypeInfo implements ConstantInfo {
 

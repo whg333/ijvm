@@ -1,6 +1,5 @@
 package com.whg.ijvm.ch04.classfile;
 
-import com.whg.ijvm.ch04.util.Pair;
 import com.whg.ijvm.ch04.classfile.constantinfo.ConstantInfo;
 import com.whg.ijvm.ch04.classfile.constantinfo.ConstantInfoFactory;
 import com.whg.ijvm.ch04.classfile.constantinfo.member.ConstantClassInfo;
@@ -9,6 +8,7 @@ import com.whg.ijvm.ch04.classfile.constantinfo.numeric.ConstantDoubleInfo;
 import com.whg.ijvm.ch04.classfile.constantinfo.numeric.ConstantLongInfo;
 import com.whg.ijvm.ch04.classfile.constantinfo.string.ConstantUtf8Info;
 import com.whg.ijvm.ch04.classfile.uint.Uint16;
+import org.apache.commons.lang3.tuple.Pair;
 
 public class ConstantPool {
 	
