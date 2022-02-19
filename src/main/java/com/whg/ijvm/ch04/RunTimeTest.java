@@ -23,10 +23,10 @@ public class RunTimeTest {
 	private static void testLocalVars(LocalVars vars){
 		vars.setInt(0, 100);
 		vars.setInt(1, -100);
-		vars.setLong(2, 2997924580L);
-		vars.setLong(4, -2997924580L);
+		vars.setLong(2, 2997924580123456789L);
+		vars.setLong(4, -2997924580123456789L);
 		vars.setFloat(6, 3.1415926f);
-		vars.setDouble(7, 2.71828182845);
+		vars.setDouble(7, -2.71828182845);
 		vars.setRef(9, null);
 
 		System.out.println(vars.getInt(0));
@@ -41,10 +41,10 @@ public class RunTimeTest {
 	private static void testOperandStack(OperandStack stack){
 		stack.pushInt(100);
 		stack.pushInt(-100);
-		stack.pushLong(2997924580L);
-		stack.pushLong(-2997924580L);
+		stack.pushLong(2997924580123456789L);
+		stack.pushLong(-2997924580123456789L);
 		stack.pushFloat(3.1415926f);
-		stack.pushDouble(2.71828182845);
+		stack.pushDouble(-2.71828182845);
 		stack.pushRef(null);
 
 		System.out.println(stack.popRef());

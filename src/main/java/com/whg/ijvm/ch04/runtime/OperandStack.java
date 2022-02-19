@@ -29,15 +29,15 @@ public class OperandStack {
     }
 
     public void pushLong(long val){
-        long low = val;
-        long high = val >> 32;
-        slots[nextIdx].num = (int)low;
-        slots[nextIdx+1].num = (int)high;
+        int low = (int)val;
+        int high = (int)(val >> 32);
+        slots[nextIdx].num = low;
+        slots[nextIdx+1].num = high;
         nextIdx += 2;
     }
     public long popLong(){
         nextIdx -= 2;
-        long low = slots[nextIdx].num;
+        long low = Integer.toUnsignedLong(slots[nextIdx].num);
         long high = slots[nextIdx+1].num;
         return high << 32 | low;
     }

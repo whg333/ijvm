@@ -26,15 +26,22 @@ public class LocalVars {
     }
 
     public void setLong(int index, long val){
-        long low = val;
-        long high = val >> 32;
-        slots[index].num = (int)low;
-        slots[index+1].num = (int)high;
+        // System.out.println(Long.toBinaryString(val));
+        int low = (int)val;
+        // System.out.println(Integer.toBinaryString(low));
+        int high = (int)(val >> 32);
+        // System.out.println(Integer.toBinaryString(high));
+        slots[index].num = low;
+        slots[index+1].num = high;
     }
     public long getLong(int index){
-        long low = slots[index].num;
+        long low = Integer.toUnsignedLong(slots[index].num);
+        // System.out.println(Long.toBinaryString(low));
         long high = slots[index+1].num;
-        return high << 32 | low;
+        // System.out.println(Long.toBinaryString(high));
+        long result = high << 32 | low;
+        // System.out.println(Long.toBinaryString(result));
+        return result;
     }
 
     public void setDouble(int index, double val){
