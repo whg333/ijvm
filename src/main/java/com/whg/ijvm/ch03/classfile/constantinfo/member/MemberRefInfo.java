@@ -1,6 +1,6 @@
 package com.whg.ijvm.ch03.classfile.constantinfo.member;
 
-import com.whg.ijvm.ch03.Pair;
+import com.whg.ijvm.ch03.util.Pair;
 import com.whg.ijvm.ch03.classfile.ClassReader;
 import com.whg.ijvm.ch03.classfile.ConstantPool;
 import com.whg.ijvm.ch03.classfile.constantinfo.ConstantInfo;

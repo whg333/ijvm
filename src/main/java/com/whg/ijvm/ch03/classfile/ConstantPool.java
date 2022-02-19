@@ -1,6 +1,6 @@
 package com.whg.ijvm.ch03.classfile;
 
-import com.whg.ijvm.ch03.Pair;
+import com.whg.ijvm.ch03.util.Pair;
 import com.whg.ijvm.ch03.classfile.constantinfo.ConstantInfo;
 import com.whg.ijvm.ch03.classfile.constantinfo.ConstantInfoFactory;
 import com.whg.ijvm.ch03.classfile.constantinfo.member.ConstantClassInfo;
@@ -12,7 +12,7 @@ import com.whg.ijvm.ch03.classfile.uint.Uint16;
 
 public class ConstantPool {
 	
-	private ConstantInfo[] infos;
+	private final ConstantInfo[] infos;
 	
 	static ConstantPool readConstantPool(ClassReader reader){
 		return new ConstantPool(reader);

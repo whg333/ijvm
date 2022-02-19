@@ -6,9 +6,10 @@ import com.beust.jcommander.JCommander;
 
 public class Main {
 
-	//java -jar ijvm-jar-with-dependencies.jar -Xjre "C:\Program Files\Java\jdk1.8.0_51\jre" java.lang.Object
-	//java -jar ijvm-jar-with-dependencies.jar -cp /Users/hoolai/whg/gitRepo/ijvm/target/classes com/whg/ijvm/ch03/ClassFileTest
+	//java -jar ijvm-jar-with-dependencies.jar -Xjre "C:\Program Files\Java\jdk1.8.0_51\jre" java.lang.String
+	//java -jar ijvm-jar-with-dependencies.jar -cp D:\gitRepo\ijvm\target\classes com/whg/ijvm/ch03/ClassFileTest
 	//java -jar ijvm-jar-with-dependencies.jar -Xjre "/Library/Java/JavaVirtualMachines/jdk1.8.0_201.jdk/Contents/Home/jre" java.lang.String
+	//java -jar ijvm-jar-with-dependencies.jar -cp /Users/hoolai/whg/gitRepo/ijvm/target/classes com/whg/ijvm/ch03/ClassFileTest
 	public static void main(String[] args) {
 		JvmCmder jvmCmder = new JvmCmder();
 		JCommander jCommander = JCommander.newBuilder().addObject(jvmCmder).build();
