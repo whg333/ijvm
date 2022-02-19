@@ -39,9 +39,9 @@ public class LocalVars {
         // System.out.println(Long.toBinaryString(low));
         long high = slots[index+1].num;
         // System.out.println(Long.toBinaryString(high));
-        long result = high << 32 | low;
-        // System.out.println(Long.toBinaryString(result));
-        return result;
+        long val = high << 32 | low;
+        // System.out.println(Long.toBinaryString(val));
+        return val;
     }
 
     public void setDouble(int index, double val){
