@@ -12,7 +12,9 @@ public class Wide implements Instruction {
     public void fetchOperands(BytecodeReader reader) {
         short opcode = reader.readUint8().value();
         switch (opcode){
-            /*case 0x15:
+            //TODO
+            /*
+            case 0x15:
                 inst := &loads.ILOAD{}
             inst.Index = uint(reader.ReadUint16())
             self.modifiedInstruction = inst
@@ -56,7 +58,8 @@ public class Wide implements Instruction {
                 inst := &math.IINC{}
             inst.Index = uint(reader.ReadUint16())
             inst.Const = int32(reader.ReadInt16())
-            self.modifiedInstruction = inst*/
+            self.modifiedInstruction = inst
+            */
 
             case 0xa9:
             default:
@@ -66,7 +69,7 @@ public class Wide implements Instruction {
 
     @Override
     public void execute(RFrame frame) {
-
+        modifiedInstruction.execute(frame);
     }
 
 }
