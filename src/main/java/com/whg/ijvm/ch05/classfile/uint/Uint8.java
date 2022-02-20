@@ -3,6 +3,10 @@ package com.whg.ijvm.ch05.classfile.uint;
 public class Uint8 {
 
 	private final byte[] buf;
+
+	public Uint8(byte buf) {
+		this(new byte[]{buf});
+	}
 	
 	public Uint8(byte[] buf) {
 		this.buf = buf;

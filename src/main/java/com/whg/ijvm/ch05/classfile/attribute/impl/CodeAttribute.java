@@ -13,6 +13,7 @@ public class CodeAttribute extends AbstractAttribute {
     Uint16 maxStack;
     Uint16 maxLocals;
     byte[] code;
+
     ExceptionTableEntry[] exceptionTable;
     AttributeInfo[] attributes;
 
@@ -46,4 +47,15 @@ public class CodeAttribute extends AbstractAttribute {
         return exceptionTable;
     }
 
+    public Uint16 getMaxStack() {
+        return maxStack;
+    }
+
+    public Uint16 getMaxLocals() {
+        return maxLocals;
+    }
+
+    public byte[] getCode() {
+        return code;
+    }
 }

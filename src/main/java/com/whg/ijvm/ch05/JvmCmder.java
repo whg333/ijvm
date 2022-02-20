@@ -3,6 +3,8 @@ package com.whg.ijvm.ch05;
 import java.io.File;
 import java.util.Arrays;
 
+import com.whg.ijvm.ch05.classfile.MemberInfo;
+import com.whg.ijvm.ch05.instruction.Interpreter;
 import org.apache.commons.lang3.RegExUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -59,16 +61,24 @@ public class JvmCmder {
 		clazz = clazz.replaceAll("\\.", "/");
 		// clazz = RegExUtils.replaceAll(clazz, "/.", "////");
 		byte[] bytes = cp.readClass(clazz);
-		String[] unsignedBytes = unsignedBytes(bytes);
 		if(bytes == null){
 			info = String.format("Can not find or load main class:%s", clazz);
 		}else{
+			String[] unsignedBytes = unsignedBytes(bytes);
 			info = String.format("class data:%s", Arrays.toString(unsignedBytes));
 		}
 		console.println(info);
+
 		if(bytes != null){
 			ClassFile classFile = ClassFile.parse(bytes);
-			classFile.printInfo();
+			// classFile.printInfo();
+
+			MemberInfo mainMethod = classFile.getMainMethod();
+			if(mainMethod != null){
+				Interpreter.run(mainMethod);
+			}else{
+				console.println(String.format("Main method not found in class %s\n", clazz));
+			}
 		}
 	}
 	

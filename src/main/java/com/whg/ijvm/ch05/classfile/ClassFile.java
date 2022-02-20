@@ -105,6 +105,16 @@ public class ClassFile {
 		return interfaceNames;
 	}
 
+	public MemberInfo getMainMethod() {
+		for(MemberInfo method: methods){
+			if(method.getName().equals("main")
+					&& method.getDescriptor().equals("([Ljava/lang/String;)V")){
+				return method;
+			}
+		}
+		return null;
+	}
+
 	public void printInfo() {
 		StringBuilder sb = new StringBuilder("\n");
 		sb.append(String.format("minor version: %d\n", minorVersion.value()));

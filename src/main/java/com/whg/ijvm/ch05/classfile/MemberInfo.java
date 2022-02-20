@@ -1,6 +1,7 @@
 package com.whg.ijvm.ch05.classfile;
 
 import com.whg.ijvm.ch05.classfile.attribute.AttributeInfo;
+import com.whg.ijvm.ch05.classfile.attribute.impl.CodeAttribute;
 import com.whg.ijvm.ch05.classfile.uint.Uint16;
 
 public class MemberInfo {
@@ -46,5 +47,13 @@ public class MemberInfo {
 	public String getDescriptor(){
 		return constantPool.getUtf8(descriptorIndex);
 	}
-	
+
+    public CodeAttribute getCodeAttribute() {
+		for(AttributeInfo attrInfo: attributes){
+			if(attrInfo instanceof CodeAttribute){
+				return (CodeAttribute)attrInfo;
+			}
+		}
+		return null;
+    }
 }

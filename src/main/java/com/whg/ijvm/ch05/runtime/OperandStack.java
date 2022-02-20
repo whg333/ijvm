@@ -1,5 +1,7 @@
 package com.whg.ijvm.ch05.runtime;
 
+import java.util.Arrays;
+
 public class OperandStack {
 
     Slot[] slots;
@@ -60,4 +62,18 @@ public class OperandStack {
         return ref;
     }
 
+    public void pushSlot(Slot slot){
+        slots[nextIdx] = slot;
+        nextIdx++;
+    }
+
+    public Slot popSlot(){
+        nextIdx--;
+        return slots[nextIdx];
+    }
+
+    @Override
+    public String toString() {
+        return "{" + nextIdx + " " + Arrays.toString(slots) + "}";
+    }
 }

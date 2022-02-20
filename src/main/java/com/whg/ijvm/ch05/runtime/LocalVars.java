@@ -1,5 +1,7 @@
 package com.whg.ijvm.ch05.runtime;
 
+import java.util.Arrays;
+
 public class LocalVars {
 
     Slot[] slots;
@@ -56,6 +58,11 @@ public class LocalVars {
     }
     public RObject getRef(int index){
         return slots[index].ref;
+    }
+
+    @Override
+    public String toString() {
+        return Arrays.toString(slots);
     }
 
 }

@@ -73,7 +73,11 @@ public class Classpath {
 		if(bytes != null){
 			return bytes;
 		}
-		return userClasspath.readClass(className);
+		bytes = userClasspath.readClass(className);
+		if(bytes != null){
+			return bytes;
+		}
+		return null;
 	}
 	
 	@Override

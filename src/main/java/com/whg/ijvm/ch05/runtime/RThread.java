@@ -9,6 +9,10 @@ public class RThread {
         stack = new RStack(1024);
     }
 
+    public RFrame newFrame(int maxLocals, int maxStack){
+        return new RFrame(this, maxLocals, maxStack);
+    }
+
     public void pushFrame(RFrame frame){
         stack.push(frame);
     }
