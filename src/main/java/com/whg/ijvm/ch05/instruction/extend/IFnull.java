@@ -1,7 +1,6 @@
 package com.whg.ijvm.ch05.instruction.extend;
 
 import com.whg.ijvm.ch05.instruction.base.BranchInstruction;
-import com.whg.ijvm.ch05.runtime.OperandStack;
 import com.whg.ijvm.ch05.runtime.RFrame;
 import com.whg.ijvm.ch05.runtime.RObject;
 
