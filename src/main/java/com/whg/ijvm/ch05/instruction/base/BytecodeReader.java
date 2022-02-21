@@ -8,9 +8,8 @@ public class BytecodeReader {
     byte[] code;
     int pc;
 
-    public void reset(byte[] code, int pc){
+    public BytecodeReader(byte[] code){
         this.code = code;
-        this.pc = pc;
     }
 
     public Uint8 readUint8(){
@@ -56,7 +55,11 @@ public class BytecodeReader {
         return ints;
     }
 
+    public void setPc(int pc) {
+        this.pc = pc;
+    }
     public int getPc() {
         return pc;
     }
+
 }

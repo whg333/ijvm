@@ -31,12 +31,12 @@ public class Interpreter {
 
     private void loop(RThread thread, byte[] bytecode) {
         RFrame frame = thread.popFrame();
-        BytecodeReader reader = new BytecodeReader();
+        BytecodeReader reader = new BytecodeReader(bytecode);
         for(;;){
             int pc = frame.getNextPc();
             thread.setPc(pc);
+            reader.setPc(pc);
 
-            reader.reset(bytecode, pc);
             short opcode = reader.readUint8().value();
             Instruction inst = InstructionFactory.newInstruction(opcode);
             inst.fetchOperands(reader);
