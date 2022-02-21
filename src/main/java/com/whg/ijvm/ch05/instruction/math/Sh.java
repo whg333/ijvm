@@ -12,7 +12,7 @@ public class Sh {
             OperandStack stack = frame.getOperandStack();
             int v2 = stack.popInt();
             int v1 = stack.popInt();
-            int s = v2 & 0x1f; //取前5位
+            int s = v2 & 0x1f; //取前5位足够表示32位
             int result = v1 << s;
             stack.pushInt(result);
         }
@@ -23,7 +23,7 @@ public class Sh {
             OperandStack stack = frame.getOperandStack();
             int v2 = stack.popInt();
             int v1 = stack.popInt();
-            int s = v2 & 0x1f; //取前5位
+            int s = v2 & 0x1f; //取前5位足够表示32位
             int result = v1 >> s;
             stack.pushInt(result);
         }
@@ -34,7 +34,7 @@ public class Sh {
             OperandStack stack = frame.getOperandStack();
             int v2 = stack.popInt();
             int v1 = stack.popInt();
-            int s = v2 & 0x1f; //取前5位
+            int s = v2 & 0x1f; //取前5位足够表示32位
             int result = v1 >>> s;
             stack.pushInt(result);
         }
@@ -46,7 +46,7 @@ public class Sh {
             OperandStack stack = frame.getOperandStack();
             int v2 = stack.popInt();
             long v1 = stack.popLong();
-            int s = v2 & 0x3f; //取前6位
+            int s = v2 & 0x3f; //取前6位足够表示64位
             long result = v1 << s;
             stack.pushLong(result);
         }
@@ -57,7 +57,7 @@ public class Sh {
             OperandStack stack = frame.getOperandStack();
             int v2 = stack.popInt();
             long v1 = stack.popLong();
-            int s = v2 & 0x3f; //取前6位
+            int s = v2 & 0x3f; //取前6位足够表示64位
             long result = v1 >> s;
             stack.pushLong(result);
         }
@@ -68,7 +68,7 @@ public class Sh {
             OperandStack stack = frame.getOperandStack();
             int v2 = stack.popInt();
             long v1 = stack.popLong();
-            int s = v2 & 0x3f; //取前6位
+            int s = v2 & 0x3f; //取前6位足够表示64位
             long result = v1 >>> s;
             stack.pushLong(result);
         }
