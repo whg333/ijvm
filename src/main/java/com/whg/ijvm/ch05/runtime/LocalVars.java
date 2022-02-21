@@ -37,6 +37,7 @@ public class LocalVars {
         slots[index+1].num = high;
     }
     public long getLong(int index){
+        //低位需要转成无符号的，才可和高位正常组合拼接
         long low = Integer.toUnsignedLong(slots[index].num);
         // System.out.println(Long.toBinaryString(low));
         long high = slots[index+1].num;
