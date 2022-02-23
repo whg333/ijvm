@@ -71,7 +71,7 @@ public class JvmCmder {
 
 		if(bytes != null){
 			ClassFile classFile = ClassFile.parse(bytes);
-			// classFile.printInfo();
+			classFile.printInfo();
 
 			MemberInfo mainMethod = classFile.getMainMethod();
 			if(mainMethod != null){

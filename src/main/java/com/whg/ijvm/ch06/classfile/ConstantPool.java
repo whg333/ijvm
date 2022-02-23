@@ -53,8 +53,8 @@ public class ConstantPool {
 		return (T)(infos[index.value()]);
 	}
 
-	public int getLength(){
-		return infos.length;
+	public ConstantInfo[] getInfos(){
+		return infos;
 	}
 
 }

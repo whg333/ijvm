@@ -1,5 +1,7 @@
 package com.whg.ijvm.ch06.runtime;
 
+import com.whg.ijvm.ch06.heap.RObject;
+
 import java.util.Arrays;
 
 public class LocalVars {

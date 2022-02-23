@@ -2,6 +2,7 @@ package com.whg.ijvm.ch06.classfile;
 
 import com.whg.ijvm.ch06.classfile.attribute.AttributeInfo;
 import com.whg.ijvm.ch06.classfile.attribute.AttributeInfoFactory;
+import com.whg.ijvm.ch06.classfile.constantinfo.ConstantInfo;
 import com.whg.ijvm.ch06.classfile.uint.Uint16;
 import com.whg.ijvm.ch06.classfile.uint.Uint32;
 
@@ -86,6 +87,14 @@ public class ClassFile {
 		return attrInfo;
 	}
 
+	public Uint16 getAccessFlags(){
+		return accessFlags;
+	}
+
+	public ConstantPool getConstantPool() {
+		return constantPool;
+	}
+
 	public String getClassName(){
 		return constantPool.getClassName(thisClass);
 	}
@@ -124,7 +133,8 @@ public class ClassFile {
 		sb.append(String.format("super_class : %s\n", getSuperClassName()));
 		sb.append(String.format("interfaces : %s\n", Arrays.toString(getInterfaceNames())));
 
-		sb.append(String.format("constants count : %d\n", constantPool.getLength()));
+		ConstantInfo[] constantInfos = constantPool.getInfos();
+		sb.append(String.format("constants count : %d\n", constantInfos.length));
 
 		sb.append(String.format("fields count : %d\n", fields.length));
 		for(MemberInfo field: fields){

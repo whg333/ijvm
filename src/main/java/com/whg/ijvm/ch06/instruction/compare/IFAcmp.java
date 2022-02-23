@@ -3,7 +3,7 @@ package com.whg.ijvm.ch06.instruction.compare;
 import com.whg.ijvm.ch06.instruction.base.BranchInstruction;
 import com.whg.ijvm.ch06.runtime.OperandStack;
 import com.whg.ijvm.ch06.runtime.RFrame;
-import com.whg.ijvm.ch06.runtime.RObject;
+import com.whg.ijvm.ch06.heap.RObject;
 
 public class IFAcmp {
 
