@@ -39,7 +39,11 @@ public class MemberInfo {
 		this.descriptorIndex = descriptorIndex;
 		this.attributes = attributes;
 	}
-	
+
+	public Uint16 getAccessFlags() {
+		return accessFlags;
+	}
+
 	public String getName(){
 		return constantPool.getUtf8(nameIndex);
 	}

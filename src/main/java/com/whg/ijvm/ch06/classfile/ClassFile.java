@@ -114,6 +114,14 @@ public class ClassFile {
 		return interfaceNames;
 	}
 
+	public MemberInfo[] getFields() {
+		return fields;
+	}
+
+	public MemberInfo[] getMethods() {
+		return methods;
+	}
+
 	public MemberInfo getMainMethod() {
 		for(MemberInfo method: methods){
 			if(method.getName().equals("main")
