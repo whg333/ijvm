@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 public class LocalVars {
 
-    Slot[] slots;
+    protected Slot[] slots;
 
     public LocalVars(int length){
         slots = new Slot[length];

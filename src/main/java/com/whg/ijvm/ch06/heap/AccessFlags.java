@@ -21,4 +21,33 @@ public interface AccessFlags {
     int ACC_ANNOTATION      = 0x2000;
     int ACC_ENUM            = 0x4000;
 
+    static boolean isPublic(int accessFlags){
+        return (accessFlags & ACC_PUBLIC) != 0;
+    }
+    static boolean isFinal(int accessFlags){
+        return (accessFlags & ACC_FINAL) != 0;
+    }
+    static boolean isSuper(int accessFlags){
+        return (accessFlags & ACC_SUPER) != 0;
+    }
+    static boolean isInterface(int accessFlags){
+        return (accessFlags & ACC_INTERFACE) != 0;
+    }
+    static boolean isAbstract(int accessFlags){
+        return (accessFlags & ACC_ABSTRACT) != 0;
+    }
+    static boolean isSynthetic(int accessFlags){
+        return (accessFlags & ACC_SYNTHETIC) != 0;
+    }
+    static boolean isAnnotation(int accessFlags){
+        return (accessFlags & ACC_ANNOTATION) != 0;
+    }
+    static boolean isEnum(int accessFlags){
+        return (accessFlags & ACC_ENUM) != 0;
+    }
+
+    static boolean isStatic(int accessFlags){
+        return (accessFlags & ACC_STATIC) != 0;
+    }
+
 }

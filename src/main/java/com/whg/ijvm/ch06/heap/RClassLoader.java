@@ -49,7 +49,10 @@ public class RClassLoader {
 
     private RClass parseClass(byte[] bytes) {
         ClassFile classFile = ClassFile.parse(bytes);
-        return new RClass(classFile, this);
+        RClass clazz = new RClass(classFile, this);
+        clazz.resolveSuperClass();
+        clazz.resolveInterfaces();
+        return clazz;
     }
 
     private void link(RClass clazz) {
@@ -62,7 +65,9 @@ public class RClassLoader {
     }
 
     private void prepare(RClass clazz) {
-
+        clazz.calcInstanceFieldSlotIds();
+        clazz.calcStaticFieldSlotIds();
+        clazz.allocAndInitStaticVars();
     }
 
 }

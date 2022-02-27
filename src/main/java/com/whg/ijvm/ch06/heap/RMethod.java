@@ -13,7 +13,15 @@ public class RMethod extends RClassMember{
     RMethod(RClass clazz, MemberInfo cfMethod){
         this.clazz = clazz;
         copyMemberInfo(cfMethod);
-        copyAttribute(cfMethod);
+        copyAttributes(cfMethod);
+    }
+
+    @Override
+    void copyAttributes(MemberInfo cfMethod){
+        CodeAttribute codeAttr = cfMethod.getCodeAttribute();
+        maxLocals = codeAttr.getMaxLocals().value();
+        maxStack = codeAttr.getMaxStack().value();
+        code = codeAttr.getCode();
     }
 
     public static RMethod[] newMethods(RClass clazz, ClassFile cf){
@@ -23,13 +31,6 @@ public class RMethod extends RClassMember{
             methods[i] = new RMethod(clazz, cfMethods[i]);
         }
         return methods;
-    }
-
-    void copyAttribute(MemberInfo cfMethod){
-        CodeAttribute codeAttr = cfMethod.getCodeAttribute();
-        maxLocals = codeAttr.getMaxLocals().value();
-        maxStack = codeAttr.getMaxStack().value();
-        code = codeAttr.getCode();
     }
 
 }

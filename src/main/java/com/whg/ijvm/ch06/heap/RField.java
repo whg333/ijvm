@@ -2,12 +2,23 @@ package com.whg.ijvm.ch06.heap;
 
 import com.whg.ijvm.ch06.classfile.ClassFile;
 import com.whg.ijvm.ch06.classfile.MemberInfo;
+import com.whg.ijvm.ch06.classfile.attribute.impl.ConstantValueAttribute;
 
 public class RField extends RClassMember{
+
+    int constValueIndex;
+    int slotId;
 
     RField(RClass clazz, MemberInfo cfFiled){
         this.clazz = clazz;
         copyMemberInfo(cfFiled);
+        copyAttributes(cfFiled);
+    }
+
+    @Override
+    void copyAttributes(MemberInfo cfFiled) {
+        ConstantValueAttribute valAttr = cfFiled.getConstantValueAttribute();
+        constValueIndex = valAttr.getConstantValueIndex().value();
     }
 
     public static RField[] newFields(RClass clazz, ClassFile cf) {
@@ -18,4 +29,5 @@ public class RField extends RClassMember{
         }
         return fields;
     }
+
 }

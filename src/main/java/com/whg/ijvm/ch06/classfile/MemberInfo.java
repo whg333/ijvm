@@ -2,6 +2,7 @@ package com.whg.ijvm.ch06.classfile;
 
 import com.whg.ijvm.ch06.classfile.attribute.AttributeInfo;
 import com.whg.ijvm.ch06.classfile.attribute.impl.CodeAttribute;
+import com.whg.ijvm.ch06.classfile.attribute.impl.ConstantValueAttribute;
 import com.whg.ijvm.ch06.classfile.uint.Uint16;
 
 public class MemberInfo {
@@ -60,4 +61,14 @@ public class MemberInfo {
 		}
 		return null;
     }
+
+	public ConstantValueAttribute getConstantValueAttribute() {
+		for(AttributeInfo attrInfo: attributes){
+			if(attrInfo instanceof ConstantValueAttribute){
+				return (ConstantValueAttribute)attrInfo;
+			}
+		}
+		return null;
+	}
+
 }

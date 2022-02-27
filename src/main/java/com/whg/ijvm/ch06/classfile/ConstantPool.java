@@ -50,7 +50,7 @@ public class ConstantPool {
 	}
 
 	public <T extends ConstantInfo> T getConstantInfo(Uint16 index){
-		return (T)(infos[index.value()]);
+		return (T) infos[index.value()];
 	}
 
 	public ConstantInfo[] getInfos(){

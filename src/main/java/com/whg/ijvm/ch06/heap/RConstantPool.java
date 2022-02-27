@@ -37,7 +37,11 @@ public class RConstantPool {
     }
 
     Constant getConstant(Uint8 index){
-        return constants[index.value()];
+        return getConstant(index.value());
+    }
+
+    <T extends Constant> T getConstant(int index){
+        return (T) constants[index];
     }
 
 }
