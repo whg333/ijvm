@@ -13,9 +13,10 @@ public class RMethod extends RClassMember{
     RMethod(RClass clazz, MemberInfo cfMethod){
         this.clazz = clazz;
         copyMemberInfo(cfMethod);
+        copyAttribute(cfMethod);
     }
 
-    public RMethod[] newMethods(RClass clazz, ClassFile cf){
+    public static RMethod[] newMethods(RClass clazz, ClassFile cf){
         MemberInfo[] cfMethods = cf.getMethods();
         RMethod[] methods = new RMethod[cfMethods.length];
         for(int i=0;i<cfMethods.length;i++){

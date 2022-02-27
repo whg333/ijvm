@@ -63,19 +63,19 @@ public class Classpath {
 		userClasspath = Entry.newEntry(cpOption);
 	}
 	
-	public byte[] readClass(String className) {
+	public ClassData readClass(String className) {
 		className = className + ".class";
 		byte[] bytes = bootClasspath.readClass(className);
 		if(bytes != null){
-			return bytes;
+			return new ClassData(bytes, bootClasspath);
 		}
 		bytes = extClasspath.readClass(className);
 		if(bytes != null){
-			return bytes;
+			return new ClassData(bytes, extClasspath);
 		}
 		bytes = userClasspath.readClass(className);
 		if(bytes != null){
-			return bytes;
+			return new ClassData(bytes, userClasspath);
 		}
 		return null;
 	}

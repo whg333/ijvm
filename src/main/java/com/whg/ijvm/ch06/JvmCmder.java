@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.Arrays;
 
 import com.whg.ijvm.ch06.classfile.MemberInfo;
+import com.whg.ijvm.ch06.classpath.ClassData;
 import com.whg.ijvm.ch06.instruction.Interpreter;
 import org.apache.commons.lang3.RegExUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -60,7 +61,8 @@ public class JvmCmder {
 		
 		clazz = clazz.replaceAll("\\.", "/");
 		// clazz = RegExUtils.replaceAll(clazz, "/.", "////");
-		byte[] bytes = cp.readClass(clazz);
+		ClassData classData = cp.readClass(clazz);
+		byte[] bytes = classData.bytes;
 		if(bytes == null){
 			info = String.format("Can not find or load main class:%s", clazz);
 		}else{

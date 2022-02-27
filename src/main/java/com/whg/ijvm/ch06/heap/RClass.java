@@ -25,13 +25,32 @@ public class RClass {
     Uint8 staticSlotCount;
     Slots staticVars;
 
-    public RClass(ClassFile cf){
+    public RClass(ClassFile cf, RClassLoader loader){
         accessFlags = cf.getAccessFlags();
         name = cf.getClassName();
         superClassName = cf.getSuperClassName();
         interfacesNames = cf.getInterfaceNames();
 
         constantPool = new RConstantPool(this, cf.getConstantPool());
+        fields = RField.newFields(this, cf);
+        methods = RMethod.newMethods(this, cf);
+
+        this.loader = loader;
+        resolveSuperClass();
+        resolveInterfaces();
+    }
+
+    private void resolveSuperClass(){
+        if(!name.equals("java/lang/Object")){
+            superClass = loader.loadClass(superClassName);
+        }
+    }
+
+    private void resolveInterfaces(){
+        interfaces = new RClass[interfacesNames.length];
+        for(int i=0;i<interfacesNames.length;i++){
+            interfaces[i] = loader.loadClass(interfacesNames[i]);
+        }
     }
 
     public boolean isPublic(){
