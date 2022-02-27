@@ -12,10 +12,12 @@ import com.whg.ijvm.ch06.heap.constant.*;
 
 public class RConstantPool {
 
-    RClass clazz;
+    public RClass clazz;
     Constant[] constants;
 
     public RConstantPool(RClass clazz, ConstantPool cp) {
+        this.clazz = clazz;
+
         ConstantInfo[] infos = cp.getInfos();
         constants = new Constant[infos.length];
         for(int i=0;i<infos.length;i++){
@@ -36,7 +38,7 @@ public class RConstantPool {
         }
     }
 
-    Constant getConstant(Uint8 index){
+    <T extends Constant> T getConstant(Uint8 index){
         return getConstant(index.value());
     }
 

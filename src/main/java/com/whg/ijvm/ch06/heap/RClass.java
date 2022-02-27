@@ -6,7 +6,7 @@ import com.whg.ijvm.ch06.heap.constant.*;
 
 public class RClass {
 
-    Uint16 accessFlags;
+    int accessFlags;
     String name;
     String superClassName;
     String[] interfacesNames;
@@ -15,7 +15,7 @@ public class RClass {
     RField[] fields;
     RMethod[] methods;
 
-    RClassLoader loader;
+    public RClassLoader loader;
     RClass superClass;
     RClass[] interfaces;
 
@@ -24,7 +24,7 @@ public class RClass {
     Slots staticVars;
 
     public RClass(ClassFile cf, RClassLoader loader){
-        accessFlags = cf.getAccessFlags();
+        accessFlags = cf.getAccessFlags().value();
         name = cf.getClassName();
         superClassName = cf.getSuperClassName();
         interfacesNames = cf.getInterfaceNames();
@@ -125,32 +125,73 @@ public class RClass {
     }
 
     public boolean isPublic(){
-        return AccessFlags.isPublic(accessFlags());
+        return AccessFlags.isPublic(accessFlags);
     }
     public boolean isFinal(){
-        return AccessFlags.isFinal(accessFlags());
+        return AccessFlags.isFinal(accessFlags);
     }
     public boolean isSuper(){
-        return AccessFlags.isSuper(accessFlags());
+        return AccessFlags.isSuper(accessFlags);
     }
     public boolean isInterface(){
-        return AccessFlags.isInterface(accessFlags());
+        return AccessFlags.isInterface(accessFlags);
     }
     public boolean isAbstract(){
-        return AccessFlags.isAbstract(accessFlags());
+        return AccessFlags.isAbstract(accessFlags);
     }
     public boolean isSynthetic(){
-        return AccessFlags.isSynthetic(accessFlags());
+        return AccessFlags.isSynthetic(accessFlags);
     }
     public boolean isAnnotation(){
-        return AccessFlags.isAnnotation(accessFlags());
+        return AccessFlags.isAnnotation(accessFlags);
     }
     public boolean isEnum(){
-        return AccessFlags.isEnum(accessFlags());
+        return AccessFlags.isEnum(accessFlags);
     }
 
-    private int accessFlags(){
-        return accessFlags.value();
+    public String getName() {
+        return name;
+    }
+
+    public boolean isAccessibleTo(RClass other) {
+        return isPublic() || isSamePackage(other);
+    }
+
+    public boolean isSamePackage(RClass other){
+        return getPackageName().equals(other.getPackageName());
+    }
+
+    private String getPackageName() {
+        int index = name.lastIndexOf('/');
+        if(index >= 0){
+            return name.substring(0, index);
+        }
+        return "";
+    }
+
+    // self extends c
+    public boolean isSubClassOf(RClass other) {
+        RClass c = superClass;
+        while(c != null){
+            if(c == other){
+                return true;
+            }
+            c = c.superClass;
+        }
+        return false;
+    }
+
+    /** setter/getter */
+    public RField[] getFields() {
+        return fields;
+    }
+
+    public RClass[] getInterfaces() {
+        return interfaces;
+    }
+
+    public RClass getSuperClass() {
+        return superClass;
     }
 
 }

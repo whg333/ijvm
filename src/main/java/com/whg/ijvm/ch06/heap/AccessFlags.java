@@ -50,4 +50,11 @@ public interface AccessFlags {
         return (accessFlags & ACC_STATIC) != 0;
     }
 
+    static boolean isProtected(int accessFlags){
+        return (accessFlags & ACC_PROTECTED) != 0;
+    }
+    static boolean isPrivate(int accessFlags){
+        return (accessFlags & ACC_PRIVATE) != 0;
+    }
+
 }
