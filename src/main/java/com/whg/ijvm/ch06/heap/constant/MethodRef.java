@@ -8,7 +8,7 @@ public class MethodRef extends MemberRef{
 
     RMethod method;
 
-    MethodRef(RConstantPool cp, MethodRefInfo refInfo) {
+    public MethodRef(RConstantPool cp, MethodRefInfo refInfo) {
         super(cp, refInfo);
     }
 }

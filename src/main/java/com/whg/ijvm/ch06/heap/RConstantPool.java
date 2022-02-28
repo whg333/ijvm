@@ -2,6 +2,10 @@ package com.whg.ijvm.ch06.heap;
 
 import com.whg.ijvm.ch06.classfile.ConstantPool;
 import com.whg.ijvm.ch06.classfile.constantinfo.ConstantInfo;
+import com.whg.ijvm.ch06.classfile.constantinfo.member.ClassInfo;
+import com.whg.ijvm.ch06.classfile.constantinfo.member.FieldRefInfo;
+import com.whg.ijvm.ch06.classfile.constantinfo.member.InterfaceMethodRefInfo;
+import com.whg.ijvm.ch06.classfile.constantinfo.member.MethodRefInfo;
 import com.whg.ijvm.ch06.classfile.constantinfo.numeric.ConstantDoubleInfo;
 import com.whg.ijvm.ch06.classfile.constantinfo.numeric.ConstantFloatInfo;
 import com.whg.ijvm.ch06.classfile.constantinfo.numeric.ConstantIntegerInfo;
@@ -34,6 +38,14 @@ public class RConstantPool {
                 i++;
             }else if(info instanceof ConstantStringInfo) {
                 constants[i] = new ConstantString((ConstantStringInfo)info);
+            }else if(info instanceof ClassInfo) {
+                constants[i] = new ClassRef(this, (ClassInfo)info);
+            }else if(info instanceof FieldRefInfo) {
+                constants[i] = new FieldRef(this, (FieldRefInfo)info);
+            }else if(info instanceof MethodRefInfo) {
+                constants[i] = new MethodRef(this, (MethodRefInfo)info);
+            }else if(info instanceof InterfaceMethodRefInfo) {
+                constants[i] = new InterfaceMethodRef(this, (InterfaceMethodRefInfo)info);
             }
         }
     }

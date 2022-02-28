@@ -9,7 +9,7 @@ public class FieldRef extends MemberRef{
 
     RField field;
 
-    FieldRef(RConstantPool cp, FieldRefInfo refInfo) {
+    public FieldRef(RConstantPool cp, FieldRefInfo refInfo) {
         super(cp, refInfo);
     }
 

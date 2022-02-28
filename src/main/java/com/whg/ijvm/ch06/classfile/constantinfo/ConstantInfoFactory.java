@@ -24,7 +24,7 @@ public class ConstantInfoFactory {
         ConstantTag constantTag = ConstantTag.valueOf(tag.value());
         switch (constantTag) {
             case Clazz:
-                return new ConstantClassInfo(cp);
+                return new ClassInfo(cp);
             case NameAndType:
                 return new NameAndTypeInfo(cp);
             case FieldRef:

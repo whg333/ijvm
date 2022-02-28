@@ -8,7 +8,7 @@ public class InterfaceMethodRef extends MemberRef{
     
     RMethod method;
 
-    InterfaceMethodRef(RConstantPool cp, InterfaceMethodRefInfo refInfo) {
+    public InterfaceMethodRef(RConstantPool cp, InterfaceMethodRefInfo refInfo) {
         super(cp, refInfo);
     }
 

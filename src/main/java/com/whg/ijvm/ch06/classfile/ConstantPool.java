@@ -2,7 +2,7 @@ package com.whg.ijvm.ch06.classfile;
 
 import com.whg.ijvm.ch06.classfile.constantinfo.ConstantInfo;
 import com.whg.ijvm.ch06.classfile.constantinfo.ConstantInfoFactory;
-import com.whg.ijvm.ch06.classfile.constantinfo.member.ConstantClassInfo;
+import com.whg.ijvm.ch06.classfile.constantinfo.member.ClassInfo;
 import com.whg.ijvm.ch06.classfile.constantinfo.member.NameAndTypeInfo;
 import com.whg.ijvm.ch06.classfile.constantinfo.numeric.ConstantDoubleInfo;
 import com.whg.ijvm.ch06.classfile.constantinfo.numeric.ConstantLongInfo;
@@ -40,7 +40,7 @@ public class ConstantPool {
 	}
 
 	public String getClassName(Uint16 index) {
-		ConstantClassInfo info = getConstantInfo(index);
+		ClassInfo info = getConstantInfo(index);
 		return info.getName();
 	}
 

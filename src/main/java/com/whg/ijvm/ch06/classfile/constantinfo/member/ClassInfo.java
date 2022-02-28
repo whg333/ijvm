@@ -5,12 +5,12 @@ import com.whg.ijvm.ch06.classfile.ConstantPool;
 import com.whg.ijvm.ch06.classfile.constantinfo.ConstantInfo;
 import com.whg.ijvm.ch06.classfile.uint.Uint16;
 
-public class ConstantClassInfo implements ConstantInfo {
+public class ClassInfo implements ConstantInfo {
 
     ConstantPool cp;
     Uint16 nameIndex;
 
-    public ConstantClassInfo(ConstantPool cp){
+    public ClassInfo(ConstantPool cp){
         this.cp = cp;
     }
 
