@@ -1,5 +1,7 @@
 package com.whg.ijvm.ch06.runtime;
 
+import com.whg.ijvm.ch06.heap.RMethod;
+
 public class RFrame {
 
     RFrame lower;
@@ -7,13 +9,16 @@ public class RFrame {
     private OperandStack operandStack;
 
     RThread thread;
+    RMethod method;
     int nextPc;
 
-    RFrame(RThread thread, int maxLocals, int maxStack){
-        this(maxLocals, maxStack);
+    RFrame(RThread thread, RMethod method){
+        this(method.getMaxLocals(), method.getMaxStack());
         this.thread = thread;
+        this.method = method;
     }
 
+    //for test
     public RFrame(int maxLocals, int maxStack){
         localVars = new LocalVars(maxLocals);
         operandStack = new OperandStack(maxStack);
@@ -31,10 +36,15 @@ public class RFrame {
         return thread.getPc();
     }
 
+    public RMethod getMethod() {
+        return method;
+    }
+
     public void setNextPc(int nextPc) {
         this.nextPc = nextPc;
     }
     public int getNextPc() {
         return nextPc;
     }
+
 }

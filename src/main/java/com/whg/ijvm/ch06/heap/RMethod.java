@@ -33,4 +33,16 @@ public class RMethod extends RClassMember{
         return methods;
     }
 
+    public int getMaxStack() {
+        return maxStack;
+    }
+
+    public int getMaxLocals() {
+        return maxLocals;
+    }
+
+    public byte[] getCode() {
+        return code;
+    }
+
 }

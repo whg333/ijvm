@@ -5,4 +5,12 @@ public class RObject {
     RClass clazz;
     Slots fields;
 
+    RObject(RClass clazz){
+        this.clazz = clazz;
+        this.fields = new Slots(clazz.getInstanceSlotCount());
+    }
+
+    public Slots getFields() {
+        return fields;
+    }
 }

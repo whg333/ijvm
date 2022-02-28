@@ -30,4 +30,7 @@ public class RField extends RClassMember{
         return fields;
     }
 
+    public int getSlotId() {
+        return slotId;
+    }
 }

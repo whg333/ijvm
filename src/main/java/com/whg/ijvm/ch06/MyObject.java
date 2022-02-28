@@ -6,18 +6,18 @@ public class MyObject {
     public int instanceVar;
 
     public static void main(String[] args) {
-        int x = 32768;
-        MyObject myObj = new MyObject();
+        int x = 32768;                      //ldc
+        MyObject myObj = new MyObject();    //new
 
-        MyObject.staticVar = x;
-        x = MyObject.staticVar;
+        MyObject.staticVar = x;             //putstatic
+        x = MyObject.staticVar;             //getstatic
 
-        myObj.instanceVar = x;
-        x = myObj.instanceVar;
+        myObj.instanceVar = x;              //putfield
+        x = myObj.instanceVar;              //getfield
 
         Object obj = myObj;
-        if(obj instanceof MyObject){
-            myObj = (MyObject) obj;
+        if(obj instanceof MyObject){        //instanceof
+            myObj = (MyObject) obj;         //checkcast
         }
     }
 

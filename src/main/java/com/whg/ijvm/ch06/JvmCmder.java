@@ -5,6 +5,9 @@ import java.util.Arrays;
 
 import com.whg.ijvm.ch06.classfile.MemberInfo;
 import com.whg.ijvm.ch06.classpath.ClassData;
+import com.whg.ijvm.ch06.heap.RClass;
+import com.whg.ijvm.ch06.heap.RClassLoader;
+import com.whg.ijvm.ch06.heap.RMethod;
 import com.whg.ijvm.ch06.instruction.Interpreter;
 import org.apache.commons.lang3.RegExUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -75,7 +78,10 @@ public class JvmCmder {
 			ClassFile classFile = ClassFile.parse(bytes);
 			classFile.printInfo();
 
-			MemberInfo mainMethod = classFile.getMainMethod();
+			RClassLoader classLoader = new RClassLoader(cp);
+			RClass mainClass = classLoader.loadClass(clazz);
+			RMethod mainMethod = mainClass.getMainMethod();
+			// MemberInfo mainMethod = classFile.getMainMethod();
 			if(mainMethod != null){
 				Interpreter.run(mainMethod);
 			}else{

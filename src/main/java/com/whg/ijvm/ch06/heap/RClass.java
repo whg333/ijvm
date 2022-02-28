@@ -1,7 +1,6 @@
 package com.whg.ijvm.ch06.heap;
 
 import com.whg.ijvm.ch06.classfile.ClassFile;
-import com.whg.ijvm.ch06.classfile.uint.Uint16;
 import com.whg.ijvm.ch06.heap.constant.*;
 
 public class RClass {
@@ -181,6 +180,23 @@ public class RClass {
         return false;
     }
 
+    public RObject newObject(){
+        return new RObject(this);
+    }
+
+    public RMethod getMainMethod() {
+        return getStaticMethod("main", "([Ljava/lang/String;)V");
+    }
+
+    RMethod getStaticMethod(String name, String descriptor){
+        for(RMethod method: methods){
+            if(method.isStatic() && method.isMatch(name, descriptor)){
+                return method;
+            }
+        }
+        return null;
+    }
+
     /** setter/getter */
     public RField[] getFields() {
         return fields;
@@ -194,4 +210,15 @@ public class RClass {
         return superClass;
     }
 
+    public int getInstanceSlotCount() {
+        return instanceSlotCount;
+    }
+
+    public RConstantPool getRConstantPool() {
+        return constantPool;
+    }
+
+    public Slots getStaticVars() {
+        return staticVars;
+    }
 }

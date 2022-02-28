@@ -13,7 +13,7 @@ public class FieldRef extends MemberRef{
         super(cp, refInfo);
     }
 
-    RField resolveField(){
+    public RField resolveField(){
         if(field == null){
             resolveFieldRef();
         }
@@ -35,8 +35,7 @@ public class FieldRef extends MemberRef{
 
     private RField lookupField(RClass c, String name, String descriptor) {
         for(RField field: c.getFields()){
-            if(field.getName().equals(name)
-                    && field.getDescriptor().equals(descriptor)){
+            if(field.isMatch(name, descriptor)){
                 return field;
             }
         }

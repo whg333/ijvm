@@ -1,7 +1,6 @@
 package com.whg.ijvm.ch06.heap;
 
 import com.whg.ijvm.ch06.classfile.MemberInfo;
-import com.whg.ijvm.ch06.classfile.uint.Uint16;
 
 public abstract class RClassMember {
 
@@ -55,13 +54,22 @@ public abstract class RClassMember {
         return d == c;
     }
 
+    public boolean isMatch(String name, String descriptor){
+        return this.name.equals(name)
+                && this.descriptor.equals(descriptor);
+    }
+
+    public String getName() {
+        return name;
+    }
+
     /** setter/getter */
     public String getDescriptor() {
         return descriptor;
     }
 
-    public String getName() {
-        return name;
+    public RClass getRClass() {
+        return clazz;
     }
 
 }

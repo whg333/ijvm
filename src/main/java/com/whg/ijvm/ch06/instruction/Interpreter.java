@@ -1,29 +1,23 @@
 package com.whg.ijvm.ch06.instruction;
 
-import com.whg.ijvm.ch06.classfile.MemberInfo;
-import com.whg.ijvm.ch06.classfile.attribute.impl.CodeAttribute;
+import com.whg.ijvm.ch06.heap.RMethod;
 import com.whg.ijvm.ch06.instruction.base.BytecodeReader;
 import com.whg.ijvm.ch06.runtime.RFrame;
 import com.whg.ijvm.ch06.runtime.RThread;
 
 public class Interpreter {
 
-    public static void run(MemberInfo memberInfo){
-        new Interpreter(memberInfo);
+    public static void run(RMethod method){
+        new Interpreter(method);
     }
 
-    private Interpreter(MemberInfo memberInfo){
-        CodeAttribute codeAttr = memberInfo.getCodeAttribute();
-        int maxLocals = codeAttr.getMaxLocals().value();
-        int maxStack = codeAttr.getMaxStack().value();
-        byte[] bytecode = codeAttr.getCode();
-
+    private Interpreter(RMethod method){
         RThread thread = new RThread();
-        RFrame frame = thread.newFrame(maxLocals, maxStack);
+        RFrame frame = thread.newFrame(method);
         thread.pushFrame(frame);
 
         try{
-            loop(thread, bytecode);
+            loop(thread, method.getCode());
         }catch (Exception e){
             catchErr(e, frame);
         }

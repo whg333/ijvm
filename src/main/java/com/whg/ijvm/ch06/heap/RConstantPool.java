@@ -50,11 +50,7 @@ public class RConstantPool {
         }
     }
 
-    <T extends Constant> T getConstant(Uint8 index){
-        return getConstant(index.value());
-    }
-
-    <T extends Constant> T getConstant(int index){
+    public <T extends Constant> T getConstant(int index){
         return (T) constants[index];
     }
 

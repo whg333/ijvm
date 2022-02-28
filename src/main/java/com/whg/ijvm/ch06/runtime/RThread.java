@@ -1,5 +1,7 @@
 package com.whg.ijvm.ch06.runtime;
 
+import com.whg.ijvm.ch06.heap.RMethod;
+
 public class RThread {
 
     int pc;
@@ -9,8 +11,8 @@ public class RThread {
         stack = new RStack(1024);
     }
 
-    public RFrame newFrame(int maxLocals, int maxStack){
-        return new RFrame(this, maxLocals, maxStack);
+    public RFrame newFrame(RMethod method){
+        return new RFrame(this, method);
     }
 
     public void pushFrame(RFrame frame){
