@@ -197,6 +197,39 @@ public class RClass {
         return null;
     }
 
+    public boolean isAssignableFrom(RClass other) {
+        if(this == other){
+            return true;
+        }
+        if(this.isInterface()){
+            return other.isImplememnts(this);
+        }else{
+            return other.isSubClassOf(this);
+        }
+    }
+
+    private boolean isImplememnts(RClass iface) {
+        RClass c = this;
+        while(c != null){
+            for(RClass i: c.getInterfaces()){
+                if(i == iface || i.isSubInterfaceOf(iface)){
+                    return true;
+                }
+            }
+            c = c.superClass;
+        }
+        return false;
+    }
+
+    private boolean isSubInterfaceOf(RClass iface) {
+        for(RClass superInterface: interfaces){
+            if(superInterface == iface || superInterface.isSubInterfaceOf(iface)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     /** setter/getter */
     public RField[] getFields() {
         return fields;
@@ -221,4 +254,5 @@ public class RClass {
     public Slots getStaticVars() {
         return staticVars;
     }
+
 }

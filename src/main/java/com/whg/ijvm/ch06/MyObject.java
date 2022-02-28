@@ -18,6 +18,7 @@ public class MyObject {
         Object obj = myObj;
         if(obj instanceof MyObject){        //instanceof
             myObj = (MyObject) obj;         //checkcast
+            System.out.println(myObj.instanceVar);
         }
     }
 

@@ -7,6 +7,7 @@ import com.whg.ijvm.ch06.instruction.control.Goto;
 import com.whg.ijvm.ch06.instruction.load.ILoad;
 import com.whg.ijvm.ch06.instruction.math.Add;
 import com.whg.ijvm.ch06.instruction.math.Inc;
+import com.whg.ijvm.ch06.instruction.reference.*;
 import com.whg.ijvm.ch06.instruction.store.IStore;
 import com.whg.ijvm.ch06.instruction.store.LStore;
 
@@ -41,6 +42,28 @@ public class InstructionFactory {
 
             case 0xa7:
                 return new Goto();
+
+            //References
+            case 0xb2:
+                return new Static.GET_STATIC();
+            case 0xb3:
+                return new Static.PUT_STATIC();
+            case 0xb4:
+                return new InstField.GET_FIELD();
+            case 0xb5:
+                return new InstField.PUT_FIELD();
+            case 0xb6:
+                return new Invoke.INVOKE_VIRTUAL();
+            case 0xb7:
+                return new Invoke.INVOKE_SPECIAL();
+
+            case 0xbb:
+                return new New.NEW();
+            case 0xc0:
+                return new Instance.CHECK_CAST();
+            case 0xc1:
+                return new Instance.INSTANCE_OF();
+
 
             default:
                 throw new UnsupportedOperationException("Unsupported opcode="+toHexStr(opcode));

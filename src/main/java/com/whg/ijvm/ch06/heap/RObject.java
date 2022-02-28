@@ -13,4 +13,9 @@ public class RObject {
     public Slots getFields() {
         return fields;
     }
+
+    public boolean isInstanceOf(RClass clazz) {
+        return clazz.isAssignableFrom(this.clazz);
+    }
+
 }

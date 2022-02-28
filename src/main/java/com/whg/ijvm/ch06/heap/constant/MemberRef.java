@@ -22,4 +22,12 @@ public class MemberRef extends SymRef{
         descriptor = nameAndDescriptor.getRight();
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getDescriptor() {
+        return descriptor;
+    }
+
 }
