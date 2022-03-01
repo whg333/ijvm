@@ -30,7 +30,7 @@ public class ConstantInfoFactory {
             case FieldRef:
                 return new FieldRefInfo(cp);
             case MethodRef:
-                return new MemberRefInfo(cp);
+                return new MethodRefInfo(cp);
             case InterfaceMethodRef:
                 return new InterfaceMethodRefInfo(cp);
 

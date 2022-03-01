@@ -51,13 +51,14 @@ public class Invoke {
                     default:
                         throw new RuntimeException("println: "+descriptor);
                 }
-                stack.popRef();
+                // TODO
+                // stack.popRef();
             }
         }
     }
 
     private static void printf(String s){
-        System.out.println(s);
+        System.out.print(s);
     }
 
 }

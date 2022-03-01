@@ -2,6 +2,7 @@ package com.whg.ijvm.ch06.instruction;
 
 import com.whg.ijvm.ch06.heap.RMethod;
 import com.whg.ijvm.ch06.instruction.base.BytecodeReader;
+import com.whg.ijvm.ch06.instruction.reference.Return;
 import com.whg.ijvm.ch06.runtime.RFrame;
 import com.whg.ijvm.ch06.runtime.RThread;
 
@@ -36,8 +37,10 @@ public class Interpreter {
             inst.fetchOperands(reader);
             frame.setNextPc(reader.getPc());
 
-            System.out.printf("pc:%2d inst:%s\n",
-                    pc, inst.getClass().getSimpleName());
+            System.out.printf("pc:%2d inst:%s\n", pc, inst.getClass().getSimpleName());
+            if(inst instanceof Return.RETURN){
+                break;
+            }
             inst.execute(frame);
         }
     }

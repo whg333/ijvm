@@ -24,7 +24,7 @@ public class RConstantPool {
 
         ConstantInfo[] infos = cp.getInfos();
         constants = new Constant[infos.length];
-        for(int i=0;i<infos.length;i++){
+        for(int i=1;i<infos.length;i++){
             ConstantInfo info = infos[i];
             if (info instanceof ConstantIntegerInfo) {
                 constants[i] = new ConstantInteger((ConstantIntegerInfo)info);

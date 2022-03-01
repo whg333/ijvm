@@ -6,7 +6,7 @@ import com.whg.ijvm.ch06.classfile.constantinfo.ConstantInfo;
 import com.whg.ijvm.ch06.classfile.uint.Uint16;
 import org.apache.commons.lang3.tuple.Pair;
 
-public class MemberRefInfo implements ConstantInfo {
+public abstract class MemberRefInfo implements ConstantInfo {
 
     protected ConstantPool cp;
     protected Uint16 classIndex;

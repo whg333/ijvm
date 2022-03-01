@@ -1,6 +1,7 @@
 package com.whg.ijvm.ch06.instruction;
 
 import com.whg.ijvm.ch06.instruction.compare.IFIcmp;
+import com.whg.ijvm.ch06.instruction.compare.IFcond;
 import com.whg.ijvm.ch06.instruction.constant.Const;
 import com.whg.ijvm.ch06.instruction.constant.Ipush;
 import com.whg.ijvm.ch06.instruction.constant.Ldc;
@@ -66,6 +67,9 @@ public class InstructionFactory {
             case 0x84:
                 return new Inc.IINC();
 
+            case 0x99:
+                return new IFcond.IFEQ();
+
             case 0xa3:
                 return new IFIcmp.IF_ICMPGT();
 
@@ -73,6 +77,8 @@ public class InstructionFactory {
                 return new Goto();
 
             //References
+            case 0xb1:
+                return new Return.RETURN();
             case 0xb2:
                 return new Static.GET_STATIC();
             case 0xb3:

@@ -65,7 +65,11 @@ public class OperandStack {
     }
 
     public void pushSlot(Slot slot){
-        slots[nextIdx] = slot;
+        // slots[nextIdx] = slot;
+        // 不能使用上面引用的方式，而应该如下设置slot的值，
+        // 否则当执行DUP（拷贝相同的slot）后再执行INVOKE_SPECIAL，popRef的时候，因为DUP是指向同一个引用，导致栈上2个ref改变为null
+        slots[nextIdx].num = slot.num;
+        slots[nextIdx].ref = slot.ref;
         nextIdx++;
     }
 
