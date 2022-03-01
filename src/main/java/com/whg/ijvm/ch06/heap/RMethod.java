@@ -19,9 +19,11 @@ public class RMethod extends RClassMember{
     @Override
     void copyAttributes(MemberInfo cfMethod){
         CodeAttribute codeAttr = cfMethod.getCodeAttribute();
-        maxLocals = codeAttr.getMaxLocals().value();
-        maxStack = codeAttr.getMaxStack().value();
-        code = codeAttr.getCode();
+        if(codeAttr != null){
+            maxLocals = codeAttr.getMaxLocals().value();
+            maxStack = codeAttr.getMaxStack().value();
+            code = codeAttr.getCode();
+        }
     }
 
     public static RMethod[] newMethods(RClass clazz, ClassFile cf){

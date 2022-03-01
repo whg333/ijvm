@@ -29,7 +29,7 @@ public class RClassLoader {
         ClassData classData = readClass(className);
         RClass clazz = defineClass(classData.bytes);
         link(clazz);
-        System.out.printf("[Loaded %s from %s]", className, classData.entry);
+        System.out.printf("[Loaded %s from %s]\n", className, classData.entry);
         return clazz;
     }
 

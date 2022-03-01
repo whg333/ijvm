@@ -3,11 +3,15 @@ package com.whg.ijvm.ch06.instruction;
 import com.whg.ijvm.ch06.instruction.compare.IFIcmp;
 import com.whg.ijvm.ch06.instruction.constant.Const;
 import com.whg.ijvm.ch06.instruction.constant.Ipush;
+import com.whg.ijvm.ch06.instruction.constant.Ldc;
 import com.whg.ijvm.ch06.instruction.control.Goto;
+import com.whg.ijvm.ch06.instruction.load.ALoad;
 import com.whg.ijvm.ch06.instruction.load.ILoad;
 import com.whg.ijvm.ch06.instruction.math.Add;
 import com.whg.ijvm.ch06.instruction.math.Inc;
 import com.whg.ijvm.ch06.instruction.reference.*;
+import com.whg.ijvm.ch06.instruction.stack.Dup;
+import com.whg.ijvm.ch06.instruction.store.AStore;
 import com.whg.ijvm.ch06.instruction.store.IStore;
 import com.whg.ijvm.ch06.instruction.store.LStore;
 
@@ -21,15 +25,40 @@ public class InstructionFactory {
                 return new Const.ICONST_1();
             case 0x10:
                 return new Ipush.BIPUSH();
+
+            case 0x12:
+                return new Ldc.LDC();
+
             case 0x1b:
                 return new ILoad.ILOAD_1();
             case 0x1c:
                 return new ILoad.ILOAD_2();
 
+            case 0x2a:
+                return new ALoad.ALOAD_0();
+            case 0x2b:
+                return new ALoad.ALOAD_1();
+            case 0x2c:
+                return new ALoad.ALOAD_2();
+            case 0x2d:
+                return new ALoad.ALOAD_3();
+
             case 0x3c:
                 return new IStore.ISTORE_1();
             case 0x3d:
                 return new IStore.ISTORE_2();
+
+            case 0x4b:
+                return new AStore.ASTORE_0();
+            case 0x4c:
+                return new AStore.ASTORE_1();
+            case 0x4d:
+                return new AStore.ASTORE_2();
+            case 0x4e:
+                return new AStore.ASTORE_3();
+
+            case 0x59:
+                return new Dup.DUP();
 
             case 0x60:
                 return new Add.IADD();

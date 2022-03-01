@@ -18,7 +18,9 @@ public class RField extends RClassMember{
     @Override
     void copyAttributes(MemberInfo cfFiled) {
         ConstantValueAttribute valAttr = cfFiled.getConstantValueAttribute();
-        constValueIndex = valAttr.getConstantValueIndex().value();
+        if(valAttr != null){
+            constValueIndex = valAttr.getConstantValueIndex().value();
+        }
     }
 
     public static RField[] newFields(RClass clazz, ClassFile cf) {
