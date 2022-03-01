@@ -11,4 +11,10 @@ public class Index8Instruction extends AbstractInstruction {
     public void fetchOperands(BytecodeReader reader) {
         index = reader.readUint8();
     }
+
+    @Override
+    public String toString() {
+        return super.toString()+" #"+index.value();
+    }
+
 }

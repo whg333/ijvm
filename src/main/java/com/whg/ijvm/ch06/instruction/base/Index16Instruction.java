@@ -11,4 +11,10 @@ public class Index16Instruction extends AbstractInstruction {
     public void fetchOperands(BytecodeReader reader) {
         index = reader.readUint16();
     }
+
+    @Override
+    public String toString() {
+        return super.toString()+" #"+index.value();
+    }
+
 }

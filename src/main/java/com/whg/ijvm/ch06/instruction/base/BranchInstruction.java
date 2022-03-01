@@ -17,4 +17,9 @@ public class BranchInstruction extends AbstractInstruction {
         frame.setNextPc(nextPc);
     }
 
+    @Override
+    public String toString() {
+        return super.toString()+" +"+offset;
+    }
+
 }

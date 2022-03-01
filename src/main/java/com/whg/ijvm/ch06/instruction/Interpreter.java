@@ -37,7 +37,7 @@ public class Interpreter {
             inst.fetchOperands(reader);
             frame.setNextPc(reader.getPc());
 
-            System.out.printf("pc:%2d inst:%s\n", pc, inst.getClass().getSimpleName());
+            System.out.printf("pc:%2d inst:%s\n", pc, inst);
             if(inst instanceof Return.RETURN){
                 break;
             }
