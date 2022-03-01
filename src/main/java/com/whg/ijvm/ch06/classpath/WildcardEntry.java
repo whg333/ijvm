@@ -11,6 +11,8 @@ public class WildcardEntry implements Entry {
 	
 	private final String absDir;
 	private final List<Entry> entries;
+
+	private String readClassPath; //真正读取到类文件的路径
 	
 	WildcardEntry(String absDir){
 		this.absDir = absDir;
@@ -27,6 +29,7 @@ public class WildcardEntry implements Entry {
 		for (Entry entry : entries) {
 			byte[] bytes = entry.readClass(className);
 			if(bytes != null){
+				readClassPath = entry.toString();
 				return bytes;
 			}
 		}
@@ -35,7 +38,7 @@ public class WildcardEntry implements Entry {
 	
 	@Override
 	public String toString() {
-		return absDir;
+		return readClassPath;
 	}
 
 }
