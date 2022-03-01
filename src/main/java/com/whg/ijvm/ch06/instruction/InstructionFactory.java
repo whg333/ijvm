@@ -18,6 +18,7 @@ import com.whg.ijvm.ch06.instruction.store.LStore;
 
 public class InstructionFactory {
 
+    // TODO 优化一些不需要操作数的类成单例
     public static Instruction newInstruction(short opcode){
         switch (opcode){
             case 0x03:
