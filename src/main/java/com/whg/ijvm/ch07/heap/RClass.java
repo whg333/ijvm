@@ -235,6 +235,10 @@ public class RClass {
         return fields;
     }
 
+    public RMethod[] getMethods() {
+        return methods;
+    }
+
     public RClass[] getInterfaces() {
         return interfaces;
     }

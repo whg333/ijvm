@@ -18,7 +18,7 @@ public class SymRef implements Constant{
     }
 
     private void resolveClassRef() {
-        RClass d = cp.clazz;
+        RClass d = cp.getClazz();
         RClass c = d.loader.loadClass(className);
         if(!c.isAccessibleTo(d)){
             throw new RuntimeException(String.format("IllegalAccessException: %s -> %s",

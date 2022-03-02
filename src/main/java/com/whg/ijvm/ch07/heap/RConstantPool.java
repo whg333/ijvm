@@ -16,7 +16,7 @@ import com.whg.ijvm.ch07.heap.constant.*;
 
 public class RConstantPool {
 
-    public RClass clazz;
+    RClass clazz;
     Constant[] constants;
 
     public RConstantPool(RClass clazz, ConstantPool cp) {
@@ -48,6 +48,10 @@ public class RConstantPool {
                 constants[i] = new InterfaceMethodRef(this, (InterfaceMethodRefInfo)info);
             }
         }
+    }
+
+    public RClass getClazz() {
+        return clazz;
     }
 
     public <T extends Constant> T getConstant(int index){

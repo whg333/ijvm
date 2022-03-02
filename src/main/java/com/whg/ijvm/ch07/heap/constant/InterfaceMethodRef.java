@@ -1,6 +1,7 @@
 package com.whg.ijvm.ch07.heap.constant;
 
 import com.whg.ijvm.ch07.classfile.constantinfo.member.InterfaceMethodRefInfo;
+import com.whg.ijvm.ch07.heap.RClass;
 import com.whg.ijvm.ch07.heap.RConstantPool;
 import com.whg.ijvm.ch07.heap.RMethod;
 
@@ -10,6 +11,31 @@ public class InterfaceMethodRef extends MemberRef{
 
     public InterfaceMethodRef(RConstantPool cp, InterfaceMethodRefInfo refInfo) {
         super(cp, refInfo);
+    }
+
+    RMethod resolveInterfaceMethod(){
+        if(method == null){
+            resolveInterfaceMethodRef();
+        }
+        return method;
+    }
+
+    private void resolveInterfaceMethodRef() {
+        RClass c = resolveClass();
+        if(!c.isInterface()){
+            throw new RuntimeException("IncompatibleClassChangeError");
+        }
+
+        RMethod method = MethodLookup.lookupInterfaceMethod(c, name, descriptor);
+        if(method == null){
+            throw new RuntimeException("NoSuchMethodError");
+        }
+        RClass d = cp.getClazz();
+        if(!method.isAccessibleTo(d)){
+            throw new RuntimeException("IllegalAccessError");
+        }
+
+        this.method = method;
     }
 
 }

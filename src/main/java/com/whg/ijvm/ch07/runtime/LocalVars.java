@@ -63,6 +63,11 @@ public class LocalVars {
         return slots[index].ref;
     }
 
+    public void setSlot(int index, Slot slot){
+        slots[index].num = slot.num;
+        slots[index].ref = slot.ref;
+    }
+
     @Override
     public String toString() {
         return Arrays.toString(slots);

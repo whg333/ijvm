@@ -21,7 +21,7 @@ public class FieldRef extends MemberRef{
     }
 
     private void resolveFieldRef() {
-        RClass d = cp.clazz;
+        RClass d = cp.getClazz();
         RClass c = resolveClass();
         RField field = lookupField(c, name, descriptor);
         if(field == null){

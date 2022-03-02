@@ -36,6 +36,9 @@ public class RFrame {
         return thread.getPc();
     }
 
+    public RThread getThread() {
+        return thread;
+    }
     public RMethod getMethod() {
         return method;
     }

@@ -10,10 +10,13 @@ public class RMethod extends RClassMember{
     int maxLocals;
     byte[] code;
 
+    short argSlotCount;
+
     RMethod(RClass clazz, MemberInfo cfMethod){
         this.clazz = clazz;
         copyMemberInfo(cfMethod);
         copyAttributes(cfMethod);
+        // calcArgSlotCount();
     }
 
     @Override
@@ -23,6 +26,19 @@ public class RMethod extends RClassMember{
             maxLocals = codeAttr.getMaxLocals().value();
             maxStack = codeAttr.getMaxStack().value();
             code = codeAttr.getCode();
+        }
+    }
+
+    void calcArgSlotCount(){
+        RMethodDescriptor methodDescriptor = RMethodDescriptor.parse(descriptor);
+        for(String paramType: methodDescriptor.getParameterTypes()){
+            argSlotCount++;
+            if(paramType.equals("J") || paramType.equals("D")){
+                argSlotCount++;
+            }
+        }
+        if(!isStatic()){
+            argSlotCount++;
         }
     }
 
@@ -47,4 +63,7 @@ public class RMethod extends RClassMember{
         return code;
     }
 
+    public short getArgSlotCount() {
+        return argSlotCount;
+    }
 }
