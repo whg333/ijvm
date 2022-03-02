@@ -132,8 +132,9 @@ public class ClassFile {
 		return null;
 	}
 
-	public void printInfo() {
+	public String getPrintInfo() {
 		StringBuilder sb = new StringBuilder("\n");
+
 		sb.append(String.format("minor version: %d\n", minorVersion.value()));
 		sb.append(String.format("major version: %d\n", majorVersion.value()));
 		sb.append(String.format("flags: (%s)\n", "0x"+Integer.toHexString(accessFlags.value())));
@@ -159,7 +160,7 @@ public class ClassFile {
 			sb.append(String.format("\t%s\n", attribute.getName()));
 		}
 
-		System.out.println(sb);
+		return sb.toString();
 	}
 
 }

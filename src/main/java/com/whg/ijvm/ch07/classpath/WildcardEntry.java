@@ -17,6 +17,8 @@ public class WildcardEntry implements Entry {
 	WildcardEntry(String absDir){
 		this.absDir = absDir;
 		entries = new ArrayList<>();
+		readClassPath = absDir;
+
 		String basePath = absDir.substring(0, absDir.length()-1);
 		File baseDir = FileUtils.getFile(basePath);
 		Collection<File> files = FileUtils.listFiles(

@@ -1,11 +1,10 @@
 package com.whg.ijvm.ch07.classpath;
 
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 import org.apache.commons.lang3.StringUtils;
+
+import java.io.File;
+import java.nio.file.Paths;
+import java.util.Arrays;
 
 public class Classpath {
 
@@ -82,7 +81,11 @@ public class Classpath {
 	
 	@Override
 	public String toString() {
-		return userClasspath.toString();
+		return Arrays.toString(new String[]{
+				bootClasspath.toString(),
+				extClasspath.toString(),
+				userClasspath.toString()
+		});
 	}
 	
 }

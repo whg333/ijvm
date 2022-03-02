@@ -57,36 +57,32 @@ public class JvmCmder {
 		Classpath cp = new Classpath();
 		cp.parse(jreOption, cpOption);
 		
-		String info = String.format("classpath:%s class:%s args:%s", 
-				cp, clazz, Arrays.toString(args));
 		Console console = JCommander.getConsole();
-		console.println(info);
+		console.println(String.format("classpath:%s\nclass:[%s]\nargs:%s", cp, clazz, Arrays.toString(args)));
 		
 		clazz = clazz.replaceAll("\\.", "/");
 		// clazz = RegExUtils.replaceAll(clazz, "/.", "////");
 		ClassData classData = cp.readClass(clazz);
-		byte[] bytes = classData.bytes;
-		if(bytes == null){
-			info = String.format("Can not find or load main class:%s", clazz);
-		}else{
-			String[] unsignedBytes = unsignedBytes(bytes);
-			info = String.format("class data:%s", Arrays.toString(unsignedBytes));
+		if(classData == null){
+			console.println(String.format("Can not found class:[%s]", clazz));
+			return;
 		}
-		console.println(info);
 
-		if(bytes != null){
-			ClassFile classFile = ClassFile.parse(bytes);
-			classFile.printInfo();
+		byte[] bytes = classData.bytes;
+		String[] unsignedBytes = unsignedBytes(bytes);
+		console.println(String.format("class data:%s", Arrays.toString(unsignedBytes)));
 
-			RClassLoader classLoader = new RClassLoader(cp);
-			RClass mainClass = classLoader.loadClass(clazz);
-			RMethod mainMethod = mainClass.getMainMethod();
-			// MemberInfo mainMethod = classFile.getMainMethod();
-			if(mainMethod != null){
-				Interpreter.run(mainMethod);
-			}else{
-				console.println(String.format("Main method not found in class %s\n", clazz));
-			}
+		ClassFile classFile = ClassFile.parse(bytes);
+		console.println(classFile.getPrintInfo());
+
+		RClassLoader classLoader = new RClassLoader(cp);
+		RClass mainClass = classLoader.loadClass(clazz);
+		RMethod mainMethod = mainClass.getMainMethod();
+		// MemberInfo mainMethod = classFile.getMainMethod();
+		if(mainMethod == null){
+			console.println(String.format("Main method not found in class:[%s]", clazz));
+		}else{
+			Interpreter.run(mainMethod);
 		}
 	}
 	
