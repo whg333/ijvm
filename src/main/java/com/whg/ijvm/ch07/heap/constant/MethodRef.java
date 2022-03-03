@@ -13,7 +13,7 @@ public class MethodRef extends MemberRef{
         super(cp, refInfo);
     }
 
-    RMethod resolveMethod(){
+    public RMethod resolveMethod(){
         if(method == null){
             resolveMethodRef();
         }

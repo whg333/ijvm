@@ -1,12 +1,27 @@
 package com.whg.ijvm.ch07.instruction.reference;
 
 import com.whg.ijvm.ch07.heap.RConstantPool;
+import com.whg.ijvm.ch07.heap.RMethod;
 import com.whg.ijvm.ch07.heap.constant.MethodRef;
 import com.whg.ijvm.ch07.instruction.base.Index16Instruction;
+import com.whg.ijvm.ch07.instruction.base.MethodInvokeLogic;
 import com.whg.ijvm.ch07.runtime.OperandStack;
 import com.whg.ijvm.ch07.runtime.RFrame;
 
 public class Invoke {
+
+    public static class INVOKE_STATIC extends Index16Instruction{
+        @Override
+        public void execute(RFrame frame) {
+            RConstantPool cp = frame.getMethod().getRClass().getRConstantPool();
+            MethodRef methodRef = cp.getConstant(index.value());
+            RMethod method = methodRef.resolveMethod();
+            if(!method.isStatic()){
+                throw new RuntimeException("IncompatibleClassChangeError");
+            }
+            MethodInvokeLogic.invokeMethod(frame, method);
+        }
+    }
 
     public static class INVOKE_SPECIAL extends Index16Instruction{
         @Override

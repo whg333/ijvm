@@ -7,7 +7,7 @@ import com.whg.ijvm.ch07.runtime.Slot;
 
 public class MethodInvokeLogic {
 
-    void invokeMethod(RFrame invokerFrame, RMethod method){
+    public static void invokeMethod(RFrame invokerFrame, RMethod method){
         RThread thread = invokerFrame.getThread();
         RFrame newFrame = thread.newFrame(method);
         thread.pushFrame(newFrame);
