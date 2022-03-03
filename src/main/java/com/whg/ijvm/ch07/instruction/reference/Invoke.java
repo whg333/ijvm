@@ -1,7 +1,9 @@
 package com.whg.ijvm.ch07.instruction.reference;
 
+import com.whg.ijvm.ch07.heap.RClass;
 import com.whg.ijvm.ch07.heap.RConstantPool;
 import com.whg.ijvm.ch07.heap.RMethod;
+import com.whg.ijvm.ch07.heap.RObject;
 import com.whg.ijvm.ch07.heap.constant.MethodRef;
 import com.whg.ijvm.ch07.instruction.base.Index16Instruction;
 import com.whg.ijvm.ch07.instruction.base.MethodInvokeLogic;
@@ -26,6 +28,24 @@ public class Invoke {
     public static class INVOKE_SPECIAL extends Index16Instruction{
         @Override
         public void execute(RFrame frame) {
+            RClass currentClass = frame.getMethod().getRClass();
+            RConstantPool cp = currentClass.getRConstantPool();
+            MethodRef methodRef = cp.getConstant(index.value());
+            RClass clazz = methodRef.resolveClass();
+            RMethod method = methodRef.resolveMethod();
+
+            if(method.getName().equals("<init>") && method.getRClass() != clazz){
+                throw new RuntimeException("NoSuchMethodError");
+            }
+            if(method.isStatic()){
+                throw new RuntimeException("IncompatibleClassChangeError)";
+            }
+
+            RObject ref = frame.getOperandStack().getRefFromTop(method.getArgSlotCount());
+            if(ref == null){
+                throw new RuntimeException("NullPointerException");
+            }
+
             frame.getOperandStack().popRef();
         }
     }
