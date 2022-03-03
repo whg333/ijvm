@@ -156,6 +156,7 @@ public class Invoke {
                 default:
                     throw new RuntimeException("println: "+descriptor);
             }
+            // TODO 下面这个到底要不要？要了就会报错
             // stack.popRef();
         }
 
