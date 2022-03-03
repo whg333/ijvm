@@ -20,10 +20,11 @@ public class MethodInvokeLogic {
             }
         }
 
-        // hack!
-        if(!method.isStatic()){
-            // thread.popFrame();
-        }
+        // 方法调用完毕后都有RETURN，会调用popFrame，所以不用特殊处理，
+        // 之前有问题是因为没有切换到栈顶的frame去执行
+        // if(!method.isStatic()){
+        //     // thread.popFrame();
+        // }
         // if(method.getName().equals("<init>")){
         //     thread.popFrame();
         // }
@@ -31,6 +32,7 @@ public class MethodInvokeLogic {
         //     thread.popFrame();
         // }
 
+        // hack!
         if(method.isNative()){
             if(method.getName().equals("registerNatives")){
                 thread.popFrame();
