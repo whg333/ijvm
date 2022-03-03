@@ -6,6 +6,7 @@ import com.whg.ijvm.ch07.instruction.constant.Const;
 import com.whg.ijvm.ch07.instruction.constant.Ipush;
 import com.whg.ijvm.ch07.instruction.constant.Ldc;
 import com.whg.ijvm.ch07.instruction.control.Goto;
+import com.whg.ijvm.ch07.instruction.control.Return;
 import com.whg.ijvm.ch07.instruction.load.ALoad;
 import com.whg.ijvm.ch07.instruction.load.ILoad;
 import com.whg.ijvm.ch07.instruction.math.Add;
@@ -14,7 +15,6 @@ import com.whg.ijvm.ch07.instruction.reference.*;
 import com.whg.ijvm.ch07.instruction.stack.Dup;
 import com.whg.ijvm.ch07.instruction.store.AStore;
 import com.whg.ijvm.ch07.instruction.store.IStore;
-import com.whg.ijvm.ch07.instruction.store.LStore;
 
 public class InstructionFactory {
 

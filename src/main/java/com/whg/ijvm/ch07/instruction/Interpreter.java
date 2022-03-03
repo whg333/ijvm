@@ -2,7 +2,7 @@ package com.whg.ijvm.ch07.instruction;
 
 import com.whg.ijvm.ch07.heap.RMethod;
 import com.whg.ijvm.ch07.instruction.base.BytecodeReader;
-import com.whg.ijvm.ch07.instruction.reference.Return;
+import com.whg.ijvm.ch07.instruction.control.Return;
 import com.whg.ijvm.ch07.runtime.RFrame;
 import com.whg.ijvm.ch07.runtime.RThread;
 
@@ -25,7 +25,7 @@ public class Interpreter {
     }
 
     private void loop(RThread thread, byte[] bytecode) {
-        RFrame frame = thread.popFrame();
+        RFrame frame = thread.currentFrame();
         BytecodeReader reader = new BytecodeReader(bytecode);
         for(;;){
             int pc = frame.getNextPc();

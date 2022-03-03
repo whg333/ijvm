@@ -13,7 +13,11 @@ public class Uint8 {
 	}
 	
 	public short value() {
-		int firstByte = (0x000000FF & ((int)buf[0]));
+		return value(buf[0]);
+	}
+
+	public static short value(byte b){
+		int firstByte = (0x000000FF & ((int)b));
 		short anUnsignedByte = (short)firstByte;
 		return anUnsignedByte;
 	}

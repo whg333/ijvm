@@ -32,7 +32,7 @@ public class RStack {
         return currTop;
     }
 
-    public RFrame peek(){
+    public RFrame top(){
         checkNotEmpty();
         return top;
     }

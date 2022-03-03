@@ -23,8 +23,11 @@ public class RThread {
         return stack.pop();
     }
 
-    public RFrame peekFrame(){
-        return stack.peek();
+    public RFrame currentFrame(){
+        return topFrame();
+    }
+    public RFrame topFrame(){
+        return stack.top();
     }
 
     public int getPc() {
