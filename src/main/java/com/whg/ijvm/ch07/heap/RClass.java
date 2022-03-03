@@ -170,12 +170,37 @@ public class RClass {
 
     // self extends c
     public boolean isSubClassOf(RClass other) {
-        RClass c = superClass;
-        while(c != null){
+        for(RClass c = superClass; c != null; c = c.superClass){
             if(c == other){
                 return true;
             }
-            c = c.superClass;
+        }
+        return false;
+    }
+
+    // c extends self
+    public boolean isSuperClassOf(RClass other){
+        return other.isSubClassOf(this);
+    }
+
+    // self implements iface
+    public boolean isImplements(RClass iface){
+        for(RClass c = this; c != null; c = c.superClass){
+            for(RClass i: c.interfaces){
+                if(i == iface || i.isSubInterfaceOf(iface)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    // self extends iface
+    public boolean isSubInterfaceOf(RClass iface){
+        for(RClass superInterface: interfaces){
+            if(superInterface == iface || superInterface.isSubInterfaceOf(iface)){
+                return true;
+            }
         }
         return false;
     }
@@ -202,32 +227,10 @@ public class RClass {
             return true;
         }
         if(this.isInterface()){
-            return other.isImplememnts(this);
+            return other.isImplements(this);
         }else{
             return other.isSubClassOf(this);
         }
-    }
-
-    private boolean isImplememnts(RClass iface) {
-        RClass c = this;
-        while(c != null){
-            for(RClass i: c.getInterfaces()){
-                if(i == iface || i.isSubInterfaceOf(iface)){
-                    return true;
-                }
-            }
-            c = c.superClass;
-        }
-        return false;
-    }
-
-    private boolean isSubInterfaceOf(RClass iface) {
-        for(RClass superInterface: interfaces){
-            if(superInterface == iface || superInterface.isSubInterfaceOf(iface)){
-                return true;
-            }
-        }
-        return false;
     }
 
     /** setter/getter */

@@ -55,6 +55,11 @@ public class BytecodeReader {
         return ints;
     }
 
+    public void reset(byte[] code, int pc){
+        this.code = code;
+        this.pc = pc;
+    }
+
     public void setPc(int pc) {
         this.pc = pc;
     }

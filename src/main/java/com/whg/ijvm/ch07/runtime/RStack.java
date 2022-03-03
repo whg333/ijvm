@@ -32,6 +32,10 @@ public class RStack {
         return currTop;
     }
 
+    public boolean isEmpty() {
+        return top == null;
+    }
+
     public RFrame top(){
         checkNotEmpty();
         return top;

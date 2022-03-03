@@ -78,8 +78,18 @@ public class OperandStack {
         return slots[nextIdx];
     }
 
+    public RObject getRefFromTop(int n) {
+        int index = nextIdx-1-n;
+        if(index < 0){
+            System.out.println("getRefFromTop:"+index);
+            return null;
+        }
+        return slots[index].ref;
+    }
+
     @Override
     public String toString() {
         return "{" + nextIdx + " " + Arrays.toString(slots) + "}";
     }
+
 }

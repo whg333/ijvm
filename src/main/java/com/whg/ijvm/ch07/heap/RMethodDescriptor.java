@@ -2,11 +2,12 @@ package com.whg.ijvm.ch07.heap;
 
 import com.whg.ijvm.ch07.classfile.uint.Uint8;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RMethodDescriptor {
 
-    List<String> parameterTypes;
+    List<String> parameterTypes = new ArrayList<>();
     String returnType;
 
     public String[] getParameterTypes() {
@@ -23,11 +24,15 @@ public class RMethodDescriptor {
     }
 
     private static class MethodDescriptorParser {
+
+        String descriptor; // for debug
+
         byte[] raw;
         int offset;
         RMethodDescriptor parsed;
 
         RMethodDescriptor parse(String descriptor){
+            this.descriptor = descriptor;
             raw = descriptor.getBytes();
             parsed = new RMethodDescriptor();
 
@@ -112,11 +117,11 @@ public class RMethodDescriptor {
         }
 
         private String readString(int start){
-            return readString(start, raw.length-1);
+            return readString(start, raw.length);
         }
 
         private String readString(int start, int end){
-            byte[] bytes = new byte[start-end];
+            byte[] bytes = new byte[end-start];
             for(int i=0,j=start;j<end;i++,j++){
                 bytes[i] = raw[j];
             }
@@ -130,7 +135,19 @@ public class RMethodDescriptor {
         }
 
         private void parseReturnType(){
+            if(readUint8() == 'V'){
+                parsed.returnType = "V";
+                return;
+            }
 
+            unreadUint8();
+            String t = parseFieldType();
+            if(!t.equals("")){
+                parsed.returnType = t;
+                return;
+            }
+
+            causePanic();
         }
 
         private void finish(){

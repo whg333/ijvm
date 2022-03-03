@@ -34,6 +34,12 @@ public abstract class RClassMember {
     public boolean isPrivate(){
         return AccessFlags.isPrivate(accessFlags);
     }
+    public boolean isAbstract(){
+        return AccessFlags.isAbstract(accessFlags);
+    }
+    public boolean isNative() {
+        return AccessFlags.isNative(accessFlags);
+    }
 
     public boolean isLongOrDouble() {
         return descriptor.equals("J") || descriptor.equals("D");

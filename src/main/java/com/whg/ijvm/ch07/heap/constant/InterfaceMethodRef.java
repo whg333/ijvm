@@ -13,7 +13,7 @@ public class InterfaceMethodRef extends MemberRef{
         super(cp, refInfo);
     }
 
-    RMethod resolveInterfaceMethod(){
+    public RMethod resolveInterfaceMethod(){
         if(method == null){
             resolveInterfaceMethodRef();
         }

@@ -30,6 +30,10 @@ public class RThread {
         return stack.top();
     }
 
+    public boolean isStackEmpty() {
+        return stack.isEmpty();
+    }
+
     public int getPc() {
         return pc;
     }

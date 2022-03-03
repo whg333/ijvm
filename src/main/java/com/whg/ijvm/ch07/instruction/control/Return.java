@@ -13,7 +13,7 @@ public class Return {
             frame.getThread().popFrame();
         }
     }
-    private static class ARETURN extends NoOperandsInstruction{
+    public static class ARETURN extends NoOperandsInstruction{
         @Override
         public void execute(RFrame frame) {
             RThread thread = frame.getThread();
@@ -23,7 +23,7 @@ public class Return {
             invokerFrame.getOperandStack().pushRef(retVal);
         }
     }
-    private static class IRETURN extends NoOperandsInstruction{
+    public static class IRETURN extends NoOperandsInstruction{
         @Override
         public void execute(RFrame frame) {
             RThread thread = frame.getThread();
@@ -33,7 +33,7 @@ public class Return {
             invokerFrame.getOperandStack().pushInt(retVal);
         }
     }
-    private static class LRETURN extends NoOperandsInstruction{
+    public static class LRETURN extends NoOperandsInstruction{
         @Override
         public void execute(RFrame frame) {
             RThread thread = frame.getThread();
@@ -43,7 +43,7 @@ public class Return {
             invokerFrame.getOperandStack().pushLong(retVal);
         }
     }
-    private static class FRETURN extends NoOperandsInstruction{
+    public static class FRETURN extends NoOperandsInstruction{
         @Override
         public void execute(RFrame frame) {
             RThread thread = frame.getThread();
@@ -53,7 +53,7 @@ public class Return {
             invokerFrame.getOperandStack().pushFloat(retVal);
         }
     }
-    private static class DRETURN extends NoOperandsInstruction{
+    public static class DRETURN extends NoOperandsInstruction{
         @Override
         public void execute(RFrame frame) {
             RThread thread = frame.getThread();

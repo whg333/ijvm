@@ -1,4 +1,4 @@
-package com.whg.ijvm.ch07;
+package com.whg.ijvm.ch07.test;
 
 public class GaussTest {
 

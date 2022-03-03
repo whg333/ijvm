@@ -20,34 +20,48 @@ public class Interpreter {
         try{
             loop(thread, method.getCode());
         }catch (Exception e){
-            catchErr(e, frame);
+            catchErr(e, thread);
         }
     }
 
     private void loop(RThread thread, byte[] bytecode) {
-        RFrame frame = thread.currentFrame();
         BytecodeReader reader = new BytecodeReader(bytecode);
         for(;;){
+            RFrame frame = thread.currentFrame();
             int pc = frame.getNextPc();
             thread.setPc(pc);
             reader.setPc(pc);
 
+            reader.reset(frame.getMethod().getCode(), pc);
             short opcode = reader.readUint8().value();
             Instruction inst = InstructionFactory.newInstruction(opcode);
             inst.fetchOperands(reader);
             frame.setNextPc(reader.getPc());
 
             System.out.printf("pc:%2d inst:%s\n", pc, inst);
-            if(inst instanceof Return.RETURN){
+
+            inst.execute(frame);
+
+            // if(inst instanceof Return.RETURN){
+            //     System.out.println("RETURN");
+            //     break;
+            // }
+            if(thread.isStackEmpty()){
                 break;
             }
-            inst.execute(frame);
         }
     }
 
-    private void catchErr(Exception e, RFrame frame){
-        System.out.printf("LocalVars: %s\n", frame.getLocalVars());
-        System.out.printf("OperandStack: %s\n", frame.getOperandStack());
+    private void catchErr(Exception e, RThread thread){
+        for(;!thread.isStackEmpty();){
+            RFrame frame = thread.popFrame();
+            RMethod method = frame.getMethod();
+            String className = method.getRClass().getName();
+            System.out.printf(">> pc:%4d %s.%s%s \n", frame.getNextPc(), className,
+                    method.getName(), method.getDescriptor());
+            // System.out.printf("LocalVars: %s\n", frame.getLocalVars());
+            // System.out.printf("OperandStack: %s\n", frame.getOperandStack());
+        }
         throw new RuntimeException(e);
     }
 

@@ -18,4 +18,7 @@ public class RObject {
         return clazz.isAssignableFrom(this.clazz);
     }
 
+    public RClass getRClass() {
+        return clazz;
+    }
 }

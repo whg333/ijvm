@@ -19,6 +19,26 @@ public class MethodInvokeLogic {
                 newFrame.getLocalVars().setSlot(i, slot);
             }
         }
+
+        // hack!
+        if(!method.isStatic()){
+            // thread.popFrame();
+        }
+        // if(method.getName().equals("<init>")){
+        //     thread.popFrame();
+        // }
+        // if(method.getName().equals("<clinit>")){
+        //     thread.popFrame();
+        // }
+
+        if(method.isNative()){
+            if(method.getName().equals("registerNatives")){
+                thread.popFrame();
+            } else {
+                throw new RuntimeException(String.format("native method: %v.%v%v\n",
+                        method.getRClass().getName(), method.getName(), method.getDescriptor()));
+            }
+        }
     }
 
 }

@@ -1,4 +1,4 @@
-package com.whg.ijvm.ch07;
+package com.whg.ijvm.ch07.test;
 
 import com.whg.ijvm.ch07.runtime.LocalVars;
 import com.whg.ijvm.ch07.runtime.OperandStack;

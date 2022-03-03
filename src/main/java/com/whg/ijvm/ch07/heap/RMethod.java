@@ -10,13 +10,13 @@ public class RMethod extends RClassMember{
     int maxLocals;
     byte[] code;
 
-    short argSlotCount;
+    int argSlotCount;
 
     RMethod(RClass clazz, MemberInfo cfMethod){
         this.clazz = clazz;
         copyMemberInfo(cfMethod);
         copyAttributes(cfMethod);
-        // calcArgSlotCount();
+        calcArgSlotCount();
     }
 
     @Override
@@ -63,7 +63,7 @@ public class RMethod extends RClassMember{
         return code;
     }
 
-    public short getArgSlotCount() {
+    public int getArgSlotCount() {
         return argSlotCount;
     }
 }

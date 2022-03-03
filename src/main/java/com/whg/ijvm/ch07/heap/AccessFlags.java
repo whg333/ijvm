@@ -39,6 +39,9 @@ public interface AccessFlags {
     static boolean isSuper(int accessFlags){
         return (accessFlags & ACC_SUPER) != 0;
     }
+    static boolean isNative(int accessFlags) {
+        return (accessFlags & ACC_NATIVE) != 0;
+    }
     static boolean isInterface(int accessFlags){
         return (accessFlags & ACC_INTERFACE) != 0;
     }
