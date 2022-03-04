@@ -207,6 +207,12 @@ public class Invoke {
 
             MethodInvokeLogic.invokeMethod(frame, methodToBeInvoked);
         }
+
+        @Override
+        public String toString() {
+            return Instruction.string(this)+" #"+index.value();
+        }
+
     }
 
 }

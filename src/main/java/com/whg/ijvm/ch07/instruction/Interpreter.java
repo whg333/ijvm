@@ -38,7 +38,7 @@ public class Interpreter {
             inst.fetchOperands(reader);
             frame.setNextPc(reader.getPc());
 
-            System.out.printf("pc:%2d inst:%s\n", pc, inst);
+            System.out.printf("%s >> pc:%2d inst:%s\n", new Executor(frame), pc, inst);
 
             inst.execute(frame);
 
@@ -63,6 +63,23 @@ public class Interpreter {
             // System.out.printf("OperandStack: %s\n", frame.getOperandStack());
         }
         throw new RuntimeException(e);
+    }
+
+    private static class Executor{
+        final String className;
+        final String methodName;
+        final String methodDesc;
+        public Executor(RFrame frame) {
+            RMethod method = frame.getMethod();
+            String name = method.getRClass().getName();
+            this.className = name.substring(name.lastIndexOf('/')+1);
+            this.methodName = method.getName();
+            this.methodDesc = method.getDescriptor();
+        }
+        @Override
+        public String toString() {
+            return String.format("%s.%s%s", className, methodName, methodDesc);
+        }
     }
 
 }
