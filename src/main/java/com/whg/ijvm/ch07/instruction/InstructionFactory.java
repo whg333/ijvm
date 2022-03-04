@@ -14,6 +14,7 @@ import com.whg.ijvm.ch07.instruction.load.ILoad;
 import com.whg.ijvm.ch07.instruction.load.LLoad;
 import com.whg.ijvm.ch07.instruction.math.Add;
 import com.whg.ijvm.ch07.instruction.math.Inc;
+import com.whg.ijvm.ch07.instruction.math.Sub;
 import com.whg.ijvm.ch07.instruction.reference.*;
 import com.whg.ijvm.ch07.instruction.stack.Dup;
 import com.whg.ijvm.ch07.instruction.stack.Pop;
@@ -42,13 +43,22 @@ public class InstructionFactory {
             case 0x14:
                 return new Ldc.LDC2_W();
 
+            case 0x1a:
+                return new ILoad.ILOAD_0();
             case 0x1b:
                 return new ILoad.ILOAD_1();
             case 0x1c:
                 return new ILoad.ILOAD_2();
-
+            case 0x1d:
+                return new ILoad.ILOAD_3();
             case 0x1e:
                 return new LLoad.LLOAD_0();
+            case 0x1f:
+                return new LLoad.LLOAD_1();
+            case 0x20:
+                return new LLoad.LLOAD_2();
+            case 0x21:
+                return new LLoad.LLOAD_3();
 
             case 0x2a:
                 return new ALoad.ALOAD_0();
@@ -83,6 +93,20 @@ public class InstructionFactory {
 
             case 0x60:
                 return new Add.IADD();
+            case 0x61:
+                return new Add.LADD();
+            case 0x62:
+                return new Add.FADD();
+            case 0x63:
+                return new Add.DADD();
+            case 0x64:
+                return new Sub.ISUB();
+            case 0x65:
+                return new Sub.LSUB();
+            case 0x66:
+                return new Sub.FSUB();
+            case 0x67:
+                return new Sub.DSUB();
 
             case 0x84:
                 return new Inc.IINC();
@@ -104,10 +128,18 @@ public class InstructionFactory {
 
             case 0xac:
                 return new Return.IRETURN();
-
-            //References
+            case 0xad:
+                return new Return.LRETURN();
+            case 0xae:
+                return new Return.FRETURN();
+            case 0xaf:
+                return new Return.DRETURN();
+            case 0xb0:
+                return new Return.ARETURN();
             case 0xb1:
                 return new Return.RETURN();
+
+            //References
             case 0xb2:
                 return new Static.GET_STATIC();
             case 0xb3:
