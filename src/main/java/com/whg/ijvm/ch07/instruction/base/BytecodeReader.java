@@ -8,10 +8,6 @@ public class BytecodeReader {
     byte[] code;
     int pc;
 
-    public BytecodeReader(byte[] code){
-        this.code = code;
-    }
-
     public Uint8 readUint8(){
         Uint8 i = new Uint8(code[pc]);
         pc++;

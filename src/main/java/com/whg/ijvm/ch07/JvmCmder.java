@@ -26,6 +26,12 @@ public class JvmCmder {
 	@Parameter(names = "-version", description = "print version and exit")
 	private boolean versionFlag;
 
+	@Parameter(names = { "-verbose:class", "-verbose" }, description = "enable verbose output")
+	private boolean verboseClassFlag;
+
+	@Parameter(names = "-verbose:inst", description = "enable verbose output")
+	private boolean verboseInstFlag;
+
 	@Parameter(names = { "-classpath", "-cp" }, description = "classpath")
 	private String cpOption = "";
 	
@@ -35,11 +41,12 @@ public class JvmCmder {
 	private String clazz;
 	private String[] args;
 
-	public void run(JCommander jCommander, String[] args) {
-		if (args.length > 2) {
-			args = Arrays.copyOfRange(args, 2, args.length);
-			this.clazz = args[0];
-			this.args = Arrays.copyOfRange(args, 1, args.length);
+	public void run(JCommander jCommander, String[] classArgs) {
+		if (classArgs.length > 0) {
+			clazz = classArgs[0];
+			if(classArgs.length > 1){
+				args = Arrays.copyOfRange(classArgs, 1, classArgs.length);
+			}
 		}
 
 		if (versionFlag) {
@@ -75,14 +82,14 @@ public class JvmCmder {
 		ClassFile classFile = ClassFile.parse(bytes);
 		console.println(classFile.getPrintInfo());
 
-		RClassLoader classLoader = new RClassLoader(cp);
+		RClassLoader classLoader = new RClassLoader(cp, verboseClassFlag);
 		RClass mainClass = classLoader.loadClass(clazz);
 		RMethod mainMethod = mainClass.getMainMethod();
 		// MemberInfo mainMethod = classFile.getMainMethod();
 		if(mainMethod == null){
 			console.println(String.format("Main method not found in class:[%s]", clazz));
 		}else{
-			Interpreter.run(mainMethod);
+			Interpreter.run(mainMethod, verboseInstFlag);
 		}
 	}
 	

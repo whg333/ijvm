@@ -10,10 +10,12 @@ import java.util.Map;
 public class RClassLoader {
 
     Classpath classpath;
+    boolean verboseFlag;
     Map<String, RClass> classMap;
 
-    public RClassLoader(Classpath classpath) {
+    public RClassLoader(Classpath classpath, boolean verboseFlag) {
         this.classpath = classpath;
+        this.verboseFlag = verboseFlag;
         classMap = new HashMap<>();
     }
 
@@ -29,7 +31,9 @@ public class RClassLoader {
         ClassData classData = readClass(className);
         RClass clazz = defineClass(classData.bytes);
         link(clazz);
-        System.out.printf("[Loaded %s from %s]\n", className, classData.entry);
+        if(verboseFlag){
+            System.out.printf("[Loaded %s from %s]\n", className, classData.entry);
+        }
         return clazz;
     }
 

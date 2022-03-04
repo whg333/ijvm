@@ -2,30 +2,29 @@ package com.whg.ijvm.ch07.instruction;
 
 import com.whg.ijvm.ch07.heap.RMethod;
 import com.whg.ijvm.ch07.instruction.base.BytecodeReader;
-import com.whg.ijvm.ch07.instruction.control.Return;
 import com.whg.ijvm.ch07.runtime.RFrame;
 import com.whg.ijvm.ch07.runtime.RThread;
 
 public class Interpreter {
 
-    public static void run(RMethod method){
-        new Interpreter(method);
+    public static void run(RMethod method, boolean logInst){
+        new Interpreter(method, logInst);
     }
 
-    private Interpreter(RMethod method){
+    private Interpreter(RMethod method, boolean logInst){
         RThread thread = new RThread();
         RFrame frame = thread.newFrame(method);
         thread.pushFrame(frame);
 
         try{
-            loop(thread, method.getCode());
+            loop(thread, logInst);
         }catch (Exception e){
             catchErr(e, thread);
         }
     }
 
-    private void loop(RThread thread, byte[] bytecode) {
-        BytecodeReader reader = new BytecodeReader(bytecode);
+    private void loop(RThread thread, boolean logInst) {
+        BytecodeReader reader = new BytecodeReader();
         for(;;){
             RFrame frame = thread.currentFrame();
             int pc = frame.getNextPc();
@@ -38,14 +37,11 @@ public class Interpreter {
             inst.fetchOperands(reader);
             frame.setNextPc(reader.getPc());
 
-            System.out.printf("%s >> pc:%2d inst:%s\n", new Executor(frame), pc, inst);
+            if(logInst){
+                System.out.printf("%s >> pc:%2d inst:%s\n", new Executor(frame), pc, inst);
+            }
 
             inst.execute(frame);
-
-            // if(inst instanceof Return.RETURN){
-            //     System.out.println("RETURN");
-            //     break;
-            // }
             if(thread.isStackEmpty()){
                 break;
             }
