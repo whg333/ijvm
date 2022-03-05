@@ -20,7 +20,7 @@ public class Main {
 		String[] cmdArgs = cpOrXjreIndex >= 0
 				? Arrays.copyOfRange(args, 0, Math.min(args.length, cpOrXjreIndex+2))
 				: args;
-		// 自定义解析的类和后面传递的参数
+		// 自定义解析的——类和后面传递的参数
 		String[] classArgs = cpOrXjreIndex >= 0
 				? Arrays.copyOfRange(args, cpOrXjreIndex+2, args.length)
 				: new String[0];
