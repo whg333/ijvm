@@ -17,6 +17,11 @@ public class Static {
             FieldRef fieldRef = cp.getConstant(index.value());
             RField field = fieldRef.resolveField();
             RClass clazz = field.getRClass();
+            if(!clazz.isInit()){
+                frame.revertNextPc();
+                clazz.init(frame.getThread());
+                return;
+            }
 
             if(!field.isStatic()){
                 throw new RuntimeException("IncompatibleClassChangeError");
@@ -49,11 +54,21 @@ public class Static {
                 case "D":
                     slots.setDouble(slotId, stack.popDouble());
                     break;
-                case "L":
-                    slots.setRef(slotId, stack.popRef());
+                // case "L":
+                //     slots.setRef(slotId, stack.popRef());
+                //     break;
+                default:
+                    if(isRefDesc(descriptor)){
+                        slots.setRef(slotId, stack.popRef());
+                    }
                     break;
             }
         }
+    }
+
+    // 引用类型的描述符：L+类的完全限定名+分号
+    private static boolean isRefDesc(String descriptor){
+        return descriptor.startsWith("L") && descriptor.endsWith(";");
     }
 
     public static class GET_STATIC extends Index16Instruction{
@@ -63,6 +78,11 @@ public class Static {
             FieldRef fieldRef = cp.getConstant(index.value());
             RField field = fieldRef.resolveField();
             RClass clazz = field.getRClass();
+            if(!clazz.isInit()){
+                frame.revertNextPc();
+                clazz.init(frame.getThread());
+                return;
+            }
 
             if(!field.isStatic()){
                 throw new RuntimeException("IncompatibleClassChangeError");
@@ -90,8 +110,13 @@ public class Static {
                 case "D":
                     stack.pushDouble(slots.getDouble(slotId));
                     break;
-                case "L":
-                    stack.pushRef(slots.getRef(slotId));
+                // case "L":
+                //     stack.pushRef(slots.getRef(slotId));
+                //     break;
+                default:
+                    if(isRefDesc(descriptor)){
+                        stack.pushRef(slots.getRef(slotId));
+                    }
                     break;
             }
         }

@@ -3,10 +3,11 @@ package com.whg.ijvm.ch07.test;
 public class ClassFileTest {
 
 	public static final boolean FLAG = true;
-	private final boolean[] FLAG_ARR = {true, false};
+	// private final boolean[] FLAG_ARR = {true, false};
 
 	protected static final byte BYTE = 123;
 	char X = 'X';
+	protected int a;
 
 	public static final short SHORT = 12345;
 	public static final int INT = 123456789;

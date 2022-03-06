@@ -24,6 +24,11 @@ public class RFrame {
         operandStack = new OperandStack(maxStack);
     }
 
+    // 重新指向当前指令（即重新执行）
+    public void revertNextPc() {
+        nextPc = thread.pc;
+    }
+
     public LocalVars getLocalVars() {
         return localVars;
     }

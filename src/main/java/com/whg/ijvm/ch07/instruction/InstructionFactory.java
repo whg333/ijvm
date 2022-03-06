@@ -7,6 +7,7 @@ import com.whg.ijvm.ch07.instruction.compare.Lcmp;
 import com.whg.ijvm.ch07.instruction.constant.Const;
 import com.whg.ijvm.ch07.instruction.constant.Ipush;
 import com.whg.ijvm.ch07.instruction.constant.Ldc;
+import com.whg.ijvm.ch07.instruction.constant.Nop;
 import com.whg.ijvm.ch07.instruction.control.Goto;
 import com.whg.ijvm.ch07.instruction.control.Return;
 import com.whg.ijvm.ch07.instruction.load.ALoad;
@@ -27,12 +28,25 @@ public class InstructionFactory {
     // TODO 优化一些不需要操作数的类成单例
     public static Instruction newInstruction(short opcode){
         switch (opcode){
+            case 0x00:
+                return new Nop.NOP();
             case 0x01:
                 return new Const.ACONST_NULL();
+            case 0x02:
+                return new Const.ICONST_M1();
             case 0x03:
                 return new Const.ICONST_0();
             case 0x04:
                 return new Const.ICONST_1();
+            case 0x05:
+                return new Const.ICONST_2();
+            case 0x06:
+                return new Const.ICONST_3();
+            case 0x07:
+                return new Const.ICONST_4();
+            case 0x08:
+                return new Const.ICONST_5();
+
             case 0x0a:
                 return new Const.LCONST_1();
             case 0x10:

@@ -23,6 +23,13 @@ public class Invoke {
             RConstantPool cp = frame.getMethod().getRClass().getRConstantPool();
             MethodRef methodRef = cp.getConstant(index.value());
             RMethod method = methodRef.resolveMethod();
+            RClass clazz = method.getRClass();
+            if(!clazz.isInit()){
+                frame.revertNextPc();
+                clazz.init(frame.getThread());
+                return;
+            }
+
             if(!method.isStatic()){
                 throw new RuntimeException("IncompatibleClassChangeError");
             }
@@ -156,8 +163,10 @@ public class Invoke {
                 default:
                     throw new RuntimeException("println: "+descriptor);
             }
-            // TODO 下面这个到底要不要？要了就会报错
-            // stack.popRef();
+
+            // PS:下面这个，必须解决Static类的里面，处理解析引用类型的描述符，才好用
+            // 因为里面是pushRef，这里是popRef，否则测试类多次调用println就会报错
+            stack.popRef();
         }
 
         void printf(String s){

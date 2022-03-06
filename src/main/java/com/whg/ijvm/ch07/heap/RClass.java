@@ -2,6 +2,8 @@ package com.whg.ijvm.ch07.heap;
 
 import com.whg.ijvm.ch07.classfile.ClassFile;
 import com.whg.ijvm.ch07.heap.constant.*;
+import com.whg.ijvm.ch07.runtime.RFrame;
+import com.whg.ijvm.ch07.runtime.RThread;
 
 public class RClass {
 
@@ -21,6 +23,8 @@ public class RClass {
     int instanceSlotCount;
     int staticSlotCount;
     Slots staticVars;
+
+    boolean init;
 
     public RClass(ClassFile cf, RClassLoader loader){
         accessFlags = cf.getAccessFlags().value();
@@ -83,14 +87,14 @@ public class RClass {
         staticVars = new Slots(staticSlotCount);
         for(RField field: fields){
             if(field.isStatic() && field.isFinal()){
-                initStaticFinalVar(this, field);
+                initStaticFinalVar(field);
             }
         }
     }
 
-    private void initStaticFinalVar(RClass clazz, RField field) {
-        Slots vars = clazz.staticVars;
-        RConstantPool cp = clazz.constantPool;
+    private void initStaticFinalVar(RField field) {
+        Slots vars = staticVars;
+        RConstantPool cp = constantPool;
         int cpIndex = field.constValueIndex;
         int slotId = field.slotId;
 
@@ -230,6 +234,37 @@ public class RClass {
             return other.isImplements(this);
         }else{
             return other.isSubClassOf(this);
+        }
+    }
+
+    public boolean isInit() {
+        return init;
+    }
+
+    public void init(RThread thread){
+        init = true;
+        scheduleClinit(thread);
+        initSuperClass(thread);
+    }
+
+    private void scheduleClinit(RThread thread) {
+        RMethod clinitMethod = getClinitMethod();
+        if(clinitMethod != null){
+            // exec <clinit>
+            RFrame newFrame = thread.newFrame(clinitMethod);
+            thread.pushFrame(newFrame);
+        }
+    }
+
+    private RMethod getClinitMethod() {
+        return getStaticMethod("<clinit>", "()V");
+    }
+
+    private void initSuperClass(RThread thread) {
+        if(!isInterface()){
+            if(superClass != null && !superClass.isInit()){
+                superClass.init(thread);
+            }
         }
     }
 

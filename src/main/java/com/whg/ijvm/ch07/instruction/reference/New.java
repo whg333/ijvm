@@ -15,6 +15,11 @@ public class New {
             RConstantPool cp = frame.getMethod().getRClass().getRConstantPool();
             ClassRef classRef = cp.getConstant(index.value());
             RClass clazz = classRef.resolveClass();
+            if(!clazz.isInit()){
+                frame.revertNextPc();
+                clazz.init(frame.getThread());
+                return;
+            }
 
             if(clazz.isInterface() || clazz.isAbstract()){
                 throw new RuntimeException("InstantiationError");
