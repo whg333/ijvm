@@ -3,8 +3,9 @@ package com.whg.ijvm.ch07.test;
 public class FibonacciTest {
 
     public static void main(String[] args) {
-        long x = fibonacci(20);
+        long x = fibonacci(30);
         System.out.println(x);
+        // System.out.println(FibonacciTest.class.getSimpleName());
     }
 
     private static long fibonacci(long n) {

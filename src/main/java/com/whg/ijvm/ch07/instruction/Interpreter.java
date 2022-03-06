@@ -7,11 +7,20 @@ import com.whg.ijvm.ch07.runtime.RThread;
 
 public class Interpreter {
 
+    private final RMethod method;
+    private boolean logInst;
+
     public static void run(RMethod method, boolean logInst){
-        new Interpreter(method, logInst);
+        Interpreter interpreter = new Interpreter(method, logInst);
+        interpreter.run();
     }
 
     private Interpreter(RMethod method, boolean logInst){
+        this.method = method;
+        this.logInst = logInst;
+    }
+
+    void run(){
         RThread thread = new RThread();
         RFrame frame = thread.newFrame(method);
         thread.pushFrame(frame);
@@ -29,16 +38,16 @@ public class Interpreter {
             RFrame frame = thread.currentFrame();
             int pc = frame.getNextPc();
             thread.setPc(pc);
-            reader.setPc(pc);
 
-            reader.reset(frame.getMethod().getCode(), pc);
+            RMethod method = frame.getMethod();
+            reader.reset(method.getCode(), pc);
             short opcode = reader.readUint8().value();
             Instruction inst = InstructionFactory.newInstruction(opcode);
             inst.fetchOperands(reader);
             frame.setNextPc(reader.getPc());
 
             if(logInst){
-                System.out.printf("%s >> pc:%2d inst:%s\n", new Executor(frame), pc, inst);
+                System.out.printf("%s >> pc:%2d inst:%s\n", method, pc, inst);
             }
 
             inst.execute(frame);
@@ -59,23 +68,6 @@ public class Interpreter {
             // System.out.printf("OperandStack: %s\n", frame.getOperandStack());
         }
         throw new RuntimeException(e);
-    }
-
-    private static class Executor{
-        final String className;
-        final String methodName;
-        final String methodDesc;
-        public Executor(RFrame frame) {
-            RMethod method = frame.getMethod();
-            String name = method.getRClass().getName();
-            this.className = name.substring(name.lastIndexOf('/')+1);
-            this.methodName = method.getName();
-            this.methodDesc = method.getDescriptor();
-        }
-        @Override
-        public String toString() {
-            return String.format("%s.%s%s", className, methodName, methodDesc);
-        }
     }
 
 }

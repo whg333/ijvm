@@ -156,6 +156,10 @@ public class RClass {
         return name;
     }
 
+    public String getSimpleName(){
+        return name.substring(name.lastIndexOf('/') + 1);
+    }
+
     public boolean isAccessibleTo(RClass other) {
         return isPublic() || isSamePackage(other);
     }
@@ -266,6 +270,11 @@ public class RClass {
                 superClass.init(thread);
             }
         }
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 
     /** setter/getter */
