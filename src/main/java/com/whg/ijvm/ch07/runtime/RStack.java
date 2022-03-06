@@ -20,6 +20,7 @@ public class RStack {
             frame.lower = top;
         }
         top = frame;
+        frame.level = size;
         size++;
     }
 

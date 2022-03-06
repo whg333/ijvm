@@ -47,7 +47,7 @@ public class Interpreter {
             frame.setNextPc(reader.getPc());
 
             if(logInst){
-                System.out.printf("%s >> pc:%2d inst:%s\n", method, pc, inst);
+                logInstruction(frame, pc, inst);
             }
 
             inst.execute(frame);
@@ -68,6 +68,36 @@ public class Interpreter {
             // System.out.printf("OperandStack: %s\n", frame.getOperandStack());
         }
         throw new RuntimeException(e);
+    }
+
+    private void logInstruction(RFrame frame, int pc, Instruction inst){
+        RMethod method = frame.getMethod();
+
+        // System.out.printf("%d %s >> pc:%2d inst:%s\n", frame.getLevel(), method, pc, inst);
+        StringBuilder sb = new StringBuilder();
+        int frameLv = frame.getLevel();
+        for(int i=0;i<frameLv;i++){
+            for(int j=1;j<=4;j++){
+                sb.append(' ');
+            }
+        }
+        sb.append(method);
+
+        int sbLen = sb.length();
+        int padding = 60-sbLen;
+        for(int i=1;i<=padding;i++){
+            sb.append(' ');
+        }
+
+        sb.append(" >> pc:");
+        sb.append(pc);
+        if(pc < 10){
+            sb.append(' ');
+        }
+
+        sb.append(" inst:");
+        sb.append(inst);
+        System.out.println(sb);
     }
 
 }

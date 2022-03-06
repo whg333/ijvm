@@ -12,6 +12,8 @@ public class RFrame {
     RMethod method;
     int nextPc;
 
+    int level; //方法调用层级，美化verbose的打印
+
     RFrame(RThread thread, RMethod method){
         this(method.getMaxLocals(), method.getMaxStack());
         this.thread = thread;
@@ -53,6 +55,10 @@ public class RFrame {
     }
     public int getNextPc() {
         return nextPc;
+    }
+
+    public int getLevel() {
+        return level;
     }
 
 }
