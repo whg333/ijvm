@@ -1,0 +1,79 @@
+package com.whg.ijvm.ch08.heap;
+
+import com.whg.ijvm.ch08.classfile.ClassFile;
+import com.whg.ijvm.ch08.classfile.MemberInfo;
+import com.whg.ijvm.ch08.classfile.attribute.impl.CodeAttribute;
+
+public class RMethod extends RClassMember{
+
+    int maxStack;
+    int maxLocals;
+    byte[] code;
+
+    int argSlotCount;
+
+    RMethod(RClass clazz, MemberInfo cfMethod){
+        this.clazz = clazz;
+        copyMemberInfo(cfMethod);
+        copyAttributes(cfMethod);
+        calcArgSlotCount();
+    }
+
+    @Override
+    void copyAttributes(MemberInfo cfMethod){
+        CodeAttribute codeAttr = cfMethod.getCodeAttribute();
+        if(codeAttr != null){
+            maxLocals = codeAttr.getMaxLocals().value();
+            maxStack = codeAttr.getMaxStack().value();
+            code = codeAttr.getCode();
+        }
+    }
+
+    void calcArgSlotCount(){
+        RMethodDescriptor methodDescriptor = RMethodDescriptor.parse(descriptor);
+        for(String paramType: methodDescriptor.getParameterTypes()){
+            argSlotCount++;
+            if(paramType.equals("J") || paramType.equals("D")){
+                argSlotCount++;
+            }
+        }
+        if(!isStatic()){
+            argSlotCount++;
+        }
+    }
+
+    public static RMethod[] newMethods(RClass clazz, ClassFile cf){
+        MemberInfo[] cfMethods = cf.getMethods();
+        RMethod[] methods = new RMethod[cfMethods.length];
+        for(int i=0;i<cfMethods.length;i++){
+            methods[i] = new RMethod(clazz, cfMethods[i]);
+        }
+        return methods;
+    }
+
+    @Override
+    public String toString() {
+        String className = getRClass().getSimpleName();
+        StringBuilder sb = new StringBuilder();
+        sb.append(className).append('.')
+                .append(getName())
+                .append(getDescriptor());
+        return sb.toString();
+    }
+
+    public int getMaxStack() {
+        return maxStack;
+    }
+
+    public int getMaxLocals() {
+        return maxLocals;
+    }
+
+    public byte[] getCode() {
+        return code;
+    }
+
+    public int getArgSlotCount() {
+        return argSlotCount;
+    }
+}
