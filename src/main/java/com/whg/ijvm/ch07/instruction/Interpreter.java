@@ -71,9 +71,8 @@ public class Interpreter {
     }
 
     private void logInstruction(RFrame frame, int pc, Instruction inst){
-        RMethod method = frame.getMethod();
-
         // System.out.printf("%d %s >> pc:%2d inst:%s\n", frame.getLevel(), method, pc, inst);
+
         StringBuilder sb = new StringBuilder();
         int frameLv = frame.getLevel();
         for(int i=0;i<frameLv;i++){
@@ -81,7 +80,7 @@ public class Interpreter {
                 sb.append(' ');
             }
         }
-        sb.append(method);
+        sb.append(frame.getMethod());
 
         int sbLen = sb.length();
         int padding = 60-sbLen;
