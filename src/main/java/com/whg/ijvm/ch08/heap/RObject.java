@@ -2,16 +2,20 @@ package com.whg.ijvm.ch08.heap;
 
 public class RObject {
 
-    RClass clazz;
-    Slots fields;
+    protected RClass clazz;
+    protected Object data;
+
+    RObject(){
+
+    }
 
     RObject(RClass clazz){
         this.clazz = clazz;
-        this.fields = new Slots(clazz.getInstanceSlotCount());
+        this.data = new Slots(clazz.getInstanceSlotCount());
     }
 
     public Slots getFields() {
-        return fields;
+        return (Slots)data;
     }
 
     public boolean isInstanceOf(RClass clazz) {

@@ -24,9 +24,25 @@ public class RClass {
     int staticSlotCount;
     Slots staticVars;
 
-    boolean init;
+    boolean init; //类是否已经加载
+
+    RClass(String arrayName, RClassLoader loader){
+        this.loader = loader;
+
+        accessFlags = AccessFlags.ACC_PUBLIC;
+        name = arrayName;
+        superClass = loader.loadClass("java/lang/Object");
+        interfaces = new RClass[]{
+                loader.loadClass("java/lang/Cloneable"),
+                loader.loadClass("java/io/Serializable"),
+        };
+
+        init = true;
+    }
 
     public RClass(ClassFile cf, RClassLoader loader){
+        this.loader = loader;
+
         accessFlags = cf.getAccessFlags().value();
         name = cf.getClassName();
         superClassName = cf.getSuperClassName();
@@ -35,8 +51,6 @@ public class RClass {
         constantPool = new RConstantPool(this, cf.getConstantPool());
         fields = RField.newFields(this, cf);
         methods = RMethod.newMethods(this, cf);
-
-        this.loader = loader;
     }
 
     public void resolveSuperClass(){
@@ -211,6 +225,17 @@ public class RClass {
             }
         }
         return false;
+    }
+
+    public RArray newArray(int count){
+        if(!isArray(name)){
+            throw new IllegalArgumentException("Not array class: "+name);
+        }
+        return new RArray(name, count);
+    }
+
+    public static boolean isArray(String name){
+        return name.charAt(0) == '[';
     }
 
     public RObject newObject(){

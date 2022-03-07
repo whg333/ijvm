@@ -22,9 +22,18 @@ public class RClassLoader {
     public RClass loadClass(String className){
         RClass clazz = classMap.get(className);
         if(clazz != null){
-            return clazz;
+            return clazz; //已经加载
+        }
+        if(RClass.isArray(className)){
+            return loadArrayClass(className);
         }
         return loadNonArrayClass(className);
+    }
+
+    private RClass loadArrayClass(String className){
+        RClass arrayClass = new RClass(className, this);
+        classMap.put(className, arrayClass);
+        return arrayClass;
     }
 
     private RClass loadNonArrayClass(String className) {
