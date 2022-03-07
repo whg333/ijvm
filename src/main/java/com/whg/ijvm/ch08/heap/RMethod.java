@@ -54,11 +54,9 @@ public class RMethod extends RClassMember{
     @Override
     public String toString() {
         String className = getRClass().getSimpleName();
-        StringBuilder sb = new StringBuilder();
-        sb.append(className).append('.')
-                .append(getName())
-                .append(getDescriptor());
-        return sb.toString();
+        return className + '.' +
+                getName() +
+                getDescriptor();
     }
 
     public int getMaxStack() {

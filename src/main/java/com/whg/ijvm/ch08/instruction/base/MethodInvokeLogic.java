@@ -37,8 +37,7 @@ public class MethodInvokeLogic {
             if(method.getName().equals("registerNatives")){
                 thread.popFrame();
             } else {
-                throw new RuntimeException(String.format("native method: %v.%v%v\n",
-                        method.getRClass().getName(), method.getName(), method.getDescriptor()));
+                throw new RuntimeException("native method: "+method);
             }
         }
     }

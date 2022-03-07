@@ -33,10 +33,10 @@ public class JvmCmder {
 	private boolean verboseInstFlag;
 
 	@Parameter(names = { "-classpath", "-cp" }, description = "classpath")
-	private String cpOption = "";
+	private String cpOption;
 	
 	@Parameter(names = "-Xjre", description = "path to jre")
-	private String jreOption = "";
+	private String jreOption;
 
 	private String clazz;
 	private String[] args;

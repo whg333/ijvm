@@ -27,7 +27,7 @@ public class Interpreter {
 
         try{
             loop(thread, logInst);
-        }catch (Exception e){
+        }catch(Exception e){
             catchErr(e, thread);
         }
     }
