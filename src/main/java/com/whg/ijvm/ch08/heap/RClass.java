@@ -234,8 +234,13 @@ public class RClass {
         return new RArray(name, count);
     }
 
-    public static boolean isArray(String name){
-        return name.charAt(0) == '[';
+    public static boolean isArray(String className){
+        return className.charAt(0) == '[';
+    }
+
+    public RClass getArrayClass(){
+        String arrayClassName = RArray.getArrayClassName(name);
+        return loader.loadClass(arrayClassName);
     }
 
     public RObject newObject(){

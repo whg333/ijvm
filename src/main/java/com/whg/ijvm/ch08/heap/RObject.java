@@ -5,6 +5,7 @@ public class RObject {
     protected RClass clazz;
     protected Object data;
 
+    // for array
     RObject(){
 
     }
@@ -25,4 +26,5 @@ public class RObject {
     public RClass getRClass() {
         return clazz;
     }
+
 }

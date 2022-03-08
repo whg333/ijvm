@@ -1,6 +1,23 @@
 package com.whg.ijvm.ch08.heap;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class RArray extends RObject{
+
+    private static Map<String, String> primitiveTypes = new HashMap<String, String>(){
+        {
+            put("void", "V");
+            put("boolean", "Z");
+            put("byte", "B");
+            put("short", "S");
+            put("int", "I");
+            put("long", "J");
+            put("char", "C");
+            put("float", "F");
+            put("double", "D");
+        }
+    };
 
     RArray(String name, int count){
         switch(name){
@@ -77,6 +94,27 @@ public class RArray extends RObject{
     }
     public RObject[] getRefs(){
         return (RObject[])data;
+    }
+
+    public static String getArrayClassName(String className){
+        return "["+toDescriptor(className);
+    }
+
+    private static String toDescriptor(String className) {
+        if(RClass.isArray(className)){
+            return className;
+        }
+        String type = primitiveTypes.get(className);
+        if(type != null){
+            return type;
+        }
+        return "L" + className + ";";
+    }
+
+    public static void checkIndex(int arrLen, int index){
+        if(index < 0 || index >= arrLen){
+            throw new ArrayIndexOutOfBoundsException();
+        }
     }
 
 }

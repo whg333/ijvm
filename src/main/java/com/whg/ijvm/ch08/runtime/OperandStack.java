@@ -1,5 +1,6 @@
 package com.whg.ijvm.ch08.runtime;
 
+import com.whg.ijvm.ch08.heap.RArray;
 import com.whg.ijvm.ch08.heap.RObject;
 
 import java.util.Arrays;
@@ -62,6 +63,10 @@ public class OperandStack {
         RObject ref = slots[nextIdx].ref;
         slots[nextIdx].ref = null;
         return ref;
+    }
+
+    public RArray popArrRef(){
+        return (RArray)popRef();
     }
 
     public void pushSlot(Slot slot){
