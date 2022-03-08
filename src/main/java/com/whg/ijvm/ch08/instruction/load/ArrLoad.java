@@ -24,4 +24,102 @@ public class ArrLoad {
         }
     }
 
+    public static class BALOAD extends NoOperandsInstruction{
+        @Override
+        public void execute(RFrame frame) {
+            OperandStack stack = frame.getOperandStack();
+            int index = stack.popInt();
+            RArray arrRef = stack.popArrRef();
+
+            Objects.requireNonNull(arrRef);
+            byte[] refs = arrRef.getBytes();
+            RArray.checkIndex(refs.length, index);
+            stack.pushInt(refs[index]);
+        }
+    }
+
+    public static class CALOAD extends NoOperandsInstruction{
+        @Override
+        public void execute(RFrame frame) {
+            OperandStack stack = frame.getOperandStack();
+            int index = stack.popInt();
+            RArray arrRef = stack.popArrRef();
+
+            Objects.requireNonNull(arrRef);
+            char[] refs = arrRef.getChars();
+            RArray.checkIndex(refs.length, index);
+            stack.pushInt(refs[index]);
+        }
+    }
+
+    public static class DALOAD extends NoOperandsInstruction{
+        @Override
+        public void execute(RFrame frame) {
+            OperandStack stack = frame.getOperandStack();
+            int index = stack.popInt();
+            RArray arrRef = stack.popArrRef();
+
+            Objects.requireNonNull(arrRef);
+            double[] refs = arrRef.getDoubles();
+            RArray.checkIndex(refs.length, index);
+            stack.pushDouble(refs[index]);
+        }
+    }
+
+    public static class FALOAD extends NoOperandsInstruction{
+        @Override
+        public void execute(RFrame frame) {
+            OperandStack stack = frame.getOperandStack();
+            int index = stack.popInt();
+            RArray arrRef = stack.popArrRef();
+
+            Objects.requireNonNull(arrRef);
+            float[] refs = arrRef.getFloats();
+            RArray.checkIndex(refs.length, index);
+            stack.pushFloat(refs[index]);
+        }
+    }
+
+    public static class IALOAD extends NoOperandsInstruction{
+        @Override
+        public void execute(RFrame frame) {
+            OperandStack stack = frame.getOperandStack();
+            int index = stack.popInt();
+            RArray arrRef = stack.popArrRef();
+
+            Objects.requireNonNull(arrRef);
+            int[] refs = arrRef.getInts();
+            RArray.checkIndex(refs.length, index);
+            stack.pushInt(refs[index]);
+        }
+    }
+
+    public static class LALOAD extends NoOperandsInstruction{
+        @Override
+        public void execute(RFrame frame) {
+            OperandStack stack = frame.getOperandStack();
+            int index = stack.popInt();
+            RArray arrRef = stack.popArrRef();
+
+            Objects.requireNonNull(arrRef);
+            long[] refs = arrRef.getLongs();
+            RArray.checkIndex(refs.length, index);
+            stack.pushLong(refs[index]);
+        }
+    }
+
+    public static class SALOAD extends NoOperandsInstruction{
+        @Override
+        public void execute(RFrame frame) {
+            OperandStack stack = frame.getOperandStack();
+            int index = stack.popInt();
+            RArray arrRef = stack.popArrRef();
+
+            Objects.requireNonNull(arrRef);
+            short[] refs = arrRef.getShorts();
+            RArray.checkIndex(refs.length, index);
+            stack.pushInt(refs[index]);
+        }
+    }
+
 }
