@@ -173,6 +173,13 @@ public class InstructionFactory {
 
             case 0xbb:
                 return new New.NEW();
+            case 0xbc:
+                return new Arr.NEW_ARRAY();
+            case 0xbd:
+                return new Arr.ANEW_ARRAY();
+            case 0xbe:
+                return new Arr.ARRAY_LENGTH();
+
             case 0xc0:
                 return new Instance.CHECK_CAST();
             case 0xc1:

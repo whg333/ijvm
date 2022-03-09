@@ -205,6 +205,11 @@ public class RClass {
         return other.isSubClassOf(this);
     }
 
+    // iface extends self
+    public boolean isSuperInterfaceOf(RClass iface){
+        return iface.isSubInterfaceOf(this);
+    }
+
     // self implements iface
     public boolean isImplements(RClass iface){
         for(RClass c = this; c != null; c = c.superClass){
@@ -228,10 +233,14 @@ public class RClass {
     }
 
     public RArray newArray(int count){
-        if(!isArray(name)){
+        if(!isArray()){
             throw new IllegalArgumentException("Not array class: "+name);
         }
         return new RArray(name, count);
+    }
+
+    public boolean isArray(){
+        return isArray(name);
     }
 
     public static boolean isArray(String className){
@@ -261,14 +270,47 @@ public class RClass {
     }
 
     public boolean isAssignableFrom(RClass other) {
-        if(this == other){
+        RClass s = other, t = this;
+        if(s == t){
             return true;
         }
-        if(this.isInterface()){
-            return other.isImplements(this);
+        if(!s.isArray()){
+            if(!s.isInterface()){
+                if(!t.isInterface()){
+                    return s.isSubClassOf(t);
+                }else{
+                    return s.isImplements(t);
+                }
+            }else{
+                if(t.isInterface()){
+                    return t.isJlObject();
+                }else{
+                    return t.isSuperInterfaceOf(s);
+                }
+            }
         }else{
-            return other.isSubClassOf(this);
+            if(!t.isArray()){
+                if(!t.isInterface()){
+                    return t.isJlObject();
+                }else{
+                    return t.isJlCloneable() || t.isJioSerializable();
+                }
+            }else{
+                RClass sc = s.getComponentClass();
+                RClass tc = t.getComponentClass();
+                return sc == tc || tc.isAssignableFrom(sc);
+            }
         }
+    }
+
+    boolean isJlObject() {
+        return name.equals("java/lang/Object");
+    }
+    boolean isJlCloneable() {
+        return name.equals("java/lang/Cloneable");
+    }
+    boolean isJioSerializable() {
+        return name.equals("java/io/Serializable");
     }
 
     public boolean isInit() {
