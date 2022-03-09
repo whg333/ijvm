@@ -1,10 +1,7 @@
 package com.whg.ijvm.ch08.instruction.reference;
 
 import com.whg.ijvm.ch08.classfile.uint.Uint16;
-import com.whg.ijvm.ch08.heap.RClass;
-import com.whg.ijvm.ch08.heap.RConstantPool;
-import com.whg.ijvm.ch08.heap.RMethod;
-import com.whg.ijvm.ch08.heap.RObject;
+import com.whg.ijvm.ch08.heap.*;
 import com.whg.ijvm.ch08.heap.constant.InterfaceMethodRef;
 import com.whg.ijvm.ch08.heap.constant.MethodLookup;
 import com.whg.ijvm.ch08.heap.constant.MethodRef;
@@ -159,6 +156,11 @@ public class Invoke {
                     break;
                 case "(D)V":
                     printf(String.format("%f\n", stack.popDouble()));
+                    break;
+                case "(Ljava/lang/String;)V":
+                    RObject jStr = stack.popRef();
+                    String str = StringPool.goString(jStr);
+                    printf(String.format("%s\n", str));
                     break;
                 default:
                     throw new RuntimeException("println: "+descriptor);

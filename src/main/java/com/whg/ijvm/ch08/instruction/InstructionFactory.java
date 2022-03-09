@@ -60,6 +60,8 @@ public class InstructionFactory {
                 return new Ldc.LDC2_W();
             case 0x15:
                 return new ILoad.ILOAD();
+            case 0x19:
+                return new ALoad.ALOAD();
 
             case 0x1a:
                 return new ILoad.ILOAD_0();
@@ -90,6 +92,10 @@ public class InstructionFactory {
             case 0x2e:
                 return new ArrLoad.IALOAD();
 
+            case 0x32:
+                return new ArrLoad.AALOAD();
+            case 0x3a:
+                return new AStore.ASTORE();
             case 0x36:
                 return new IStore.ISTORE();
             case 0x3c:

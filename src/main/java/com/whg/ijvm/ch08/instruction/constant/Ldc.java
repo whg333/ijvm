@@ -1,6 +1,9 @@
 package com.whg.ijvm.ch08.instruction.constant;
 
+import com.whg.ijvm.ch08.heap.RClass;
 import com.whg.ijvm.ch08.heap.RConstantPool;
+import com.whg.ijvm.ch08.heap.RObject;
+import com.whg.ijvm.ch08.heap.StringPool;
 import com.whg.ijvm.ch08.heap.constant.*;
 import com.whg.ijvm.ch08.instruction.base.Index16Instruction;
 import com.whg.ijvm.ch08.instruction.base.Index8Instruction;
@@ -24,14 +27,18 @@ public class Ldc {
 
     private static void _ldc(RFrame frame, int index){
         OperandStack stack = frame.getOperandStack();
-        RConstantPool cp = frame.getMethod().getRClass().getRConstantPool();
+        RClass clazz = frame.getMethod().getRClass();
+        RConstantPool cp = clazz.getRConstantPool();
         Constant c = cp.getConstant(index);
 
         if(c instanceof ConstantInteger){
             stack.pushInt(((ConstantInteger) c).val);
         }else if(c instanceof ConstantFloat){
             stack.pushFloat(((ConstantFloat) c).val);
-        }else{
+        }else if(c instanceof ConstantString){
+            RObject internedStr = StringPool.JString(clazz.loader, ((ConstantString) c).val);
+            stack.pushRef(internedStr);
+        } else{
             throw new RuntimeException("todo: ldc!");
         }
     }

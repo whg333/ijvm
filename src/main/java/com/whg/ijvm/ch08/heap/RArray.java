@@ -19,6 +19,10 @@ public class RArray extends RObject{
         }
     };
 
+    RArray(RClass clazz, Object data){
+        super(clazz, data);
+    }
+
     RArray(String name, int count){
         switch(name){
             case "[Z":

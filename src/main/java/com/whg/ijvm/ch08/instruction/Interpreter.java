@@ -1,6 +1,6 @@
 package com.whg.ijvm.ch08.instruction;
 
-import com.whg.ijvm.ch08.heap.RMethod;
+import com.whg.ijvm.ch08.heap.*;
 import com.whg.ijvm.ch08.instruction.base.BytecodeReader;
 import com.whg.ijvm.ch08.runtime.RFrame;
 import com.whg.ijvm.ch08.runtime.RThread;
@@ -9,15 +9,17 @@ public class Interpreter {
 
     private final RMethod method;
     private boolean logInst;
+    private String[] args;
 
-    public static void run(RMethod method, boolean logInst){
-        Interpreter interpreter = new Interpreter(method, logInst);
+    public static void run(RMethod method, boolean logInst, String[] args){
+        Interpreter interpreter = new Interpreter(method, logInst, args);
         interpreter.run();
     }
 
-    private Interpreter(RMethod method, boolean logInst){
+    private Interpreter(RMethod method, boolean logInst, String[] args){
         this.method = method;
         this.logInst = logInst;
+        this.args = args;
     }
 
     void run(){
@@ -25,11 +27,25 @@ public class Interpreter {
         RFrame frame = thread.newFrame(method);
         thread.pushFrame(frame);
 
+        RObject jArgs = createArgsArray(method.getRClass().loader, args);
+        frame.getLocalVars().setRef(0, jArgs); // 局部变量表0的位置预留放命令行参数
+
         try{
             loop(thread, logInst);
         }catch(Exception e){
             catchErr(e, thread);
         }
+    }
+
+    private RObject createArgsArray(RClassLoader loader, String[] args) {
+        RClass stringClass = loader.loadClass("java/lang/String");
+        RClass arrClass = stringClass.getArrayClass();
+        RArray argsArr = arrClass.newArray(args.length);
+        RObject[] jArgs = argsArr.getRefs();
+        for(int i=0;i<args.length;i++){
+            jArgs[i] = StringPool.JString(loader, args[i]);
+        }
+        return argsArr;
     }
 
     private void loop(RThread thread, boolean logInst) {

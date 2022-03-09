@@ -135,6 +135,9 @@ public class RClass {
                     vars.setDouble(slotId, cDouble.val);
                     break;
                 case "Ljava/lang/String":
+                    ConstantString cStr = cp.getConstant(cpIndex);
+                    RObject jStr = StringPool.JString(loader, cStr.val);
+                    vars.setRef(slotId, jStr);
                 default:
                     throw new IllegalArgumentException("Unknown descriptor="+field.getDescriptor());
             }
@@ -347,6 +350,18 @@ public class RClass {
     public RClass getComponentClass() {
         String componentClassName = RArray.getComponentClassName(name);
         return loader.loadClass(componentClassName);
+    }
+
+    public RField getField(String name, String descriptor, boolean isStatic) {
+        for(RClass c=this; c!=null; c=c.superClass){
+            for(RField field: c.fields){
+                if(field.isStatic() == isStatic
+                        && field.isMatch(name, descriptor)){
+                    return field;
+                }
+            }
+        }
+        return null;
     }
 
     @Override

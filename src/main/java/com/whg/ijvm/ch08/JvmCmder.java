@@ -39,7 +39,7 @@ public class JvmCmder {
 	private String jreOption;
 
 	private String clazz;
-	private String[] args;
+	private String[] args = new String[0];
 
 	public void run(JCommander jCommander, String[] classArgs) {
 		if (classArgs.length > 0) {
@@ -89,7 +89,7 @@ public class JvmCmder {
 		if(mainMethod == null){
 			console.println(String.format("Main method not found in class:[%s]", clazz));
 		}else{
-			Interpreter.run(mainMethod, verboseInstFlag);
+			Interpreter.run(mainMethod, verboseInstFlag, args);
 		}
 	}
 	
