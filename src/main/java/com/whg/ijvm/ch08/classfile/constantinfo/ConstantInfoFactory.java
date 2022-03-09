@@ -3,6 +3,9 @@ package com.whg.ijvm.ch08.classfile.constantinfo;
 import com.whg.ijvm.ch08.classfile.ClassReader;
 import com.whg.ijvm.ch08.classfile.ConstantPool;
 import com.whg.ijvm.ch08.classfile.constantinfo.member.*;
+import com.whg.ijvm.ch08.classfile.constantinfo.method.InvokeDynamicInfo;
+import com.whg.ijvm.ch08.classfile.constantinfo.method.MethodHandleInfo;
+import com.whg.ijvm.ch08.classfile.constantinfo.method.MethodTypeInfo;
 import com.whg.ijvm.ch08.classfile.constantinfo.numeric.ConstantDoubleInfo;
 import com.whg.ijvm.ch08.classfile.constantinfo.numeric.ConstantFloatInfo;
 import com.whg.ijvm.ch08.classfile.constantinfo.numeric.ConstantIntegerInfo;
@@ -49,8 +52,12 @@ public class ConstantInfoFactory {
                 return new ConstantDoubleInfo();
 
             case MethodHandle:
+                return new MethodHandleInfo();
             case MethodType:
+                return new MethodTypeInfo();
             case InvokeDynamic:
+                return new InvokeDynamicInfo();
+                
             default:
                 throw new IllegalArgumentException("Unsupported tag="+constantTag);
         }

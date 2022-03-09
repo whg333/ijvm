@@ -11,6 +11,7 @@ import com.whg.ijvm.ch08.instruction.constant.Nop;
 import com.whg.ijvm.ch08.instruction.control.Goto;
 import com.whg.ijvm.ch08.instruction.control.Return;
 import com.whg.ijvm.ch08.instruction.load.ALoad;
+import com.whg.ijvm.ch08.instruction.load.ArrLoad;
 import com.whg.ijvm.ch08.instruction.load.ILoad;
 import com.whg.ijvm.ch08.instruction.load.LLoad;
 import com.whg.ijvm.ch08.instruction.math.Add;
@@ -20,6 +21,7 @@ import com.whg.ijvm.ch08.instruction.reference.*;
 import com.whg.ijvm.ch08.instruction.stack.Dup;
 import com.whg.ijvm.ch08.instruction.stack.Pop;
 import com.whg.ijvm.ch08.instruction.store.AStore;
+import com.whg.ijvm.ch08.instruction.store.ArrStore;
 import com.whg.ijvm.ch08.instruction.store.IStore;
 import com.whg.ijvm.ch08.instruction.store.LStore;
 
@@ -56,6 +58,8 @@ public class InstructionFactory {
                 return new Ldc.LDC();
             case 0x14:
                 return new Ldc.LDC2_W();
+            case 0x15:
+                return new ILoad.ILOAD();
 
             case 0x1a:
                 return new ILoad.ILOAD_0();
@@ -83,10 +87,17 @@ public class InstructionFactory {
             case 0x2d:
                 return new ALoad.ALOAD_3();
 
+            case 0x2e:
+                return new ArrLoad.IALOAD();
+
+            case 0x36:
+                return new IStore.ISTORE();
             case 0x3c:
                 return new IStore.ISTORE_1();
             case 0x3d:
                 return new IStore.ISTORE_2();
+            case 0x3e:
+                return new IStore.ISTORE_3();
 
             case 0x40:
                 return new LStore.LSTORE_1();
@@ -99,6 +110,9 @@ public class InstructionFactory {
                 return new AStore.ASTORE_2();
             case 0x4e:
                 return new AStore.ASTORE_3();
+
+            case 0x4f:
+                return new ArrStore.IASTORE();
 
             case 0x57:
                 return new Pop.POP();
@@ -134,6 +148,10 @@ public class InstructionFactory {
 
             case 0xa3:
                 return new IFIcmp.IF_ICMPGT();
+            case 0xa2:
+                return new IFIcmp.IF_ICMPGE();
+            case 0xa4:
+                return new IFIcmp.IF_ICMPLE();
 
             case 0xa6:
                 return new IFAcmp.IF_ACMPNE();
@@ -185,6 +203,8 @@ public class InstructionFactory {
             case 0xc1:
                 return new Instance.INSTANCE_OF();
 
+            case 0xc5:
+                return new Arr.MULTI_ANEW_ARRAY();
 
             default:
                 throw new UnsupportedOperationException("Unsupported opcode="+toHexStr(opcode));
