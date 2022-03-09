@@ -134,10 +134,11 @@ public class RClass {
                     ConstantDouble cDouble = cp.getConstant(cpIndex);
                     vars.setDouble(slotId, cDouble.val);
                     break;
-                case "Ljava/lang/String":
+                case "Ljava/lang/String;":
                     ConstantString cStr = cp.getConstant(cpIndex);
                     RObject jStr = StringPool.JString(loader, cStr.val);
                     vars.setRef(slotId, jStr);
+                    break;
                 default:
                     throw new IllegalArgumentException("Unknown descriptor="+field.getDescriptor());
             }

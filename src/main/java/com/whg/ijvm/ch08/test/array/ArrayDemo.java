@@ -1,4 +1,4 @@
-package com.whg.ijvm.ch08.test;
+package com.whg.ijvm.ch08.test.array;
 
 public class ArrayDemo {
 

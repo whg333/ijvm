@@ -51,13 +51,13 @@ public class InstField {
                     fRef.getFields().setFloat(slotId, fVal);
                     break;
                 case "J":
-                    long lVal = stack.popInt();
+                    long lVal = stack.popLong();
                     RObject lRef = stack.popRef();
                     Objects.requireNonNull(lRef);
                     lRef.getFields().setLong(slotId, lVal);
                     break;
                 case "D":
-                    double dVal = stack.popInt();
+                    double dVal = stack.popDouble();
                     RObject dRef = stack.popRef();
                     Objects.requireNonNull(dRef);
                     dRef.getFields().setDouble(slotId, dVal);

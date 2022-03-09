@@ -10,20 +10,15 @@ import com.whg.ijvm.ch08.instruction.constant.Ldc;
 import com.whg.ijvm.ch08.instruction.constant.Nop;
 import com.whg.ijvm.ch08.instruction.control.Goto;
 import com.whg.ijvm.ch08.instruction.control.Return;
-import com.whg.ijvm.ch08.instruction.load.ALoad;
-import com.whg.ijvm.ch08.instruction.load.ArrLoad;
-import com.whg.ijvm.ch08.instruction.load.ILoad;
-import com.whg.ijvm.ch08.instruction.load.LLoad;
+import com.whg.ijvm.ch08.instruction.load.*;
 import com.whg.ijvm.ch08.instruction.math.Add;
 import com.whg.ijvm.ch08.instruction.math.Inc;
+import com.whg.ijvm.ch08.instruction.math.Mul;
 import com.whg.ijvm.ch08.instruction.math.Sub;
 import com.whg.ijvm.ch08.instruction.reference.*;
 import com.whg.ijvm.ch08.instruction.stack.Dup;
 import com.whg.ijvm.ch08.instruction.stack.Pop;
-import com.whg.ijvm.ch08.instruction.store.AStore;
-import com.whg.ijvm.ch08.instruction.store.ArrStore;
-import com.whg.ijvm.ch08.instruction.store.IStore;
-import com.whg.ijvm.ch08.instruction.store.LStore;
+import com.whg.ijvm.ch08.instruction.store.*;
 
 public class InstructionFactory {
 
@@ -60,6 +55,8 @@ public class InstructionFactory {
                 return new Ldc.LDC2_W();
             case 0x15:
                 return new ILoad.ILOAD();
+            case 0x18:
+                return new DLoad.DLOAD();
             case 0x19:
                 return new ALoad.ALOAD();
 
@@ -79,6 +76,17 @@ public class InstructionFactory {
                 return new LLoad.LLOAD_2();
             case 0x21:
                 return new LLoad.LLOAD_3();
+            case 0x24:
+                return new FLoad.FLOAD_2();
+
+            case 0x26:
+                return new DLoad.DLOAD_0();
+            case 0x27:
+                return new DLoad.DLOAD_1();
+            case 0x28:
+                return new DLoad.DLOAD_2();
+            case 0x29:
+                return new DLoad.DLOAD_3();
 
             case 0x2a:
                 return new ALoad.ALOAD_0();
@@ -107,6 +115,8 @@ public class InstructionFactory {
 
             case 0x40:
                 return new LStore.LSTORE_1();
+            case 0x45:
+                return new FStore.FSTORE_2();
 
             case 0x4b:
                 return new AStore.ASTORE_0();
@@ -125,6 +135,9 @@ public class InstructionFactory {
             case 0x59:
                 return new Dup.DUP();
 
+            case 0x5a:
+                return new Dup.DUP_X1();
+
             case 0x60:
                 return new Add.IADD();
             case 0x61:
@@ -141,6 +154,15 @@ public class InstructionFactory {
                 return new Sub.FSUB();
             case 0x67:
                 return new Sub.DSUB();
+
+            case 0x68:
+                return new Mul.IMUL();
+            case 0x69:
+                return new Mul.LMUL();
+            case 0x6a:
+                return new Mul.FMUL();
+            case 0x6b:
+                return new Mul.DMUL();
 
             case 0x84:
                 return new Inc.IINC();
