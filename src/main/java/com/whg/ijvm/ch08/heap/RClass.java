@@ -302,6 +302,11 @@ public class RClass {
         }
     }
 
+    public RClass getComponentClass() {
+        String componentClassName = RArray.getComponentClassName(name);
+        return loader.loadClass(componentClassName);
+    }
+
     @Override
     public String toString() {
         return name;

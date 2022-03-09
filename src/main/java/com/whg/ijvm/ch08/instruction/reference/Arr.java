@@ -1,5 +1,6 @@
 package com.whg.ijvm.ch08.instruction.reference;
 
+import com.whg.ijvm.ch08.classfile.uint.Uint16;
 import com.whg.ijvm.ch08.classfile.uint.Uint8;
 import com.whg.ijvm.ch08.heap.*;
 import com.whg.ijvm.ch08.heap.constant.ClassRef;
@@ -9,6 +10,8 @@ import com.whg.ijvm.ch08.instruction.base.Index16Instruction;
 import com.whg.ijvm.ch08.instruction.base.NoOperandsInstruction;
 import com.whg.ijvm.ch08.runtime.OperandStack;
 import com.whg.ijvm.ch08.runtime.RFrame;
+
+import java.util.Arrays;
 
 public class Arr {
 
@@ -35,7 +38,7 @@ public class Arr {
             OperandStack stack = frame.getOperandStack();
             int count = stack.popInt();
             if(count < 0){
-                throw new IllegalArgumentException("NegativeArraySizeException");
+                throw new NegativeArraySizeException();
             }
 
             RClassLoader classLoader = frame.getMethod().getRClass().loader;
@@ -79,7 +82,7 @@ public class Arr {
             OperandStack stack = frame.getOperandStack();
             int count = stack.popInt();
             if(count < 0){
-                throw new IllegalArgumentException("NegativeArraySizeException");
+                throw new NegativeArraySizeException();
             }
 
             RClass arrClass = componentClass.getArrayClass();
@@ -100,6 +103,56 @@ public class Arr {
             int arrLen = arrRef.getArrayLength();
             stack.pushInt(arrLen);
         }
+    }
+
+    public static class MULTI_ANEW_ARRAY implements Instruction{
+
+        Uint16 index;
+        Uint8 dimensions;
+
+        @Override
+        public void fetchOperands(BytecodeReader reader) {
+            index = reader.readUint16();
+            dimensions = reader.readUint8();
+        }
+
+        @Override
+        public void execute(RFrame frame) {
+            RConstantPool cp = frame.getMethod().getRClass().getRConstantPool();
+            ClassRef classRef = cp.getConstant(index.value());
+            RClass arrClass = classRef.resolveClass();
+
+            OperandStack stack = frame.getOperandStack();
+            int[] counts = popAndCheckCounts(stack, dimensions.value());
+            RArray array = newMultiDimensionalArray(counts, arrClass);
+            stack.pushRef(array);
+        }
+
+        private int[] popAndCheckCounts(OperandStack stack, int dimensions) {
+            int[] counts = new int[dimensions];
+            for(int i=dimensions-1;i>=0;i--){
+                counts[i] = stack.popInt();
+                if(counts[i] < 0){
+                    throw new NegativeArraySizeException();
+                }
+            }
+            return counts;
+        }
+
+        private RArray newMultiDimensionalArray(int[] counts, RClass arrClass) {
+            int count = counts[0];
+            RArray array = arrClass.newArray(count);
+            if(counts.length > 1){
+                RObject[] refs = array.getRefs();
+                for(int i=0;i< refs.length;i++){
+                    refs[i] = newMultiDimensionalArray(
+                            Arrays.copyOfRange(counts, 1, counts.length),
+                            arrClass.getComponentClass());
+                }
+            }
+            return array;
+        }
+
     }
 
 }

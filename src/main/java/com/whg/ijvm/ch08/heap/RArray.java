@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class RArray extends RObject{
 
-    private static Map<String, String> primitiveTypes = new HashMap<String, String>(){
+    private static final Map<String, String> primitiveTypes = new HashMap<String, String>(){
         {
             put("void", "V");
             put("boolean", "Z");
@@ -115,6 +115,31 @@ public class RArray extends RObject{
         if(index < 0 || index >= arrLen){
             throw new ArrayIndexOutOfBoundsException();
         }
+    }
+
+    public static String getComponentClassName(String className) {
+        if(className.charAt(0) == '['){
+            String componentTypeDescriptor = className.substring(1);
+            return RArray.toClassName(componentTypeDescriptor);
+        }
+        throw new RuntimeException("Not array: "+className);
+    }
+
+    private static String toClassName(String descriptor) {
+        if(descriptor.charAt(0) == '['){
+            return descriptor;
+        }
+        if(descriptor.charAt(0) == 'L'){
+            return descriptor.substring(1, descriptor.length()-1);
+        }
+        for(Map.Entry<String, String > entry: primitiveTypes.entrySet()){
+            String className = entry.getKey();
+            String d = entry.getValue();
+            if(d.equals(descriptor)){
+                return className;
+            }
+        }
+        throw new RuntimeException("Invalid descriptor: "+descriptor);
     }
 
 }
