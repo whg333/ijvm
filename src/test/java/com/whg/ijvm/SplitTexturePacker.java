@@ -14,6 +14,9 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 
+/**
+ * 切割TexturePacker打包的文件，例如img下的characters图片
+ */
 public class SplitTexturePacker {
 
     private static final String DIR = "D:\\whg\\temp";
