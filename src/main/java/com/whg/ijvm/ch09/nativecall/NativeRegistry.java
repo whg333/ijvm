@@ -3,17 +3,17 @@ package com.whg.ijvm.ch09.nativecall;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Registry {
+public class NativeRegistry {
 
     private static final Map<String, NativeMethod> registry = new HashMap<>();
     private static final NativeMethod emptyNativeMethod = new NativeMethod();
 
-    public void register(String className, String methodName, String methodDesc, NativeMethod method){
+    public static void register(String className, String methodName, String methodDesc, NativeMethod method){
         String key = key(className, methodName, methodDesc);
         registry.put(key, method);
     }
 
-    public NativeMethod findNativeMethod(String className, String methodName, String methodDesc){
+    public static NativeMethod findNativeMethod(String className, String methodName, String methodDesc){
         String key = key(className, methodName, methodDesc);
         NativeMethod method = registry.get(key);
         if(method != null){
@@ -25,7 +25,7 @@ public class Registry {
         return null;
     }
 
-    private String key(String className, String methodName, String methodDesc){
+    private static String key(String className, String methodName, String methodDesc){
         return className+"~"+methodName+"~"+methodDesc;
     }
 

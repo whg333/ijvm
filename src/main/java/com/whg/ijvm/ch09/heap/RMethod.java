@@ -30,8 +30,8 @@ public class RMethod extends RClassMember{
     }
 
     void calcArgSlotCount(){
-        RMethodDescriptor methodDescriptor = RMethodDescriptor.parse(descriptor);
-        for(String paramType: methodDescriptor.getParameterTypes()){
+        RMethodDescriptor md = RMethodDescriptor.parse(descriptor);
+        for(String paramType: md.getParameterTypes()){
             argSlotCount++;
             if(paramType.equals("J") || paramType.equals("D")){
                 argSlotCount++;
@@ -39,6 +39,35 @@ public class RMethod extends RClassMember{
         }
         if(!isStatic()){
             argSlotCount++;
+        }
+        if(isNative()){
+            injectCodeAttribute(md.returnType);
+        }
+    }
+
+    private void injectCodeAttribute(String returnType) {
+        maxStack = 4;
+        maxLocals = argSlotCount;
+        char firstChar = returnType.charAt(0);
+        switch (firstChar){
+            case 'V': // return
+                code = new byte[]{(byte) 0xfe, (byte) 0xb1};
+                break;
+            case 'D': // dreturn
+                code = new byte[]{(byte) 0xfe, (byte) 0xaf};
+                break;
+            case 'F': // freturn
+                code = new byte[]{(byte) 0xfe, (byte) 0xae};
+                break;
+            case 'J': // lreturn
+                code = new byte[]{(byte) 0xfe, (byte) 0xad};
+                break;
+            case 'L': // areturn
+                code = new byte[]{(byte) 0xfe, (byte) 0xb0};
+                break;
+            default: // ireturn
+                code = new byte[]{(byte) 0xfe, (byte) 0xac};
+                break;
         }
     }
 
