@@ -25,7 +25,7 @@ public class CopyChapter {
         for(File file: files){
             String content = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
             // System.out.println(content);
-            content = content.replaceAll("ch07", "ch08");
+            content = content.replaceAll("ch08", "ch09");
             System.out.println(file.getName());
             FileUtils.write(file, content, StandardCharsets.UTF_8);
         }
