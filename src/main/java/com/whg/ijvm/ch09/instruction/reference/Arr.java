@@ -70,6 +70,10 @@ public class Arr {
             }
         }
 
+        @Override
+        public String toString() {
+            return Instruction.string(this)+" "+atype.value();
+        }
     }
 
     public static class ANEW_ARRAY extends Index16Instruction{

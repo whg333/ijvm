@@ -13,7 +13,8 @@ public class Interpreter {
     private String[] args;
 
     public static void run(RMethod method, boolean logInst, String[] args){
-        NativeRegistry.init();
+        NativeRegistry.init(); // 初始化注册本地方法
+
         Interpreter interpreter = new Interpreter(method, logInst, args);
         interpreter.run();
     }
@@ -110,7 +111,9 @@ public class Interpreter {
 
         sb.append(" >> pc:");
         sb.append(pc);
-        if(pc < 10){
+
+        int len = pc < 10 ? 1 : pc < 100 ? 2 : pc <= 1000 ? 3 : 0;
+        for(int i=len;i<=4;i++){
             sb.append(' ');
         }
 
