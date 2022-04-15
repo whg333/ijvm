@@ -34,13 +34,13 @@ public class MethodInvokeLogic {
 
         // TODO delete hack!
         // hack!
-        if(method.isNative()){
-            if(method.getName().equals("registerNatives")){
-                thread.popFrame();
-            } else {
-                throw new RuntimeException("native method: "+method);
-            }
-        }
+        // if(method.isNative()){
+        //     if(method.getName().equals("registerNatives")){
+        //         thread.popFrame();
+        //     } else {
+        //         throw new RuntimeException("native method: "+method);
+        //     }
+        // }
     }
 
 }

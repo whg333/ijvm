@@ -2,6 +2,7 @@ package com.whg.ijvm.ch09.instruction;
 
 import com.whg.ijvm.ch09.heap.*;
 import com.whg.ijvm.ch09.instruction.base.BytecodeReader;
+import com.whg.ijvm.ch09.nativecall.NativeRegistry;
 import com.whg.ijvm.ch09.runtime.RFrame;
 import com.whg.ijvm.ch09.runtime.RThread;
 
@@ -12,6 +13,7 @@ public class Interpreter {
     private String[] args;
 
     public static void run(RMethod method, boolean logInst, String[] args){
+        NativeRegistry.init();
         Interpreter interpreter = new Interpreter(method, logInst, args);
         interpreter.run();
     }
@@ -78,7 +80,8 @@ public class Interpreter {
             RFrame frame = thread.popFrame();
             RMethod method = frame.getMethod();
             String className = method.getRClass().getName();
-            System.out.printf(">> pc:%4d %s.%s%s \n", frame.getNextPc(), className,
+            // TODO 这里frame.getNextPc为下一次pc了，应该在frame内记录一个当前pc，而不是thread内的pc
+            System.err.printf(">> pc:%4d %s.%s%s \n", frame.getNextPc(), className,
                     method.getName(), method.getDescriptor());
             // System.out.printf("LocalVars: %s\n", frame.getLocalVars());
             // System.out.printf("OperandStack: %s\n", frame.getOperandStack());
@@ -96,10 +99,11 @@ public class Interpreter {
                 sb.append(' ');
             }
         }
-        sb.append(frame.getMethod());
+        String method = frame.getMethod().toString();
+        sb.append(method);
 
         int sbLen = sb.length();
-        int padding = 60-sbLen;
+        int padding = 70-sbLen;
         for(int i=1;i<=padding;i++){
             sb.append(' ');
         }

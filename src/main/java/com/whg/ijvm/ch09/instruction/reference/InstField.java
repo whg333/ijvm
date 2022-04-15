@@ -33,36 +33,38 @@ public class InstField {
             int slotId = field.getSlotId();
             OperandStack stack = frame.getOperandStack();
 
-            switch (descriptor){
-                case "Z":
-                case "B":
-                case "C":
-                case "S":
-                case "I":
+            char firstDesc = descriptor.charAt(0);
+            switch (firstDesc){
+                case 'Z':
+                case 'B':
+                case 'C':
+                case 'S':
+                case 'I':
                     int iVal = stack.popInt();
                     RObject iRef = stack.popRef();
                     Objects.requireNonNull(iRef);
                     iRef.getFields().setInt(slotId, iVal);
                     break;
-                case "F":
+                case 'F':
                     float fVal = stack.popFloat();
                     RObject fRef = stack.popRef();
                     Objects.requireNonNull(fRef);
                     fRef.getFields().setFloat(slotId, fVal);
                     break;
-                case "J":
+                case 'J':
                     long lVal = stack.popLong();
                     RObject lRef = stack.popRef();
                     Objects.requireNonNull(lRef);
                     lRef.getFields().setLong(slotId, lVal);
                     break;
-                case "D":
+                case 'D':
                     double dVal = stack.popDouble();
                     RObject dRef = stack.popRef();
                     Objects.requireNonNull(dRef);
                     dRef.getFields().setDouble(slotId, dVal);
                     break;
-                case "L":
+                case 'L':
+                case '[':
                     RObject val = stack.popRef();
                     RObject ref = stack.popRef();
                     Objects.requireNonNull(ref);
@@ -91,24 +93,26 @@ public class InstField {
             int slotId = field.getSlotId();
             Slots slots = ref.getFields();
 
-            switch (descriptor){
-                case "Z":
-                case "B":
-                case "C":
-                case "S":
-                case "I":
+            char firstDesc = descriptor.charAt(0);
+            switch (firstDesc){
+                case 'Z':
+                case 'B':
+                case 'C':
+                case 'S':
+                case 'I':
                     stack.pushInt(slots.getInt(slotId));
                     break;
-                case "F":
+                case 'F':
                     stack.pushFloat(slots.getFloat(slotId));
                     break;
-                case "J":
+                case 'J':
                     stack.pushLong(slots.getLong(slotId));
                     break;
-                case "D":
+                case 'D':
                     stack.pushDouble(slots.getDouble(slotId));
                     break;
-                case "L":
+                case 'L':
+                case '[':
                     stack.pushRef(slots.getRef(slotId));
                     break;
             }

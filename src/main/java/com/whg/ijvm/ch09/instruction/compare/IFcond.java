@@ -11,7 +11,7 @@ public class IFcond {
             return val == 0;
         }
     }
-    public static class IFNQ extends IFCondInstruction {
+    public static class IFNE extends IFCondInstruction {
         @Override
         boolean cond(int val) {
             return val != 0;

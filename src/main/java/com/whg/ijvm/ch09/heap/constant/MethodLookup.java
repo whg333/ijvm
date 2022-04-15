@@ -7,7 +7,11 @@ public class MethodLookup {
 
     public static RMethod lookupMethodInClass(RClass clazz, String name, String descriptor){
         for(RClass c=clazz;c!=null;c=c.getSuperClass()){
-            for(RMethod method: c.getMethods()){
+            RMethod[] methods = c.getMethods();
+            if(methods == null){
+                continue; // 例如double数组，类型为[D，没有getClass方法，跳过去父类Object里面找
+            }
+            for(RMethod method: methods){
                 if(method.isMatch(name,descriptor)){
                     return method;
                 }

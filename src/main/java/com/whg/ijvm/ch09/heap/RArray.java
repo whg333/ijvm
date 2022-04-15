@@ -23,7 +23,8 @@ public class RArray extends RObject{
         super(clazz, data);
     }
 
-    RArray(String name, int count){
+    RArray(RClass clazz, String name, int count){
+        this.clazz = clazz;
         switch(name){
             case "[Z":
             case "[B":

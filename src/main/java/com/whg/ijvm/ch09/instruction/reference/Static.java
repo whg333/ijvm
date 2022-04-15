@@ -37,26 +37,28 @@ public class Static {
             Slots slots = clazz.getStaticVars();
             OperandStack stack = frame.getOperandStack();
 
-            switch (descriptor){
-                case "Z":
-                case "B":
-                case "C":
-                case "S":
-                case "I":
+            char firstDesc = descriptor.charAt(0);
+            switch (firstDesc){
+                case 'Z':
+                case 'B':
+                case 'C':
+                case 'S':
+                case 'I':
                     slots.setInt(slotId, stack.popInt());
                     break;
-                case "F":
+                case 'F':
                     slots.setFloat(slotId, stack.popFloat());
                     break;
-                case "J":
+                case 'J':
                     slots.setLong(slotId, stack.popLong());
                     break;
-                case "D":
+                case 'D':
                     slots.setDouble(slotId, stack.popDouble());
                     break;
-                // case "L":
-                //     slots.setRef(slotId, stack.popRef());
-                //     break;
+                case 'L':
+                case '[':
+                    slots.setRef(slotId, stack.popRef());
+                    break;
                 default:
                     if(isRefDesc(descriptor)){
                         slots.setRef(slotId, stack.popRef());
@@ -93,26 +95,28 @@ public class Static {
             Slots slots = clazz.getStaticVars();
             OperandStack stack = frame.getOperandStack();
 
-            switch (descriptor){
-                case "Z":
-                case "B":
-                case "C":
-                case "S":
-                case "I":
+            char firstDesc = descriptor.charAt(0);
+            switch (firstDesc){
+                case 'Z':
+                case 'B':
+                case 'C':
+                case 'S':
+                case 'I':
                     stack.pushInt(slots.getInt(slotId));
                     break;
-                case "F":
+                case 'F':
                     stack.pushFloat(slots.getFloat(slotId));
                     break;
-                case "J":
+                case 'J':
                     stack.pushLong(slots.getLong(slotId));
                     break;
-                case "D":
+                case 'D':
                     stack.pushDouble(slots.getDouble(slotId));
                     break;
-                // case "L":
-                //     stack.pushRef(slots.getRef(slotId));
-                //     break;
+                case 'L':
+                case '[':
+                    stack.pushRef(slots.getRef(slotId));
+                    break;
                 default:
                     if(isRefDesc(descriptor)){
                         stack.pushRef(slots.getRef(slotId));

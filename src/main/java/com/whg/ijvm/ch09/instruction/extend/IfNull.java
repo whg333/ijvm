@@ -4,22 +4,22 @@ import com.whg.ijvm.ch09.instruction.base.BranchInstruction;
 import com.whg.ijvm.ch09.runtime.RFrame;
 import com.whg.ijvm.ch09.heap.RObject;
 
-public class IFnull {
+public class IfNull {
 
-    public static class IFNULL extends IFnullInstruction{
+    public static class IFNULL extends IfNullInstruction{
         @Override
         boolean cond(RObject ref) {
             return ref == null;
         }
     }
-    public static class IFNONNULL extends IFnullInstruction{
+    public static class IFNONNULL extends IfNullInstruction{
         @Override
         boolean cond(RObject ref) {
             return ref != null;
         }
     }
 
-    private static abstract class IFnullInstruction extends BranchInstruction {
+    private static abstract class IfNullInstruction extends BranchInstruction {
         @Override
         public void execute(RFrame frame) {
             RObject ref = frame.getOperandStack().popRef();

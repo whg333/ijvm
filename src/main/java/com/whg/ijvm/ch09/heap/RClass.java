@@ -170,6 +170,11 @@ public class RClass {
         return name.substring(name.lastIndexOf('/') + 1);
     }
 
+    // java/lang/Object -> java.lang.Object
+    public String getJavaName(){
+        return name.replaceAll("/","\\.");
+    }
+
     public boolean isAccessibleTo(RClass other) {
         return isPublic() || isSamePackage(other);
     }
@@ -232,7 +237,7 @@ public class RClass {
         if(!isArray()){
             throw new IllegalArgumentException("Not array class: "+name);
         }
-        return new RArray(name, count);
+        return new RArray(this, name, count);
     }
 
     public boolean isArray(){

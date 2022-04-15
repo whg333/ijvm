@@ -44,6 +44,7 @@ public class RClassLoader {
         if(javaLangClass != null){
             clazz.setJClass(javaLangClass.newObject());
             clazz.getJClass().setExtra(clazz);
+            classMap.put(primitiveName, clazz);
         }
     }
 

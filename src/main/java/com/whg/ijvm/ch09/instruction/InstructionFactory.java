@@ -10,6 +10,7 @@ import com.whg.ijvm.ch09.instruction.constant.Ldc;
 import com.whg.ijvm.ch09.instruction.constant.Nop;
 import com.whg.ijvm.ch09.instruction.control.Goto;
 import com.whg.ijvm.ch09.instruction.control.Return;
+import com.whg.ijvm.ch09.instruction.extend.IfNull;
 import com.whg.ijvm.ch09.instruction.load.*;
 import com.whg.ijvm.ch09.instruction.math.Add;
 import com.whg.ijvm.ch09.instruction.math.Inc;
@@ -49,6 +50,8 @@ public class InstructionFactory {
                 return new Const.LCONST_1();
             case 0x10:
                 return new Ipush.BIPUSH();
+            case 0x11:
+                return new Ipush.SIPUSH();
 
             case 0x12:
                 return new Ldc.LDC();
@@ -131,6 +134,8 @@ public class InstructionFactory {
             case 0x4f:
                 return new ArrStore.IASTORE();
 
+            case 0x55:
+                return new ArrStore.CASTORE();
             case 0x57:
                 return new Pop.POP();
             case 0x59:
@@ -168,6 +173,8 @@ public class InstructionFactory {
             case 0x84:
                 return new Inc.IINC();
 
+            case 0x9a:
+                return new IFcond.IFNE();
             case 0x94:
                 return new Lcmp.LCMP();
             case 0x99:
@@ -234,6 +241,10 @@ public class InstructionFactory {
 
             case 0xc5:
                 return new Arr.MULTI_ANEW_ARRAY();
+            case 0xc6:
+                return new IfNull.IFNULL();
+            case 0xc7:
+                return new IfNull.IFNONNULL();
 
             case 0xfe:
                 return new InvokeNative();

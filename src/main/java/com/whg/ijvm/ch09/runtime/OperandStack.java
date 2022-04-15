@@ -93,6 +93,17 @@ public class OperandStack {
         return slots[index].ref;
     }
 
+    public void pushBoolean(boolean val){
+        if(val){
+            pushInt(1);
+        }else{
+            pushInt(0);
+        }
+    }
+    public boolean popBoolean(){
+        return popInt() == 1;
+    }
+
     @Override
     public String toString() {
         return "{" + nextIdx + " " + Arrays.toString(slots) + "}";

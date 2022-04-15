@@ -11,6 +11,7 @@ public class Main {
 	//java -jar ijvm-jar-with-dependencies.jar -verbose -verbose:inst -cp D:\gitRepo\ijvm\target\classes com\whg\ijvm\ch09\test\FibonacciTest 1 2 3
 	//java -jar ijvm-jar-with-dependencies.jar -Xjre "/Library/Java/JavaVirtualMachines/jdk1.8.0_201.jdk/Contents/Home/jre" java.lang.String
 	//java -jar ijvm-jar-with-dependencies.jar -cp /Users/hoolai/whg/gitRepo/ijvm/target/classes com/whg/ijvm/ch09/GaussTest
+	//java -jar ijvm-jar-with-dependencies.jar -verbose -verbose:inst -cp D:\gitRepo\ijvm\target\classes com\whg\ijvm\ch09\test\nativecall\GetClassTest foo bar 你好，世界！
 	public static void main(String[] args) {
 		JvmCmder jvmCmder = new JvmCmder();
 		JCommander jCommander = JCommander.newBuilder().addObject(jvmCmder).build();
