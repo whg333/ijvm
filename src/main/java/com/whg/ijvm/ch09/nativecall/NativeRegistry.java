@@ -30,7 +30,7 @@ public class NativeRegistry {
             return method;
         }
         if(methodDesc.equals("()V") && methodName.equals("registerNatives")){
-            return emptyNativeMethod;
+            return emptyNativeMethod; // 暂未实现的本地方法返回空执行体
         }
         return null;
     }
