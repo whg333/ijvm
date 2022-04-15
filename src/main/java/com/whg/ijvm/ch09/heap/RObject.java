@@ -2,7 +2,8 @@ package com.whg.ijvm.ch09.heap;
 
 public class RObject {
 
-    protected RClass clazz;
+    private RClass linkClass; // 此实例是类对象才会存在，关联到方法区中，对应的类
+    protected RClass clazz; // 正常对象，对象到类的关联：Object -> Class，指明此实例是哪个类
     protected Object data;
 
     // for array
@@ -41,6 +42,13 @@ public class RObject {
 
     public RClass getRClass() {
         return clazz;
+    }
+
+    public RClass getExtra() {
+        return linkClass;
+    }
+    public void setExtra(RClass extra) {
+        this.linkClass = extra;
     }
 
 }

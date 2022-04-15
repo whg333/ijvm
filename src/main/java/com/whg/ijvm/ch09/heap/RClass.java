@@ -26,18 +26,10 @@ public class RClass {
 
     boolean init; //类是否已经加载
 
-    RClass(String arrayName, RClassLoader loader){
-        this.loader = loader;
+    RObject classObj; // 类到对象的关联：Class -> Class Object，指明此类对应的类对象，即java.lang.Class实例
 
-        accessFlags = AccessFlags.ACC_PUBLIC;
-        name = arrayName;
-        superClass = loader.loadClass("java/lang/Object");
-        interfaces = new RClass[]{
-                loader.loadClass("java/lang/Cloneable"),
-                loader.loadClass("java/io/Serializable"),
-        };
+    RClass(){
 
-        init = true;
     }
 
     public RClass(ClassFile cf, RClassLoader loader){
@@ -397,6 +389,13 @@ public class RClass {
 
     public Slots getStaticVars() {
         return staticVars;
+    }
+
+    public void setJClass(RObject jClass) {
+        this.classObj = jClass;
+    }
+    public RObject getJClass() {
+        return classObj;
     }
 
 }

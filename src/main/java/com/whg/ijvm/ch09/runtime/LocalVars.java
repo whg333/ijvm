@@ -68,6 +68,10 @@ public class LocalVars {
         slots[index].ref = slot.ref;
     }
 
+    public RObject getThis(){
+        return getRef(0);
+    }
+
     @Override
     public String toString() {
         return Arrays.toString(slots);

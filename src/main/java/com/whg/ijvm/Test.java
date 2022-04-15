@@ -20,9 +20,18 @@ public class Test {
     }
 
     public static void main(String[] args) {
-        Test test = new Test("whg");
-        test.doSomeThing();
-        System.out.println(test.str);
+        // Test test = new Test("whg");
+        // test.doSomeThing();
+        // System.out.println(test.str);
+
+        Object obj1 = new Object();
+        Class<?> objClass1 = obj1.getClass();
+        Object obj2 = new Object();
+        Class<?> objClass2 = obj2.getClass();
+        System.out.println(objClass1 == objClass2);
+        Class<?> objClass = Object.class;
+        System.out.println(objClass1 == objClass);
+        System.out.println(objClass1);
     }
 
 }

@@ -17,6 +17,46 @@ public class RClassLoader {
         this.classpath = classpath;
         this.verboseFlag = verboseFlag;
         classMap = new HashMap<>();
+
+        loadBasicClasses();
+        loadPrimitiveClasses();
+    }
+
+    private void loadBasicClasses(){
+        RClass javaLangClass = loadClass(javaLangClassName()); // 触发java.lang.Object等类和接口的加载
+        classMap.forEach((className, clazz) -> {
+            if(clazz.getJClass() == null){
+                clazz.setJClass(javaLangClass.newObject());
+                clazz.getJClass().setExtra(clazz);
+            }
+        });
+    }
+
+    private void loadPrimitiveClasses(){
+        for(String primitiveType: ClassNameHelp.primitiveTypeKeys()){
+            loadPrimitiveClass(primitiveType);
+        }
+    }
+
+    private void loadPrimitiveClass(String primitiveName){
+        RClass clazz = newPrimitiveClass(primitiveName);
+        RClass javaLangClass = classMap.get(javaLangClassName());
+        if(javaLangClass != null){
+            clazz.setJClass(javaLangClass.newObject());
+            clazz.getJClass().setExtra(clazz);
+        }
+    }
+
+    // 基本类型没有超类也没有实现任何接口
+    private RClass newPrimitiveClass(String primitiveName){
+        RClass clazz = new RClass();
+        clazz.loader = this;
+
+        clazz.accessFlags = AccessFlags.ACC_PUBLIC;
+        clazz.name = primitiveName;
+
+        clazz.init = true;
+        return clazz;
     }
 
     public RClass loadClass(String className){
@@ -25,15 +65,43 @@ public class RClassLoader {
             return clazz; //已经加载
         }
         if(RClass.isArray(className)){
-            return loadArrayClass(className);
+            clazz = loadArrayClass(className);
+        }else{
+            clazz = loadNonArrayClass(className);
         }
-        return loadNonArrayClass(className);
+
+        RClass javaLangClass = classMap.get(javaLangClassName());
+        if(javaLangClass != null){
+            clazz.setJClass(javaLangClass.newObject());
+            clazz.getJClass().setExtra(clazz);
+        }
+        return clazz;
+    }
+
+    private String javaLangClassName(){
+        return "java/lang/Class";
     }
 
     private RClass loadArrayClass(String className){
-        RClass arrayClass = new RClass(className, this);
-        classMap.put(className, arrayClass);
-        return arrayClass;
+        RClass clazz = newArrayClass(className);
+        classMap.put(className, clazz);
+        return clazz;
+    }
+
+    private RClass newArrayClass(String arrayName){
+        RClass clazz = new RClass();
+        clazz.loader = this;
+
+        clazz.accessFlags = AccessFlags.ACC_PUBLIC;
+        clazz.name = arrayName;
+        clazz.superClass = this.loadClass("java/lang/Object");
+        clazz.interfaces = new RClass[]{
+                this.loadClass("java/lang/Cloneable"),
+                this.loadClass("java/io/Serializable"),
+        };
+
+        clazz.init = true;
+        return clazz;
     }
 
     private RClass loadNonArrayClass(String className) {

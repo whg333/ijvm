@@ -38,7 +38,11 @@ public class Ldc {
         }else if(c instanceof ConstantString){
             RObject internedStr = StringPool.JString(clazz.loader, ((ConstantString) c).val);
             stack.pushRef(internedStr);
-        } else{
+        }else if(c instanceof ClassRef){
+            ClassRef classRef = (ClassRef) c;
+            RObject classObj = classRef.resolveClass().getJClass();
+            stack.pushRef(classObj);
+        }else{
             throw new RuntimeException("todo: ldc!");
         }
     }
@@ -55,7 +59,7 @@ public class Ldc {
             }else if(c instanceof ConstantDouble){
                 stack.pushDouble(((ConstantDouble) c).val);
             }else{
-                throw new RuntimeException("todo: ldc!");
+                throw new RuntimeException("todo: ldc2_w!");
             }
         }
     }

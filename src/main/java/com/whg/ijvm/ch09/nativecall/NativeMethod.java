@@ -1,8 +1,7 @@
 package com.whg.ijvm.ch09.nativecall;
 
-public class NativeMethod {
+import com.whg.ijvm.ch09.runtime.RFrame;
 
-    public void invoke() {
-
-    }
+public interface NativeMethod {
+    void invoke(RFrame frame);
 }

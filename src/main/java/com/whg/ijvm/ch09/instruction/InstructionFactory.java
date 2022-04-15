@@ -16,6 +16,7 @@ import com.whg.ijvm.ch09.instruction.math.Inc;
 import com.whg.ijvm.ch09.instruction.math.Mul;
 import com.whg.ijvm.ch09.instruction.math.Sub;
 import com.whg.ijvm.ch09.instruction.reference.*;
+import com.whg.ijvm.ch09.instruction.reserved.InvokeNative;
 import com.whg.ijvm.ch09.instruction.stack.Dup;
 import com.whg.ijvm.ch09.instruction.stack.Pop;
 import com.whg.ijvm.ch09.instruction.store.*;
@@ -233,6 +234,9 @@ public class InstructionFactory {
 
             case 0xc5:
                 return new Arr.MULTI_ANEW_ARRAY();
+
+            case 0xfe:
+                return new InvokeNative();
 
             default:
                 throw new UnsupportedOperationException("Unsupported opcode="+toHexStr(opcode));

@@ -32,6 +32,7 @@ public class MethodInvokeLogic {
         //     thread.popFrame();
         // }
 
+        // TODO delete hack!
         // hack!
         if(method.isNative()){
             if(method.getName().equals("registerNatives")){

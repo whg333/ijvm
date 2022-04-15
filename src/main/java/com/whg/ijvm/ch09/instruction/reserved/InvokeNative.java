@@ -20,6 +20,6 @@ public class InvokeNative extends NoOperandsInstruction {
             String methodInfo = className + "." + methodName + methodDescriptor;
             throw new RuntimeException("UnsatisfiedLinkError:"+methodInfo);
         }
-        nativeMethod.invoke();
+        nativeMethod.invoke(frame);
     }
 }

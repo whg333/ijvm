@@ -1,12 +1,16 @@
 package com.whg.ijvm.ch09.nativecall;
 
+import com.whg.ijvm.ch09.runtime.RFrame;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class NativeRegistry {
 
     private static final Map<String, NativeMethod> registry = new HashMap<>();
-    private static final NativeMethod emptyNativeMethod = new NativeMethod();
+    private static final NativeMethod emptyNativeMethod = frame -> {
+
+    };
 
     public static void register(String className, String methodName, String methodDesc, NativeMethod method){
         String key = key(className, methodName, methodDesc);
