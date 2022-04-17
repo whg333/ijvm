@@ -33,7 +33,7 @@ public class RClassLoader {
     }
 
     private void loadPrimitiveClasses(){
-        for(String primitiveType: ClassNameHelp.primitiveTypeKeys()){
+        for(String primitiveType: RArray.primitiveTypeKeys()){
             loadPrimitiveClass(primitiveType);
         }
     }

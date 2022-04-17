@@ -1,7 +1,6 @@
 package com.whg.ijvm.ch09.nativecall;
 
-import com.whg.ijvm.ch09.nativecall.java.ClassNative;
-import com.whg.ijvm.ch09.nativecall.java.ObjectNative;
+import com.whg.ijvm.ch09.nativecall.java.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +14,11 @@ public class NativeRegistry {
 
     public static void init() {
         ClassNative.init();
+        DoubleNative.init();
+        FloatNative.init();
         ObjectNative.init();
+        StringNative.init();
+        SystemNative.init();
     }
 
     public static void register(String className, String methodName, String methodDesc, NativeMethod method){

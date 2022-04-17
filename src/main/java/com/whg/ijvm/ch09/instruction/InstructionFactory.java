@@ -10,12 +10,10 @@ import com.whg.ijvm.ch09.instruction.constant.Ldc;
 import com.whg.ijvm.ch09.instruction.constant.Nop;
 import com.whg.ijvm.ch09.instruction.control.Goto;
 import com.whg.ijvm.ch09.instruction.control.Return;
+import com.whg.ijvm.ch09.instruction.conver.I2x;
 import com.whg.ijvm.ch09.instruction.extend.IfNull;
 import com.whg.ijvm.ch09.instruction.load.*;
-import com.whg.ijvm.ch09.instruction.math.Add;
-import com.whg.ijvm.ch09.instruction.math.Inc;
-import com.whg.ijvm.ch09.instruction.math.Mul;
-import com.whg.ijvm.ch09.instruction.math.Sub;
+import com.whg.ijvm.ch09.instruction.math.*;
 import com.whg.ijvm.ch09.instruction.reference.*;
 import com.whg.ijvm.ch09.instruction.reserved.InvokeNative;
 import com.whg.ijvm.ch09.instruction.stack.Dup;
@@ -106,8 +104,12 @@ public class InstructionFactory {
 
             case 0x32:
                 return new ArrLoad.AALOAD();
+            case 0x34:
+                return new ArrLoad.CALOAD();
             case 0x3a:
                 return new AStore.ASTORE();
+            case 0x3b:
+                return new IStore.ISTORE_0();
             case 0x36:
                 return new IStore.ISTORE();
             case 0x3c:
@@ -170,8 +172,19 @@ public class InstructionFactory {
             case 0x6b:
                 return new Mul.DMUL();
 
+            case 0x78:
+                return new Sh.ISHL();
+            case 0x79:
+                return new Sh.LSHL();
+            case 0x7c:
+                return new Sh.IUSHR();
+            case 0x7f:
+                return new And.LAND();
+
             case 0x84:
                 return new Inc.IINC();
+            case 0x85:
+                return new I2x.I2L();
 
             case 0x9a:
                 return new IFcond.IFNE();
@@ -179,9 +192,17 @@ public class InstructionFactory {
                 return new Lcmp.LCMP();
             case 0x99:
                 return new IFcond.IFEQ();
+            case 0x9c:
+                return new IFcond.IFGE();
             case 0x9d:
                 return new IFcond.IFGT();
+            case 0x9e:
+                return new IFcond.IFLE();
 
+            case 0xa0:
+                return new IFIcmp.IF_ICMPNE();
+            case 0xa1:
+                return new IFIcmp.IF_ICMPLT();
             case 0xa3:
                 return new IFIcmp.IF_ICMPGT();
             case 0xa2:

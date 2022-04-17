@@ -23,8 +23,19 @@ public class StringPool {
         return jStr;
     }
 
+    public static RObject internString(RObject jStr){
+        String goStr = goString(jStr);
+        RObject internedStr = internedStrings.get(goStr);
+        if(internedStr != null){
+            return internedStr;
+        }
+        internedStrings.put(goStr, jStr);
+        return jStr;
+    }
+
     public static String goString(RObject jStr) {
         RArray charArr = jStr.getRefVar("value", "[C");
         return new String(charArr.getChars());
     }
+
 }

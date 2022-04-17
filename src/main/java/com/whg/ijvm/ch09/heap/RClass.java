@@ -345,6 +345,7 @@ public class RClass {
         }
     }
 
+    // for array
     public RClass getComponentClass() {
         String componentClassName = RArray.getComponentClassName(name);
         return loader.loadClass(componentClassName);
@@ -403,4 +404,7 @@ public class RClass {
         return classObj;
     }
 
+    public boolean isPrimitive() {
+        return RArray.isPrimitive(getName());
+    }
 }

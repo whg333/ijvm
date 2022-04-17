@@ -1,5 +1,6 @@
 package com.whg.ijvm.ch09.heap;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -145,6 +146,18 @@ public class RArray extends RObject{
             }
         }
         throw new RuntimeException("Invalid descriptor: "+descriptor);
+    }
+
+    public static Collection<String> primitiveTypeKeys(){
+        return primitiveTypes.keySet();
+    }
+
+    public static boolean isPrimitive(String name){
+        return primitiveTypes.containsKey(name);
+    }
+
+    public static void arrayCopy(RArray src, int srcPos, RArray dest, int destPos, int length){
+        System.arraycopy(src.data, srcPos, dest.data, destPos, length);
     }
 
 }
