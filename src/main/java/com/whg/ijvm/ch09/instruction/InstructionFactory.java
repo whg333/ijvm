@@ -195,6 +195,8 @@ public class InstructionFactory {
             case 0x7f:
                 return new And.LAND();
 
+            case 0x82:
+                return new Xor.IXOR();
             case 0x84:
                 return new Inc.IINC();
             case 0x85:
@@ -227,12 +229,14 @@ public class InstructionFactory {
                 return new IFIcmp.IF_ICMPNE();
             case 0xa1:
                 return new IFIcmp.IF_ICMPLT();
-            case 0xa3:
-                return new IFIcmp.IF_ICMPGT();
             case 0xa2:
                 return new IFIcmp.IF_ICMPGE();
+            case 0xa3:
+                return new IFIcmp.IF_ICMPGT();
             case 0xa4:
                 return new IFIcmp.IF_ICMPLE();
+            case 0xa5:
+                return new IFAcmp.IF_ACMPEQ();
 
             case 0xa6:
                 return new IFAcmp.IF_ACMPNE();
