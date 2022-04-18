@@ -29,14 +29,14 @@ public class RObject implements Cloneable{
     // reflection
     public void setRefVar(String name, String descriptor, RObject ref) {
         RField field = clazz.getField(name, descriptor, false);
-        Slots slots = (Slots)data;
-        slots.setRef(field.slotId, ref);
+        Slots fields = getFields();
+        fields.setRef(field.slotId, ref);
     }
     // reflection
     public <T extends RObject> T getRefVar(String name, String descriptor) {
         RField field = clazz.getField(name, descriptor, false);
-        Slots slots = (Slots)data;
-        return (T)slots.getRef(field.slotId);
+        Slots fields = getFields();
+        return (T)fields.getRef(field.slotId);
     }
 
     public Slots getFields() {
