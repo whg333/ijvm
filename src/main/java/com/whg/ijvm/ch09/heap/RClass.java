@@ -262,8 +262,16 @@ public class RClass {
     }
 
     RMethod getStaticMethod(String name, String descriptor){
+        return getMethod(name, descriptor, true);
+    }
+
+    public RMethod getInstanceMethod(String name, String descriptor){
+        return getMethod(name, descriptor, false);
+    }
+
+    RMethod getMethod(String name, String descriptor, boolean isStatic){
         for(RMethod method: methods){
-            if(method.isStatic() && method.isMatch(name, descriptor)){
+            if(method.isStatic() == isStatic && method.isMatch(name, descriptor)){
                 return method;
             }
         }
@@ -349,6 +357,17 @@ public class RClass {
     public RClass getComponentClass() {
         String componentClassName = RArray.getComponentClassName(name);
         return loader.loadClass(componentClassName);
+    }
+
+    // reflection
+    public void setRefVar(String name, String descriptor, RObject ref) {
+        RField field = getField(name, descriptor, true);
+        staticVars.setRef(field.slotId, ref);
+    }
+    // reflection
+    public RObject getRefVar(String name, String descriptor) {
+        RField field = getField(name, descriptor, true);
+        return staticVars.getRef(field.slotId);
     }
 
     public RField getField(String name, String descriptor, boolean isStatic) {

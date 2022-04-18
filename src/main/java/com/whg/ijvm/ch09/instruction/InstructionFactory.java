@@ -140,6 +140,8 @@ public class InstructionFactory {
             case 0x4f:
                 return new ArrStore.IASTORE();
 
+            case 0x53:
+                return new ArrStore.AASTORE();
             case 0x55:
                 return new ArrStore.CASTORE();
             case 0x57:
@@ -178,10 +180,14 @@ public class InstructionFactory {
             case 0x6c:
                 return new Div.IDIV();
 
+            case 0x70:
+                return new Rem.IREM();
             case 0x78:
                 return new Sh.ISHL();
             case 0x79:
                 return new Sh.LSHL();
+            case 0x7a:
+                return new Sh.ISHR();
             case 0x7c:
                 return new Sh.IUSHR();
             case 0x7e:
@@ -214,6 +220,8 @@ public class InstructionFactory {
                 return new IFcond.IFGT();
             case 0x9e:
                 return new IFcond.IFLE();
+            case 0x9f:
+                return new IFIcmp.IF_ICMPEQ();
 
             case 0xa0:
                 return new IFIcmp.IF_ICMPNE();
