@@ -2,7 +2,7 @@ package com.whg.ijvm.ch09.runtime;
 
 import com.whg.ijvm.ch09.heap.RObject;
 
-public class Slot {
+public class Slot implements Cloneable{
 
     int num;
     RObject ref;
@@ -16,7 +16,8 @@ public class Slot {
         this.ref = ref;
     }
 
-    public Slot copy(){
+    @Override
+    public Slot clone() {
         return new Slot(num, ref);
     }
 

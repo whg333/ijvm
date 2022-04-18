@@ -14,6 +14,7 @@ public class GetClassTest {
         System.out.println(double.class.getName()); // double
         System.out.println(Object.class.getName()); // java.lang.Object
         System.out.println(GetClassTest.class.getName()); // jvmgo.book.ch09.GetClassTest
+        System.out.println(boolean[].class.getName()); // [Z
         System.out.println(int[].class.getName()); // [I
         System.out.println(int[][].class.getName()); // [[I
         System.out.println(Object[].class.getName()); // [Ljava.lang.Object;

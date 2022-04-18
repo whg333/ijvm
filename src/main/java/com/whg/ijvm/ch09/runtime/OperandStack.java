@@ -80,8 +80,9 @@ public class OperandStack {
 
     public Slot popSlot(){
         nextIdx--;
-        // 调用copy生成一个拷贝体，因为如果直接返回引用，则会被修改产生副作用，例如DUP_X1指令
-        return slots[nextIdx].copy();
+        // 调用clone生成一个拷贝体，因为如果直接返回引用，则会被修改产生副作用
+        // 例如DUP_X1指令代表复制栈顶的值，此时的复制就应该是复制值对象，而不是返回对象引用
+        return slots[nextIdx].clone();
     }
 
     public RObject getRefFromTop(int n) {

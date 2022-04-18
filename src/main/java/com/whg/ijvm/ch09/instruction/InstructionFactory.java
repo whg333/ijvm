@@ -1,15 +1,13 @@
 package com.whg.ijvm.ch09.instruction;
 
-import com.whg.ijvm.ch09.instruction.compare.IFAcmp;
-import com.whg.ijvm.ch09.instruction.compare.IFIcmp;
-import com.whg.ijvm.ch09.instruction.compare.IFcond;
-import com.whg.ijvm.ch09.instruction.compare.Lcmp;
+import com.whg.ijvm.ch09.instruction.compare.*;
 import com.whg.ijvm.ch09.instruction.constant.Const;
 import com.whg.ijvm.ch09.instruction.constant.Ipush;
 import com.whg.ijvm.ch09.instruction.constant.Ldc;
 import com.whg.ijvm.ch09.instruction.constant.Nop;
 import com.whg.ijvm.ch09.instruction.control.Goto;
 import com.whg.ijvm.ch09.instruction.control.Return;
+import com.whg.ijvm.ch09.instruction.conver.F2x;
 import com.whg.ijvm.ch09.instruction.conver.I2x;
 import com.whg.ijvm.ch09.instruction.extend.IfNull;
 import com.whg.ijvm.ch09.instruction.load.*;
@@ -46,6 +44,8 @@ public class InstructionFactory {
 
             case 0x0a:
                 return new Const.LCONST_1();
+            case 0x0b:
+                return new Const.FCONST_0();
             case 0x10:
                 return new Ipush.BIPUSH();
             case 0x11:
@@ -78,6 +78,10 @@ public class InstructionFactory {
                 return new LLoad.LLOAD_2();
             case 0x21:
                 return new LLoad.LLOAD_3();
+            case 0x22:
+                return new FLoad.FLOAD_0();
+            case 0x23:
+                return new FLoad.FLOAD_1();
             case 0x24:
                 return new FLoad.FLOAD_2();
 
@@ -189,11 +193,19 @@ public class InstructionFactory {
                 return new Inc.IINC();
             case 0x85:
                 return new I2x.I2L();
+            case 0x86:
+                return new I2x.I2F();
+            case 0x8b:
+                return new F2x.F2I();
 
             case 0x9a:
                 return new IFcond.IFNE();
             case 0x94:
                 return new Lcmp.LCMP();
+            case 0x95:
+                return new Fcmp.FCMPL();
+            case 0x96:
+                return new Fcmp.FCMPG();
             case 0x99:
                 return new IFcond.IFEQ();
             case 0x9c:
