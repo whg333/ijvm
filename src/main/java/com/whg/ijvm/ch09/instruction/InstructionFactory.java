@@ -171,6 +171,8 @@ public class InstructionFactory {
                 return new Mul.FMUL();
             case 0x6b:
                 return new Mul.DMUL();
+            case 0x6c:
+                return new Div.IDIV();
 
             case 0x78:
                 return new Sh.ISHL();
@@ -178,6 +180,8 @@ public class InstructionFactory {
                 return new Sh.LSHL();
             case 0x7c:
                 return new Sh.IUSHR();
+            case 0x7e:
+                return new And.IAND();
             case 0x7f:
                 return new And.LAND();
 
