@@ -1,6 +1,6 @@
 package com.whg.ijvm.ch09.heap;
 
-public class RObject {
+public class RObject implements Cloneable{
 
     protected RClass linkClass; // 此实例是类对象才会存在，关联到方法区中，对应的类
     protected RClass clazz; // 正常对象，对象到类的关联：Object -> Class，指明此实例是哪个类
@@ -18,6 +18,12 @@ public class RObject {
     RObject(RClass clazz, Object data){
         this.clazz = clazz;
         this.data = data;
+    }
+
+    @Override
+    public RObject clone() {
+        Slots cloneData = ((Slots)data).clone();
+        return new RObject(clazz, cloneData);
     }
 
     // reflection

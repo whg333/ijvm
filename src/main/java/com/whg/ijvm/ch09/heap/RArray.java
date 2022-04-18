@@ -1,10 +1,11 @@
 package com.whg.ijvm.ch09.heap;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RArray extends RObject{
+public class RArray extends RObject implements Cloneable{
 
     private static final Map<String, String> primitiveTypes = new HashMap<String, String>(){
         {
@@ -55,8 +56,41 @@ public class RArray extends RObject{
         }
     }
 
+    @Override
+    public RArray clone() {
+        Object cloneData;
+        if(data instanceof boolean[] || data instanceof byte[]){
+            byte[] src = getBytes();
+            cloneData = Arrays.copyOf(src, src.length);
+        }else if(data instanceof short[]){
+            short[] src = getShorts();
+            cloneData = Arrays.copyOf(src, src.length);
+        }else if(data instanceof int[]){
+            int[] src = getInts();
+            cloneData = Arrays.copyOf(src, src.length);
+        }else if(data instanceof long[]){
+            long[] src = getLongs();
+            cloneData = Arrays.copyOf(src, src.length);
+        }else if(data instanceof char[]){
+            char[] src = getChars();
+            cloneData = Arrays.copyOf(src, src.length);
+        }else if(data instanceof float[]){
+            float[] src = getFloats();
+            cloneData = Arrays.copyOf(src, src.length);
+        }else if(data instanceof double[]){
+            double[] src = getDoubles();
+            cloneData = Arrays.copyOf(src, src.length);
+        }else if(data instanceof RObject[]){
+            RObject[] src = getRefs();
+            cloneData = Arrays.copyOf(src, src.length);
+        }else{
+            throw new IllegalArgumentException("不可能出现的情况");
+        }
+        return new RArray(clazz, cloneData);
+    }
+
     public int getArrayLength(){
-        if(data instanceof byte[]){
+        if(data instanceof boolean[] || data instanceof byte[]){
             return getBytes().length;
         }else if(data instanceof short[]){
             return getShorts().length;
