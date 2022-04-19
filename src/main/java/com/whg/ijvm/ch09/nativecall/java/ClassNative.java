@@ -15,6 +15,8 @@ public class ClassNative {
         NativeRegistry.register(CLASS_NAME, "getPrimitiveClass", "(Ljava/lang/String;)Ljava/lang/Class;", getPrimitiveClass);
         NativeRegistry.register(CLASS_NAME, "getName0", "()Ljava/lang/String;", getName0);
         NativeRegistry.register(CLASS_NAME, "desiredAssertionStatus0", "(Ljava/lang/Class;)Z", desiredAssertionStatus0);
+
+        NativeRegistry.register(CLASS_NAME, "getClassLoader0", "()Ljava/lang/ClassLoader;", getClassLoader0);
     }
 
     private static NativeMethod getPrimitiveClass = frame -> {
@@ -37,6 +39,16 @@ public class ClassNative {
     };
     private static NativeMethod desiredAssertionStatus0 = frame -> {
         frame.getOperandStack().pushBoolean(false);
+    };
+
+    /**
+     * Returns the class loader for the class. Some implementations may use null to represent the bootstrap class loader.
+     * This method will return null in such implementations if this class was loaded by the bootstrap class loader.
+     * If this object represents a primitive type or void, null is returned.
+     */
+    private static NativeMethod getClassLoader0 = frame -> {
+        // RClassLoader classLoader = frame.getMethod().getRClass().loader.;
+        frame.getOperandStack().pushRef(null);
     };
 
 }
