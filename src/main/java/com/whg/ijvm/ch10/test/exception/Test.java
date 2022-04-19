@@ -2,24 +2,21 @@ package com.whg.ijvm.ch10.test.exception;
 
 public class Test {
 
-    void cantBeZero(int i){
-        if(i == 0){
-            throw new TestExc();
-        }
+    public static void main(String[] args) {
+        System.out.println(test());
     }
 
-    void catchOne(){
+    static int test(){
+        int a = 1;
         try{
-            tryItOut();
-        }catch(TestExc e){
-            handleExc(e);
+            a = 2;
+        }catch(Exception e){
+            a = 3;
+        }finally{
+            a = 4;
         }
-    }
-
-    private void tryItOut() {
-    }
-
-    private void handleExc(TestExc e) {
+        // a = 5;
+        return a;
     }
 
 }
