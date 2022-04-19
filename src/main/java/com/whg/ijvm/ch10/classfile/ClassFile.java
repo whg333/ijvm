@@ -2,6 +2,7 @@ package com.whg.ijvm.ch10.classfile;
 
 import com.whg.ijvm.ch10.classfile.attribute.AttributeInfo;
 import com.whg.ijvm.ch10.classfile.attribute.AttributeInfoFactory;
+import com.whg.ijvm.ch10.classfile.attribute.impl.SourceFileAttribute;
 import com.whg.ijvm.ch10.classfile.constantinfo.ConstantInfo;
 import com.whg.ijvm.ch10.classfile.uint.Uint16;
 import com.whg.ijvm.ch10.classfile.uint.Uint32;
@@ -130,6 +131,15 @@ public class ClassFile {
 			}
 		}
 		return null;
+	}
+
+	public String getSourceFileName(){
+		for(AttributeInfo attribute: attributes){
+			if(attribute instanceof SourceFileAttribute){
+				return  ((SourceFileAttribute) attribute).getFileName();
+			}
+		}
+		return "Unknown";
 	}
 
 	public String getPrintInfo() {

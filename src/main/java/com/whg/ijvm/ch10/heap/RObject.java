@@ -6,7 +6,7 @@ public class RObject implements Cloneable{
     protected RClass clazz; // 正常对象，对象到类的关联：Object -> Class，指明此实例是哪个类
     protected Object data;
 
-    protected RObject extraObj;
+    protected Object extra;
 
     // for array
     RObject(){
@@ -53,18 +53,18 @@ public class RObject implements Cloneable{
         return clazz;
     }
 
-    public RClass getExtra() {
+    public RClass getLinkClass() {
         return linkClass;
     }
-    public void setExtra(RClass extra) {
+    public void setLinkClass(RClass extra) {
         this.linkClass = extra;
     }
 
-    public RObject getExtraObj() {
-        return extraObj;
+    public Object getExtra() {
+        return extra;
     }
-    public void setExtraObj(RObject extraObj) {
-        this.extraObj = extraObj;
+    public void setExtra(Object extra) {
+        this.extra = extra;
     }
 
 }

@@ -30,7 +30,7 @@ public class ClassNative {
     };
     private static NativeMethod getName0 = frame -> {
         RObject self = frame.getLocalVars().getThis();
-        RClass clazz = self.getExtra();
+        RClass clazz = self.getLinkClass();
 
         String javaName = clazz.getJavaName();
         RObject nameObj = StringPool.JString(clazz.loader, javaName);
@@ -42,6 +42,8 @@ public class ClassNative {
     };
 
     /**
+     * 兼容某些jdk8的getClassLoader0本地方法，目前全部返回null代表bootstrap类加载器
+     *
      * Returns the class loader for the class. Some implementations may use null to represent the bootstrap class loader.
      * This method will return null in such implementations if this class was loaded by the bootstrap class loader.
      * If this object represents a primitive type or void, null is returned.

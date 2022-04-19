@@ -27,5 +27,12 @@ public class I2x {
             stack.pushLong(stack.popInt());
         }
     }
+    public static class I2C extends NoOperandsInstruction{
+        @Override
+        public void execute(RFrame frame) {
+            OperandStack stack = frame.getOperandStack();
+            stack.pushInt((char)stack.popInt());
+        }
+    }
 
 }

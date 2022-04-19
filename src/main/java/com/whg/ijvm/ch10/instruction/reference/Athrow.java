@@ -1,9 +1,9 @@
 package com.whg.ijvm.ch10.instruction.reference;
 
-import com.whg.ijvm.ch10.heap.RClass;
 import com.whg.ijvm.ch10.heap.RObject;
 import com.whg.ijvm.ch10.heap.StringPool;
 import com.whg.ijvm.ch10.instruction.base.NoOperandsInstruction;
+import com.whg.ijvm.ch10.nativecall.java.ThrowableNative.StackTraceElement;
 import com.whg.ijvm.ch10.runtime.OperandStack;
 import com.whg.ijvm.ch10.runtime.RFrame;
 import com.whg.ijvm.ch10.runtime.RThread;
@@ -23,11 +23,11 @@ public class Athrow extends NoOperandsInstruction {
     }
 
     private boolean findAndGotoExceptionHandler(RThread thread, RObject exception) {
-        while(true){
+        do {
             RFrame frame = thread.currentFrame();
             int pc = frame.getNextPc() - 1;
             int handlerPc = frame.getMethod().findExceptionHandlerPc(exception.getRClass(), pc);
-            if(handlerPc > 0){
+            if (handlerPc > 0) {
                 OperandStack stack = frame.getOperandStack();
                 stack.clear();
                 stack.pushRef(exception);
@@ -36,20 +36,22 @@ public class Athrow extends NoOperandsInstruction {
             }
 
             thread.popFrame();
-            if(thread.isStackEmpty()){
-                break;
-            }
-        }
+        } while (!thread.isStackEmpty());
         return false;
     }
 
     private void handleUncaughtException(RThread thread, RObject exception) {
         thread.clearStack();
+
         RObject detailMessageObj = exception.getRefVar("detailMessage", "Ljava/lang/String;");
         String detailMessage = StringPool.goString(detailMessageObj);
         System.out.println(exception.getRClass().getJavaName() + ": " + detailMessage);
 
-        RClass linkClass = exception.getExtra(); // extra存放的是虚拟机栈信息，在ThrowableNative本地方法fillInStackTrace处理
+        Object extra = exception.getExtra(); // extra存放的是虚拟机栈信息，在ThrowableNative本地方法fillInStackTrace处理
+        StackTraceElement[] stackTraceElements = (StackTraceElement[]) extra;
+        for(StackTraceElement element: stackTraceElements){
+            System.out.println("\tat "+element);
+        }
     }
 
 }

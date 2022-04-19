@@ -1,6 +1,8 @@
 package com.whg.ijvm.ch10.runtime;
 
+import java.util.ArrayList;
 import java.util.EmptyStackException;
+import java.util.List;
 
 /**
  * 方法执行栈，内部由 方法执行栈帧 堆叠起来
@@ -57,4 +59,11 @@ public class RStack {
         }
     }
 
+    public List<RFrame> getFrames() {
+        List<RFrame> frames = new ArrayList<>(size);
+        for(RFrame frame=top;frame!=null;frame=frame.lower){
+            frames.add(frame);
+        }
+        return frames;
+    }
 }

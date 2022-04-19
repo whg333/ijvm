@@ -12,4 +12,11 @@ public class LineNumberTableEntry {
         this.lineNumber = lineNumber;
     }
 
+    public int getStartPc() {
+        return startPc.value();
+    }
+
+    public int getLineNumber() {
+        return lineNumber.value();
+    }
 }

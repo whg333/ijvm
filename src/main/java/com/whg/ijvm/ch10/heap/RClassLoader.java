@@ -27,7 +27,7 @@ public class RClassLoader {
         classMap.forEach((className, clazz) -> {
             if(clazz.getJClass() == null){
                 clazz.setJClass(javaLangClass.newObject());
-                clazz.getJClass().setExtra(clazz);
+                clazz.getJClass().setLinkClass(clazz);
             }
         });
     }
@@ -43,7 +43,7 @@ public class RClassLoader {
         RClass javaLangClass = classMap.get(javaLangClassName());
         if(javaLangClass != null){
             clazz.setJClass(javaLangClass.newObject());
-            clazz.getJClass().setExtra(clazz);
+            clazz.getJClass().setLinkClass(clazz);
             classMap.put(primitiveName, clazz);
         }
     }
@@ -74,7 +74,7 @@ public class RClassLoader {
         RClass javaLangClass = classMap.get(javaLangClassName());
         if(javaLangClass != null){
             clazz.setJClass(javaLangClass.newObject());
-            clazz.getJClass().setExtra(clazz);
+            clazz.getJClass().setLinkClass(clazz);
         }
         return clazz;
     }

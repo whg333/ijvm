@@ -20,6 +20,7 @@ public class NativeRegistry {
         ObjectNative.init();
         StringNative.init();
         SystemNative.init();
+        ThrowableNative.init();
 
         VMNative.init();
     }

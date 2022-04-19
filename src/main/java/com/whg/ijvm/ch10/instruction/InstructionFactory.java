@@ -182,6 +182,8 @@ public class InstructionFactory {
 
             case 0x70:
                 return new Rem.IREM();
+            case 0x74:
+                return new Neg.INEG();
             case 0x78:
                 return new Sh.ISHL();
             case 0x79:
@@ -195,6 +197,8 @@ public class InstructionFactory {
             case 0x7f:
                 return new And.LAND();
 
+            case 0x80:
+                return new Or.IOR();
             case 0x82:
                 return new Xor.IXOR();
             case 0x84:
@@ -206,8 +210,8 @@ public class InstructionFactory {
             case 0x8b:
                 return new F2x.F2I();
 
-            case 0x9a:
-                return new IFcond.IFNE();
+            case 0x92:
+                return new I2x.I2C();
             case 0x94:
                 return new Lcmp.LCMP();
             case 0x95:
@@ -216,6 +220,10 @@ public class InstructionFactory {
                 return new Fcmp.FCMPG();
             case 0x99:
                 return new IFcond.IFEQ();
+            case 0x9a:
+                return new IFcond.IFNE();
+            case 0x9b:
+                return new IFcond.IFLT();
             case 0x9c:
                 return new IFcond.IFGE();
             case 0x9d:
@@ -282,6 +290,8 @@ public class InstructionFactory {
                 return new Arr.ANEW_ARRAY();
             case 0xbe:
                 return new Arr.ARRAY_LENGTH();
+            case 0xbf:
+                return new Athrow();
 
             case 0xc0:
                 return new Instance.CHECK_CAST();

@@ -63,4 +63,13 @@ public class CodeAttribute extends AbstractAttribute {
         return exceptionTable;
     }
 
+    public LineNumberTableAttribute getLineNumberTableAttribute(){
+        for(AttributeInfo attribute: attributes){
+            if(attribute instanceof LineNumberTableAttribute){
+                return (LineNumberTableAttribute) attribute;
+            }
+        }
+        return null;
+    }
+
 }

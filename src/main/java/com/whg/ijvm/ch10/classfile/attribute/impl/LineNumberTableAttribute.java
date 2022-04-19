@@ -25,4 +25,13 @@ public class LineNumberTableAttribute extends AbstractAttribute {
         }
     }
 
+    public int getLineNumber(int pc){
+        for(LineNumberTableEntry entry: lineNumberTable){
+            if(pc >= entry.getStartPc()){
+                return entry.getLineNumber();
+            }
+        }
+        return -1;
+    }
+
 }

@@ -16,6 +16,8 @@ public class RClass {
     RField[] fields;
     RMethod[] methods;
 
+    String sourceFileName;
+
     public RClassLoader loader;
     RClass superClass;
     RClass[] interfaces;
@@ -43,6 +45,8 @@ public class RClass {
         constantPool = new RConstantPool(this, cf.getConstantPool());
         fields = RField.newFields(this, cf);
         methods = RMethod.newMethods(this, cf);
+
+        sourceFileName = cf.getSourceFileName();
     }
 
     public void resolveSuperClass(){
@@ -425,5 +429,9 @@ public class RClass {
 
     public boolean isPrimitive() {
         return RArray.isPrimitive(getName());
+    }
+
+    public String getSourceFileName() {
+        return sourceFileName;
     }
 }

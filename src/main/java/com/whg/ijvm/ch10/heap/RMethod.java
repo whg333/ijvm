@@ -3,7 +3,7 @@ package com.whg.ijvm.ch10.heap;
 import com.whg.ijvm.ch10.classfile.ClassFile;
 import com.whg.ijvm.ch10.classfile.MemberInfo;
 import com.whg.ijvm.ch10.classfile.attribute.impl.CodeAttribute;
-import com.whg.ijvm.ch10.classfile.attribute.impl.ExceptionsAttribute;
+import com.whg.ijvm.ch10.classfile.attribute.impl.LineNumberTableAttribute;
 
 public class RMethod extends RClassMember{
 
@@ -14,6 +14,7 @@ public class RMethod extends RClassMember{
     int argSlotCount;
 
     ExceptionTable exceptionTable;
+    LineNumberTableAttribute lineNumberTableAttribute;
 
     RMethod(RClass clazz, MemberInfo cfMethod){
         this.clazz = clazz;
@@ -29,7 +30,9 @@ public class RMethod extends RClassMember{
             maxLocals = codeAttr.getMaxLocals().value();
             maxStack = codeAttr.getMaxStack().value();
             code = codeAttr.getCode();
+
             exceptionTable = new ExceptionTable(codeAttr.getExceptionTable(), clazz.getRConstantPool());
+            lineNumberTableAttribute = codeAttr.getLineNumberTableAttribute();
         }
     }
 
@@ -96,6 +99,16 @@ public class RMethod extends RClassMember{
     public String toString() {
         String className = getRClass().getSimpleName();
         return className + '.' + getName() + getDescriptor();
+    }
+
+    public int getLineNumber(int pc){
+        if(isNative()){
+            return -2;
+        }
+        if(lineNumberTableAttribute == null){
+            return -1;
+        }
+        return lineNumberTableAttribute.getLineNumber(pc);
     }
 
     public int getMaxStack() {

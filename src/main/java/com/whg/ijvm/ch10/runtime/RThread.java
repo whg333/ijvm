@@ -2,6 +2,8 @@ package com.whg.ijvm.ch10.runtime;
 
 import com.whg.ijvm.ch10.heap.RMethod;
 
+import java.util.List;
+
 public class RThread {
 
     int pc;
@@ -36,6 +38,10 @@ public class RThread {
 
     public void clearStack(){
         stack.clear();
+    }
+
+    public List<RFrame> getFrames() {
+        return stack.getFrames();
     }
 
     public int getPc() {
