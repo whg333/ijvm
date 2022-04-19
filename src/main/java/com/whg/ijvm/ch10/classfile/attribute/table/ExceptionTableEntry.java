@@ -16,4 +16,17 @@ public class ExceptionTableEntry {
         this.catchType = catchType;
     }
 
+    public int getStartPc(){
+        return startPc.value();
+    }
+    public int getEndPc(){
+        return endPc.value();
+    }
+    public int getHandlerPc(){
+        return handlerPc.value();
+    }
+    public int getCatchType(){
+        return catchType.value();
+    }
+
 }

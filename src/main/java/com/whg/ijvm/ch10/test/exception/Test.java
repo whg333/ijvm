@@ -8,4 +8,18 @@ public class Test {
         }
     }
 
+    void catchOne(){
+        try{
+            tryItOut();
+        }catch(TestExc e){
+            handleExc(e);
+        }
+    }
+
+    private void tryItOut() {
+    }
+
+    private void handleExc(TestExc e) {
+    }
+
 }

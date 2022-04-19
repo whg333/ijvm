@@ -2,6 +2,9 @@ package com.whg.ijvm.ch10.runtime;
 
 import com.whg.ijvm.ch10.heap.RMethod;
 
+/**
+ * 方法执行栈帧
+ */
 public class RFrame {
 
     RFrame lower;

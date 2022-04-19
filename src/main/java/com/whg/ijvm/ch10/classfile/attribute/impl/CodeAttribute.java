@@ -58,4 +58,9 @@ public class CodeAttribute extends AbstractAttribute {
     public byte[] getCode() {
         return code;
     }
+
+    public ExceptionTableEntry[] getExceptionTable() {
+        return exceptionTable;
+    }
+
 }

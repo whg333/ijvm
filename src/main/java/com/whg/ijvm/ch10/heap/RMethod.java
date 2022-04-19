@@ -3,6 +3,7 @@ package com.whg.ijvm.ch10.heap;
 import com.whg.ijvm.ch10.classfile.ClassFile;
 import com.whg.ijvm.ch10.classfile.MemberInfo;
 import com.whg.ijvm.ch10.classfile.attribute.impl.CodeAttribute;
+import com.whg.ijvm.ch10.classfile.attribute.impl.ExceptionsAttribute;
 
 public class RMethod extends RClassMember{
 
@@ -11,6 +12,8 @@ public class RMethod extends RClassMember{
     byte[] code;
 
     int argSlotCount;
+
+    ExceptionTable exceptionTable;
 
     RMethod(RClass clazz, MemberInfo cfMethod){
         this.clazz = clazz;
@@ -26,7 +29,16 @@ public class RMethod extends RClassMember{
             maxLocals = codeAttr.getMaxLocals().value();
             maxStack = codeAttr.getMaxStack().value();
             code = codeAttr.getCode();
+            exceptionTable = new ExceptionTable(codeAttr.getExceptionTable(), clazz.getRConstantPool());
         }
+    }
+
+    public int findExceptionHandlerPc(RClass exClass, int pc){
+        ExceptionTable.ExceptionHandler handler = exceptionTable.findExceptionHandler(exClass, pc);
+        if(handler != null){
+            return handler.handlerPc;
+        }
+        return -1;
     }
 
     void calcArgSlotCount(){
@@ -83,9 +95,7 @@ public class RMethod extends RClassMember{
     @Override
     public String toString() {
         String className = getRClass().getSimpleName();
-        return className + '.' +
-                getName() +
-                getDescriptor();
+        return className + '.' + getName() + getDescriptor();
     }
 
     public int getMaxStack() {
@@ -103,4 +113,5 @@ public class RMethod extends RClassMember{
     public int getArgSlotCount() {
         return argSlotCount;
     }
+
 }

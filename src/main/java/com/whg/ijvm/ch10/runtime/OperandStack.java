@@ -15,6 +15,15 @@ public class OperandStack {
 
     public OperandStack(int length){
         slots = new Slot[length];
+        init(length);
+    }
+
+    public void clear() {
+        init(slots.length);
+    }
+
+    private void init(int length){
+        nextIdx = 0;
         for(int i=0;i<length;i++){
             slots[i] = new Slot();
         }

@@ -2,6 +2,9 @@ package com.whg.ijvm.ch10.runtime;
 
 import java.util.EmptyStackException;
 
+/**
+ * 方法执行栈，内部由 方法执行栈帧 堆叠起来
+ */
 public class RStack {
 
     int capacity;
@@ -45,6 +48,12 @@ public class RStack {
     private void checkNotEmpty(){
         if(top == null){
             throw new EmptyStackException();
+        }
+    }
+
+    public void clear(){
+        while(!isEmpty()){
+            pop();
         }
     }
 

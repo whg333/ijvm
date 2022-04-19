@@ -34,6 +34,10 @@ public class RThread {
         return stack.isEmpty();
     }
 
+    public void clearStack(){
+        stack.clear();
+    }
+
     public int getPc() {
         return pc;
     }
