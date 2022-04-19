@@ -5,6 +5,9 @@ import com.whg.ijvm.ch10.heap.RObject;
 
 import java.util.Arrays;
 
+/**
+ * 操作数栈，有常规的push入栈和pop出栈操作，根据类型区分
+ */
 public class OperandStack {
 
     Slot[] slots;
