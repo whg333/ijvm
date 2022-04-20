@@ -8,7 +8,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 
 /**
- * 拷贝章节并替换包名的工具，避免手动修改
+ * 先自己手动拷贝目录，指定拷贝后的目录，执行此程序替换包名，避免手动一个个文件替换修改
+ * TODO 可以把拷贝目录也加上，目前是自己手动拷贝才执行此程序替换包名
  */
 public class CopyChapter {
 
