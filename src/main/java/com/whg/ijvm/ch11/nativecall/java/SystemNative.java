@@ -12,8 +12,8 @@ public class SystemNative {
     private static final String CLASS_NAME = "java/lang/System";
 
     public static void init() {
-        NativeRegistry.register(CLASS_NAME, "arraycopy",
-                "(Ljava/lang/Object;ILjava/lang/Object;II)V", arraycopy);
+        NativeRegistry.register(CLASS_NAME, "arraycopy", "(Ljava/lang/Object;ILjava/lang/Object;II)V", arraycopy);
+        // NativeRegistry.register(CLASS_NAME, "initProperties", "(Ljava/util/Properties;)Ljava/util/Properties;", initProperties);
     }
 
     private static NativeMethod arraycopy = frame -> {
@@ -52,5 +52,9 @@ public class SystemNative {
         }
         return true;
     }
+
+    private static NativeMethod initProperties = frame -> {
+
+    };
 
 }
