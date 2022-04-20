@@ -27,7 +27,7 @@ public class NativeRegistry {
 
     public static void register(String className, String methodName, String methodDesc, NativeMethod method){
         String key = key(className, methodName, methodDesc);
-        registry.put(key, method);
+        registry.putIfAbsent(key, method);
     }
 
     public static NativeMethod findNativeMethod(String className, String methodName, String methodDesc){

@@ -16,21 +16,21 @@ public class Main {
 		JvmCmder jvmCmder = new JvmCmder();
 		JCommander jCommander = JCommander.newBuilder().addObject(jvmCmder).build();
 
-		int cpOrXjreIndex = findCpOrXjreIndex(args);
+		int cpOrJreIndex = findCpOrJreIndex(args);
 		// 能被jCommander解析的
-		String[] cmdArgs = cpOrXjreIndex >= 0
-				? Arrays.copyOfRange(args, 0, Math.min(args.length, cpOrXjreIndex+2))
+		String[] cmdArgs = cpOrJreIndex >= 0
+				? Arrays.copyOfRange(args, 0, Math.min(args.length, cpOrJreIndex+2))
 				: args;
 		// 自定义解析的——类和后面传递的参数
-		String[] classArgs = cpOrXjreIndex >= 0
-				? Arrays.copyOfRange(args, cpOrXjreIndex+2, args.length)
+		String[] classArgs = cpOrJreIndex >= 0
+				? Arrays.copyOfRange(args, cpOrJreIndex+2, args.length)
 				: new String[0];
 
 		jCommander.parse(cmdArgs);
 		jvmCmder.run(jCommander, classArgs);
 	}
 
-	private static int findCpOrXjreIndex(String[] args){
+	private static int findCpOrJreIndex(String[] args){
 		for(int i=0;i<args.length;i++){
 			String arg = args[i];
 			if(arg.equals("-classpath") || arg.equals("-cp")

@@ -265,7 +265,7 @@ public class RClass {
         return getStaticMethod("main", "([Ljava/lang/String;)V");
     }
 
-    RMethod getStaticMethod(String name, String descriptor){
+    public RMethod getStaticMethod(String name, String descriptor){
         return getMethod(name, descriptor, true);
     }
 

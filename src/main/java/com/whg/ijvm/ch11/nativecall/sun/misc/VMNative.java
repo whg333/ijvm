@@ -14,6 +14,7 @@ public class VMNative {
         NativeRegistry.register(CLASS_NAME, "initialize", "()V", initialize);
     }
 
+    /*
     private static NativeMethod initialize = frame -> {
         RClass vmClass = frame.getMethod().getRClass();
         RObject savedProps = vmClass.getRefVar("savedProps", "Ljava/util/Properties;");
@@ -29,6 +30,14 @@ public class VMNative {
         RMethod setPropMethod = propsClass.getInstanceMethod("setProperty",
                 "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/Object;");
         MethodInvokeLogic.invokeMethod(frame, setPropMethod);
+    };
+    */
+
+    private static NativeMethod initialize = frame -> {
+        RClassLoader loader = frame.getMethod().getRClass().loader;
+        RClass jlSysClass = loader.loadClass("java/lang/System");
+        RMethod initSysClassMethod = jlSysClass.getStaticMethod("initializeSystemClass", "()V");
+        MethodInvokeLogic.invokeMethod(frame, initSysClassMethod);
     };
 
 }

@@ -1,22 +1,14 @@
 package com.whg.ijvm.ch11;
 
-import java.io.File;
-import java.util.Arrays;
-
-import com.whg.ijvm.ch11.classfile.MemberInfo;
-import com.whg.ijvm.ch11.classpath.ClassData;
-import com.whg.ijvm.ch11.heap.RClass;
-import com.whg.ijvm.ch11.heap.RClassLoader;
-import com.whg.ijvm.ch11.heap.RMethod;
-import com.whg.ijvm.ch11.instruction.Interpreter;
-import org.apache.commons.lang3.RegExUtils;
-import org.apache.commons.lang3.StringUtils;
-
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.internal.Console;
-import com.whg.ijvm.ch11.classpath.Classpath;
 import com.whg.ijvm.ch11.classfile.ClassFile;
+import com.whg.ijvm.ch11.classpath.ClassData;
+import com.whg.ijvm.ch11.classpath.Classpath;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Arrays;
 
 public class JvmCmder {
 
@@ -38,12 +30,12 @@ public class JvmCmder {
 	@Parameter(names = "-Xjre", description = "path to jre")
 	private String jreOption;
 
-	private String clazz;
+	private String className;
 	private String[] args = new String[0];
 
 	public void run(JCommander jCommander, String[] classArgs) {
 		if (classArgs.length > 0) {
-			clazz = classArgs[0];
+			className = classArgs[0];
 			if(classArgs.length > 1){
 				args = Arrays.copyOfRange(classArgs, 1, classArgs.length);
 			}
@@ -65,13 +57,12 @@ public class JvmCmder {
 		cp.parse(jreOption, cpOption);
 		
 		Console console = JCommander.getConsole();
-		console.println(String.format("classpath:%s\nclass:[%s]\nargs:%s", cp, clazz, Arrays.toString(args)));
+		console.println(String.format("classpath:%s\nclass:[%s]\nargs:%s", cp, className, Arrays.toString(args)));
 		
-		clazz = clazz.replaceAll("\\.", "/");
-		// clazz = RegExUtils.replaceAll(clazz, "/.", "////");
-		ClassData classData = cp.readClass(clazz);
+		className = className.replaceAll("\\.", "/");
+		ClassData classData = cp.readClass(className);
 		if(classData == null){
-			console.println(String.format("Can not found class:[%s]", clazz));
+			console.println(String.format("Can not found class:[%s]", className));
 			return;
 		}
 
@@ -82,17 +73,9 @@ public class JvmCmder {
 		ClassFile classFile = ClassFile.parse(bytes);
 		console.println(classFile.getPrintInfo());
 
-		RClassLoader classLoader = new RClassLoader(cp, verboseClassFlag);
-		RClass mainClass = classLoader.loadClass(clazz);
-		RMethod mainMethod = mainClass.getMainMethod();
-		// MemberInfo mainMethod = classFile.getMainMethod();
-		if(mainMethod == null){
-			console.println(String.format("Main method not found in class:[%s]", clazz));
-		}else{
-			Interpreter.run(mainMethod, verboseInstFlag, args);
-		}
+		new Jvm(this, cp).start();
 	}
-	
+
 	private String[] unsignedBytes(byte[] bytes){
 		String[] uints = new String[bytes.length];
 		for(int i=0;i<bytes.length;i++){
@@ -100,6 +83,22 @@ public class JvmCmder {
 			uints[i] = hex.length() == 1 ? "0"+hex : hex;
 		}
 		return uints;
+	}
+
+	public boolean versionFlag() {
+		return versionFlag;
+	}
+
+	public boolean verboseClassFlag() {
+		return verboseClassFlag;
+	}
+
+	public String[] args(){
+		return args;
+	}
+
+	public String className(){
+		return className;
 	}
 
 }

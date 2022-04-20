@@ -8,31 +8,25 @@ import com.whg.ijvm.ch11.runtime.RThread;
 
 public class Interpreter {
 
-    private final RMethod method;
+    private final RThread thread;
     private boolean logInst;
-    private String[] args;
 
-    public static void run(RMethod method, boolean logInst, String[] args){
-        NativeRegistry.init(); // 初始化注册本地方法
-
-        Interpreter interpreter = new Interpreter(method, logInst, args);
-        interpreter.run();
-    }
-
-    private Interpreter(RMethod method, boolean logInst, String[] args){
-        this.method = method;
+    public Interpreter(RThread thread, boolean logInst){
+        this.thread = thread;
         this.logInst = logInst;
-        this.args = args;
     }
 
-    void run(){
-        RThread thread = new RThread();
+    public void runMethod(RMethod method, String[] args){
         RFrame frame = thread.newFrame(method);
         thread.pushFrame(frame);
 
         RObject jArgs = createArgsArray(method.getRClass().loader, args);
         frame.getLocalVars().setRef(0, jArgs); // 局部变量表0的位置预留放命令行参数
 
+        run();
+    }
+
+    public void run(){
         try{
             loop(thread, logInst);
         }catch(Exception e){

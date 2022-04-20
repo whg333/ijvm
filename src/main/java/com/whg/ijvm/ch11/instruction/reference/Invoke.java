@@ -103,10 +103,11 @@ public class Invoke {
 
             RObject ref = frame.getOperandStack().getRefFromTop(method.getArgSlotCount()-1);
             if(ref == null){
-                if(methodRef.getName().equals("println")) {
-                    _println(frame.getOperandStack(), methodRef.getDescriptor());
-                    return;
-                }
+                // hack! println
+                // if(methodRef.getName().equals("println")) {
+                //     _println(frame.getOperandStack(), methodRef.getDescriptor());
+                //     return;
+                // }
                 throw new RuntimeException("NullPointerException");
             }
 
@@ -117,7 +118,10 @@ public class Invoke {
                     && methodClass.isSamePackage(currentClass)
                     && refClass != currentClass
                     && !refClass.isSubClassOf(currentClass)){
-                throw new RuntimeException("IllegalAccessError");
+
+                if (!refClass.isArray() || !method.getName().equals("clone")){
+                    throw new RuntimeException("IllegalAccessError");
+                }
             }
 
             RMethod methodToBeInvoked = MethodLookup.lookupMethodInClass(refClass,
