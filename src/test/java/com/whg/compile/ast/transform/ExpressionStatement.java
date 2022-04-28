@@ -6,7 +6,7 @@ import com.whg.compile.ast.BaseASTNode;
 
 public class ExpressionStatement extends BaseASTNode {
 
-    CalleeExpression expression;
+    public final CalleeExpression expression;
 
     public ExpressionStatement(ASTNode parent, CalleeExpression expression) {
         super(parent);

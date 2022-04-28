@@ -11,13 +11,13 @@ import java.util.List;
 
 public class CalleeExpression extends BaseASTNode {
 
-    Identifier callee;
+    public final Identifier callee;
     public final List<ASTNode> arguments;
 
     public CalleeExpression(ASTNode parent, CallExpression callExpression) {
         super(parent);
         type = ASTType.CalleeExpression;
-        callee = new Identifier(callExpression.value());
+        callee = new Identifier(parent, callExpression.value());
         arguments = new ArrayList<>();
     }
 

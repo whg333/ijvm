@@ -2,8 +2,10 @@ package com.whg.compile.ast;
 
 public enum ASTType {
 
+    // token
     Program, CallExpression, NumberLiteral,
 
-    CalleeExpression, ExpressionStatement,
+    // transform
+    CalleeExpression, ExpressionStatement, Identifier
 
 }

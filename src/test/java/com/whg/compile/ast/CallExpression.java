@@ -24,7 +24,7 @@ public class CallExpression extends BaseASTNode {
     }
 
     @Override
-    public void addNode(ASTNode node){
+    public void addChild(ASTNode node){
         params.add(node);
     }
 

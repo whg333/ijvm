@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Program extends BaseASTNode {
 
-    public final List<ASTNode> body;
+    final List<ASTNode> body;
 
     public Program() {
         super(null);
@@ -17,8 +17,13 @@ public class Program extends BaseASTNode {
     }
 
     @Override
-    public void addNode(ASTNode node){
+    public void addChild(ASTNode node){
         body.add(node);
+    }
+
+    @Override
+    public List<ASTNode> children() {
+        return body;
     }
 
     @Override

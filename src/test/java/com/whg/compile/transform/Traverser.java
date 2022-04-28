@@ -43,7 +43,7 @@ public class Traverser {
     }
 
     public void traverseList(List<ASTNode> list){
-        list.forEach(node -> traverseNode(node));
+        list.forEach(this::traverseNode);
     }
 
     private void traverseNode(ASTNode node){

@@ -11,10 +11,9 @@ public class Compiler {
         List<Token> tokens = new Tokenizer().parseTokens(input);
         ASTNode ast = new Parser(tokens).parseAST();
         ASTNode newAst = new Transformer().transform(ast);
-        // String output = new CodeGenerator().generate(newAst);
-        // return output;
+        String output = new CodeGenerator().generate(newAst);
 
-        return "add(2, subtract(34, 29))";
+        return output;
     }
 
 }

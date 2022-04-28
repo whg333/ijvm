@@ -31,7 +31,12 @@ public class BaseASTNode implements ASTNode{
     }
 
     @Override
-    public void addNode(ASTNode node) {
+    public void addChild(ASTNode node) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public List<ASTNode> children() {
         throw new UnsupportedOperationException();
     }
 

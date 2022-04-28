@@ -12,7 +12,9 @@ public interface ASTNode {
 
     ASTNode parent();
 
-    void addNode(ASTNode node);
+    void addChild(ASTNode node);
+
+    List<ASTNode> children();
 
     void traverse(Traverser traverser);
 

@@ -1,12 +1,22 @@
 package com.whg.compile.ast.transform;
 
-public class Identifier {
+import com.whg.compile.ast.ASTNode;
+import com.whg.compile.ast.ASTType;
+import com.whg.compile.ast.BaseASTNode;
 
-    final String type = "Identifier";
+public class Identifier extends BaseASTNode {
+
     final String name;
 
-    public Identifier(String name){
+    public Identifier(ASTNode parent, String name){
+        super(parent);
+        type = ASTType.Identifier;
         this.name = name;
+    }
+
+    @Override
+    public String value() {
+        return name;
     }
 
     @Override

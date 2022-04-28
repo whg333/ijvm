@@ -22,7 +22,7 @@ public class Parser {
         Program program = new Program();
         int size = tokens.size();
         while(current < size){
-            program.addNode(walk(program));
+            program.addChild(walk(program));
         }
         System.out.println(program);
         return program;
@@ -42,7 +42,7 @@ public class Parser {
 
             token = tokens.get(++current);
             while(!token.isParen() || !token.isRightParen()){
-                callExpression.addNode(walk(callExpression));
+                callExpression.addChild(walk(callExpression));
                 token = tokens.get(current);
             }
 
