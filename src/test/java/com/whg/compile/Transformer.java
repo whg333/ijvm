@@ -8,7 +8,7 @@ public class Transformer {
 
     ASTNode transform(ASTNode ast){
         Program newAst = new Program();
-        Traverser.traverse(ast);
+        new Traverser().traverse(ast);
         return newAst;
     }
 

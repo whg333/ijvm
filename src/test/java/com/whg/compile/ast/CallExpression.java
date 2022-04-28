@@ -23,8 +23,8 @@ public class CallExpression extends BaseASTNode {
     }
 
     @Override
-    public void traverse() {
-        Traverser.traverseList(params);
+    public void traverse(Traverser traverser) {
+        traverser.traverseList(params);
     }
 
     @Override

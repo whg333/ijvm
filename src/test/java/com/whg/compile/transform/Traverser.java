@@ -15,22 +15,22 @@ public class Traverser {
         handlerMap.put(ASTType.NumberLiteral, new BaseASTNodeHandler());
     }
 
-    public static void traverse(ASTNode ast){
+    public void traverse(ASTNode ast){
         traverseNode(ast);
     }
 
-    public static void traverseList(List<ASTNode> list){
+    public void traverseList(List<ASTNode> list){
         list.forEach(node -> traverseNode(node));
     }
 
-    static void traverseNode(ASTNode node){
+    private void traverseNode(ASTNode node){
         ASTType type = node.type();
         ASTNodeHandler handler = handlerMap.get(type);
         if(handler != null){
             handler.enter(node);
         }
 
-        node.traverse();
+        node.traverse(this);
 
         if(handler != null){
             handler.exist(node);

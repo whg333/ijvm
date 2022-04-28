@@ -21,8 +21,8 @@ public class Program extends BaseASTNode {
     }
 
     @Override
-    public void traverse() {
-        Traverser.traverseList(body);
+    public void traverse(Traverser traverser) {
+        traverser.traverseList(body);
     }
 
     @Override

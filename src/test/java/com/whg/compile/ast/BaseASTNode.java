@@ -1,5 +1,7 @@
 package com.whg.compile.ast;
 
+import com.whg.compile.transform.Traverser;
+
 public class BaseASTNode implements ASTNode{
 
     protected ASTType type;
@@ -20,7 +22,7 @@ public class BaseASTNode implements ASTNode{
     }
 
     @Override
-    public void traverse() {
+    public void traverse(Traverser traverser) {
 
     }
 
