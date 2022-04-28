@@ -1,12 +1,13 @@
 package com.whg.compile.ast;
 
+import com.whg.compile.transform.Traverser;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class CallExpression implements ASTNode {
+public class CallExpression extends BaseASTNode {
 
-    final ASTType type;
     final String name;
     final List<ASTNode> params;
 
@@ -21,6 +22,11 @@ public class CallExpression implements ASTNode {
     }
 
     @Override
+    public void traverse() {
+        Traverser.traverseList(params, this);
+    }
+
+    @Override
     public String toString() {
         return "{" +
                 "\"type\": \"" + type + "\"" +
@@ -28,4 +34,5 @@ public class CallExpression implements ASTNode {
                 ", \"params\": " + Arrays.toString(params.toArray()) +
                 '}';
     }
+
 }

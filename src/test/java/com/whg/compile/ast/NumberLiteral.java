@@ -1,8 +1,7 @@
 package com.whg.compile.ast;
 
-public class NumberLiteral implements ASTNode {
+public class NumberLiteral extends BaseASTNode {
 
-    final ASTType type;
     final Number value;
 
     public NumberLiteral(Number value) {
@@ -17,4 +16,5 @@ public class NumberLiteral implements ASTNode {
                 ", \"value\": " + value +
                 '}';
     }
+
 }

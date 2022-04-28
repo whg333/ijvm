@@ -1,9 +1,15 @@
 package com.whg.compile;
 
+import com.whg.compile.ast.ASTNode;
+import com.whg.compile.ast.Program;
+import com.whg.compile.transform.Traverser;
+
 public class Transformer {
 
-    String transform(String ast){
-        return "";
+    ASTNode transform(ASTNode ast){
+        Program newAst = new Program();
+        Traverser.traverse(ast);
+        return newAst;
     }
 
 }

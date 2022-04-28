@@ -10,7 +10,7 @@ public class Compiler {
     String compile(String input){
         List<Token> tokens = new Tokenizer().parseTokens(input);
         ASTNode ast = new Parser(tokens).parseAST();
-        // String newAst = new Transformer().transform(ast);
+        ASTNode newAst = new Transformer().transform(ast);
         // String output = new CodeGenerator().generate(newAst);
         // return output;
 
