@@ -1,5 +1,8 @@
 package com.whg.compile;
 
+import com.whg.compile.token.Token;
+import com.whg.compile.token.TokenType;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -16,32 +19,28 @@ public class Tokenizer {
             if(isSpace(c)){
                 ++current;
             }else if(isParen(c)){
-                tokens.add(new Token(Token.TokenType.paren, String.valueOf(c)));
+                tokens.add(new Token(TokenType.paren, String.valueOf(c)));
                 ++current;
             }else if(isDigit(c)){
                 StringBuilder value = new StringBuilder();
-                value.append(c);
-                c = input.charAt(++current); // next char
                 while(isDigit(c)){
                     value.append(c);
                     c = input.charAt(++current);
                 }
-                tokens.add(new Token(Token.TokenType.number, value.toString()));
+                tokens.add(new Token(TokenType.number, value.toString()));
             }else if(isLetter(c)){
                 StringBuilder value = new StringBuilder();
-                value.append(c);
-                c = input.charAt(++current); // next char
                 while(isLetter(c)){
                     value.append(c);
                     c = input.charAt(++current);
                 }
-                tokens.add(new Token(Token.TokenType.name, value.toString()));
+                tokens.add(new Token(TokenType.name, value.toString()));
             }else{
                 throw new IllegalArgumentException("Unknown character: "+c);
             }
         }
 
-        System.out.println(Arrays.toString(tokens.toArray(new Tokenizer.Token[0])));
+        System.out.println(Arrays.toString(tokens.toArray()));
         return tokens;
     }
 
@@ -66,31 +65,6 @@ public class Tokenizer {
         System.out.println(Character.isWhitespace(' '));
         System.out.println(Character.isSpaceChar('\t'));
         System.out.println(Character.isWhitespace('\t'));
-    }
-
-    public static class Token {
-
-        enum TokenType {
-
-            paren, name, number,
-
-        }
-
-        final TokenType type;
-        final String value;
-
-        public Token(TokenType type, String value) {
-            this.type = type;
-            this.value = value;
-        }
-
-        @Override
-        public String toString() {
-            return "{" +
-                    "type: " + type +
-                    ", value: '" + value + '\'' +
-                    '}';
-        }
     }
 
 }

@@ -1,12 +1,15 @@
 package com.whg.compile;
 
+import com.whg.compile.ast.ASTNode;
+import com.whg.compile.token.Token;
+
 import java.util.List;
 
 public class Compiler {
 
     String compile(String input){
-        List<Tokenizer.Token> tokens = new Tokenizer().parseTokens(input);
-        // String ast = new Parser().parse(tokens);
+        List<Token> tokens = new Tokenizer().parseTokens(input);
+        ASTNode ast = new Parser(tokens).parseAST();
         // String newAst = new Transformer().transform(ast);
         // String output = new CodeGenerator().generate(newAst);
         // return output;
