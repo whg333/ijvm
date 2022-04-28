@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Program extends BaseASTNode {
 
-    final List<ASTNode> body;
+    public final List<ASTNode> body;
 
     public Program() {
         super(null);

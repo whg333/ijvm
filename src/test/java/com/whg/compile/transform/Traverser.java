@@ -17,29 +17,25 @@ public class Traverser {
         handlerMap.put(ASTType.Program, new BaseASTNodeHandler());
         handlerMap.put(ASTType.CallExpression, new BaseASTNodeHandler(){
             @Override
-            public void enter(ASTNode node, ASTNode newAst) {
-                super.enter(node, newAst);
+            public void enter(ASTNode node) {
+                super.enter(node);
                 ASTNode parent = node.parent();
                 ASTNode expression = new CalleeExpression(parent, (CallExpression) node);
+                node.setContext(((CalleeExpression) expression).arguments);
                 if(parent.type() != ASTType.CallExpression){
                     expression = new ExpressionStatement(parent, (CalleeExpression) expression);
                 }
-                newAst.addNode(expression);
+                parent.addContextNode(expression);
             }
         });
         handlerMap.put(ASTType.NumberLiteral, new BaseASTNodeHandler(){
             @Override
-            public void enter(ASTNode node, ASTNode newAst) {
-                super.enter(node, newAst);
-                newAst.addNode(new NumberLiteral(newAst, (Number) node.value()));
+            public void enter(ASTNode node) {
+                super.enter(node);
+                ASTNode parent = node.parent();
+                parent.addContextNode(new NumberLiteral(parent, (Number) node.value()));
             }
         });
-    }
-
-    private final ASTNode newAst;
-
-    public Traverser(ASTNode newAst) {
-        this.newAst = newAst;
     }
 
     public void traverse(ASTNode ast){
@@ -54,13 +50,13 @@ public class Traverser {
         ASTType type = node.type();
         ASTNodeHandler handler = handlerMap.get(type);
         if(handler != null){
-            handler.enter(node, newAst);
+            handler.enter(node);
         }
 
         node.traverse(this);
 
         if(handler != null){
-            handler.exist(node, newAst);
+            handler.exist(node);
         }
     }
 

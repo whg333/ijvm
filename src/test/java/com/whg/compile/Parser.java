@@ -20,12 +20,10 @@ public class Parser {
 
     ASTNode parseAST(){
         Program program = new Program();
-
         int size = tokens.size();
         while(current < size){
             program.addNode(walk(program));
         }
-
         System.out.println(program);
         return program;
     }

@@ -5,7 +5,7 @@ import com.whg.compile.ast.ASTNode;
 public class BaseASTNodeHandler implements ASTNodeHandler{
 
     @Override
-    public void enter(ASTNode node, ASTNode newAst) {
+    public void enter(ASTNode node) {
         ASTNode parent = node.parent();
         String retract = addRetract(calcLevel(node));
         System.out.println(retract+"-> "+node.type()+"("+node.hashCode()+")"
@@ -13,7 +13,7 @@ public class BaseASTNodeHandler implements ASTNodeHandler{
     }
 
     @Override
-    public void exist(ASTNode node, ASTNode newAst) {
+    public void exist(ASTNode node) {
         ASTNode parent = node.parent();
         String retract = addRetract(calcLevel(node));
         System.out.println(retract+"<- "+node.type()+"("+node.hashCode()+")"

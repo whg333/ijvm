@@ -12,7 +12,7 @@ import java.util.List;
 public class CalleeExpression extends BaseASTNode {
 
     Identifier callee;
-    List<ASTNode> arguments;
+    public final List<ASTNode> arguments;
 
     public CalleeExpression(ASTNode parent, CallExpression callExpression) {
         super(parent);
