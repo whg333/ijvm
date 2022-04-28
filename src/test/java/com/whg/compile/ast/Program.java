@@ -16,8 +16,9 @@ public class Program extends BaseASTNode {
         this.body = new ArrayList<>();
     }
 
-    public void addBody(ASTNode element){
-        body.add(element);
+    @Override
+    public void addNode(ASTNode node){
+        body.add(node);
     }
 
     @Override

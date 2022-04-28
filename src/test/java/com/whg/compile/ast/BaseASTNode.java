@@ -17,8 +17,18 @@ public class BaseASTNode implements ASTNode{
     }
 
     @Override
+    public Object value() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public ASTNode parent() {
         return parent;
+    }
+
+    @Override
+    public void addNode(ASTNode node) {
+        throw new UnsupportedOperationException();
     }
 
     @Override

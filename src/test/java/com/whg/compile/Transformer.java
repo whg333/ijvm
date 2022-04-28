@@ -7,9 +7,10 @@ import com.whg.compile.transform.Traverser;
 public class Transformer {
 
     ASTNode transform(ASTNode ast){
-        Program newAst = new Program();
-        new Traverser().traverse(ast);
-        return newAst;
+        Program program = new Program();
+        new Traverser(program).traverse(ast);
+        System.out.println(program);
+        return program;
     }
 
 }

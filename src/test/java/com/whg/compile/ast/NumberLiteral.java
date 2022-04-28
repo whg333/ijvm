@@ -11,6 +11,11 @@ public class NumberLiteral extends BaseASTNode {
     }
 
     @Override
+    public Number value() {
+        return value;
+    }
+
+    @Override
     public String toString() {
         return "{" +
                 "\"type\": \"" + type + "\"" +

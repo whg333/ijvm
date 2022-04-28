@@ -6,7 +6,11 @@ public interface ASTNode {
 
     ASTType type();
 
+    Object value();
+
     ASTNode parent();
+
+    void addNode(ASTNode node);
 
     void traverse(Traverser traverser);
 

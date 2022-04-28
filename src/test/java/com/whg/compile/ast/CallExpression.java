@@ -18,8 +18,14 @@ public class CallExpression extends BaseASTNode {
         this.params = new ArrayList<>();
     }
 
-    public void addParams(ASTNode element){
-        params.add(element);
+    @Override
+    public String value() {
+        return name;
+    }
+
+    @Override
+    public void addNode(ASTNode node){
+        params.add(node);
     }
 
     @Override
