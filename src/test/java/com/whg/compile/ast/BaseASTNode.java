@@ -42,7 +42,7 @@ public class BaseASTNode implements ASTNode{
 
     @Override
     public void traverse(Traverser traverser) {
-
+        // do nothing
     }
 
     @Override
