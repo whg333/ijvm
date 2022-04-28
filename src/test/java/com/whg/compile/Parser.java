@@ -23,28 +23,28 @@ public class Parser {
 
         int size = tokens.size();
         while(current < size){
-            program.addBody(walk());
+            program.addBody(walk(program));
         }
 
         System.out.println(program);
         return program;
     }
 
-    private ASTNode walk() {
+    private ASTNode walk(ASTNode parent) {
         Token token = tokens.get(current);
 
         if(token.isNumber()){
             current++;
-            return new NumberLiteral(Integer.valueOf(token.value));
+            return new NumberLiteral(parent, Integer.valueOf(token.value));
         }
 
         if(token.isLeftParen()){
             token = tokens.get(++current);
-            CallExpression callExpression = new CallExpression(token.value);
+            CallExpression callExpression = new CallExpression(parent, token.value);
 
             token = tokens.get(++current);
             while(!token.isParen() || !token.isRightParen()){
-                callExpression.addParams(walk());
+                callExpression.addParams(walk(callExpression));
                 token = tokens.get(current);
             }
 

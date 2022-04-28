@@ -11,7 +11,8 @@ public class CallExpression extends BaseASTNode {
     final String name;
     final List<ASTNode> params;
 
-    public CallExpression(String name) {
+    public CallExpression(ASTNode parent, String name) {
+        super(parent);
         this.type = ASTType.CallExpression;
         this.name = name;
         this.params = new ArrayList<>();
@@ -23,7 +24,7 @@ public class CallExpression extends BaseASTNode {
 
     @Override
     public void traverse() {
-        Traverser.traverseList(params, this);
+        Traverser.traverseList(params);
     }
 
     @Override

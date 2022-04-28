@@ -16,24 +16,24 @@ public class Traverser {
     }
 
     public static void traverse(ASTNode ast){
-        traverseNode(ast, null);
+        traverseNode(ast);
     }
 
-    public static void traverseList(List<ASTNode> list, ASTNode parent){
-        list.forEach(node -> traverseNode(node, parent));
+    public static void traverseList(List<ASTNode> list){
+        list.forEach(node -> traverseNode(node));
     }
 
-    static void traverseNode(ASTNode node, ASTNode parent){
+    static void traverseNode(ASTNode node){
         ASTType type = node.type();
         ASTNodeHandler handler = handlerMap.get(type);
         if(handler != null){
-            handler.enter(node, parent);
+            handler.enter(node);
         }
 
         node.traverse();
 
         if(handler != null){
-            handler.exist(node, parent);
+            handler.exist(node);
         }
     }
 

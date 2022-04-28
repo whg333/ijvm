@@ -11,6 +11,7 @@ public class Program extends BaseASTNode {
     final List<ASTNode> body;
 
     public Program() {
+        super(null);
         this.type = ASTType.Program;
         this.body = new ArrayList<>();
     }
@@ -21,7 +22,7 @@ public class Program extends BaseASTNode {
 
     @Override
     public void traverse() {
-        Traverser.traverseList(body, this);
+        Traverser.traverseList(body);
     }
 
     @Override
