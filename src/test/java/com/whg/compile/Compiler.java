@@ -12,13 +12,13 @@ import java.util.List;
 public class Compiler {
 
     String compile(String input){
-        List<Token> tokens = new Tokenizer().parseTokens(input);
+        List<Token> tokens = Tokenizer.parseTokens(input);
         ASTNode ast = new Parser(tokens).parseAST();
-        ASTNode newAst = new Transformer().transform(ast);
+        ASTNode newAst = Transformer.transform(ast);
 
         new BaseTraverser().traverse(newAst); // traverse newAst
 
-        String output = new CodeGenerator().generate(newAst);
+        String output = CodeGenerator.generate(newAst);
 
         return output;
     }

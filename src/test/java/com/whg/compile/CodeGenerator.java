@@ -8,17 +8,17 @@ import java.util.stream.Collectors;
 
 public class CodeGenerator {
 
-    String generate(ASTNode node){
+    public static String generate(ASTNode node){
         switch (node.type()){
             case Program:
-                return node.children().stream().map(this::generate)
+                return node.children().stream().map(CodeGenerator::generate)
                         .collect(Collectors.joining("\n"));
             case ExpressionStatement:
                 return generate(((ExpressionStatement)node).expression)/*+';'*/;
             case CalleeExpression:
                 return generate(((CalleeExpression)node).callee)
                         + '('
-                        + ((CalleeExpression)node).arguments.stream().map(this::generate)
+                        + ((CalleeExpression)node).arguments.stream().map(CodeGenerator::generate)
                             .collect(Collectors.joining(", "))
                         + ')';
             case Identifier:

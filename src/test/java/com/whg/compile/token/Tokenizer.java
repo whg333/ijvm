@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Tokenizer {
 
-    public List<Token> parseTokens(String input){
+    public static List<Token> parseTokens(String input){
         List<Token> tokens = new ArrayList<>();
         int current = 0;
         int length = input.length();
@@ -41,19 +41,19 @@ public class Tokenizer {
         return tokens;
     }
 
-    private boolean isParen(char c){
+    private static boolean isParen(char c){
         return c == '(' || c == ')';
     }
 
-    private boolean isDigit(char c){
+    private static boolean isDigit(char c){
         return Character.isDigit(c);
     }
 
-    private boolean isLetter(char c){
+    private static boolean isLetter(char c){
         return Character.isLetter(c);
     }
 
-    private boolean isSpace(char c){
+    private static boolean isSpace(char c){
         return Character.isSpaceChar(c) || Character.isWhitespace(c);
     }
 
