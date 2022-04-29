@@ -1,13 +1,10 @@
 package com.whg.compile.ast;
 
-import com.whg.compile.transform.ITraverser;
-import com.whg.compile.transform.Traverser;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class CallExpression extends BaseASTNode {
+public class CallExpression extends ASTComposite {
 
     final String name;
     final List<ASTNode> params;
@@ -30,8 +27,8 @@ public class CallExpression extends BaseASTNode {
     }
 
     @Override
-    public void traverse(ITraverser traverser) {
-        traverser.traverseList(params);
+    public List<ASTNode> children() {
+        return params;
     }
 
     @Override

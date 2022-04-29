@@ -1,12 +1,13 @@
 package com.whg.compile.ast.transform;
 
+import com.whg.compile.ast.ASTComposite;
 import com.whg.compile.ast.ASTNode;
 import com.whg.compile.ast.ASTType;
-import com.whg.compile.ast.BaseASTNode;
-import com.whg.compile.transform.ITraverser;
-import com.whg.compile.transform.Traverser;
 
-public class ExpressionStatement extends BaseASTNode {
+import java.util.Collections;
+import java.util.List;
+
+public class ExpressionStatement extends ASTComposite {
 
     public final CalleeExpression expression;
 
@@ -17,8 +18,8 @@ public class ExpressionStatement extends BaseASTNode {
     }
 
     @Override
-    public void traverse(ITraverser traverser) {
-        traverser.traverse(expression);
+    public List<ASTNode> children() {
+        return Collections.singletonList(expression);
     }
 
     @Override
