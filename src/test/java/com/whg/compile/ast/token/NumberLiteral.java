@@ -1,4 +1,8 @@
-package com.whg.compile.ast;
+package com.whg.compile.ast.token;
+
+import com.whg.compile.ast.ASTNode;
+import com.whg.compile.ast.ASTType;
+import com.whg.compile.ast.BaseASTNode;
 
 public class NumberLiteral extends BaseASTNode {
 

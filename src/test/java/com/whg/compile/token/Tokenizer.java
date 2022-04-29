@@ -1,7 +1,4 @@
-package com.whg.compile;
-
-import com.whg.compile.token.Token;
-import com.whg.compile.token.TokenType;
+package com.whg.compile.token;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,7 +6,7 @@ import java.util.List;
 
 public class Tokenizer {
 
-    List<Token> parseTokens(String input){
+    public List<Token> parseTokens(String input){
         List<Token> tokens = new ArrayList<>();
         int current = 0;
         int length = input.length();

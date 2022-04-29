@@ -1,6 +1,6 @@
 package com.whg.compile.ast;
 
-import com.whg.compile.transform.ITraverser;
+import com.whg.compile.transform.traverse.ITraverser;
 
 /**
  * 组合节点，即标记带有孩子的节点

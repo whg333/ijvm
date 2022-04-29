@@ -1,11 +1,12 @@
-package com.whg.compile.transform;
+package com.whg.compile.transform.traverse;
 
 import com.whg.compile.ast.ASTNode;
 import com.whg.compile.ast.ASTType;
-import com.whg.compile.ast.CallExpression;
-import com.whg.compile.ast.NumberLiteral;
+import com.whg.compile.ast.token.CallExpression;
+import com.whg.compile.ast.token.NumberLiteral;
 import com.whg.compile.ast.transform.CalleeExpression;
 import com.whg.compile.ast.transform.ExpressionStatement;
+import com.whg.compile.transform.BaseASTNodeHandler;
 
 public class Traverser extends BaseTraverser{
 

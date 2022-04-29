@@ -1,9 +1,8 @@
-package com.whg.compile;
+package com.whg.compile.ast;
 
-import com.whg.compile.ast.ASTNode;
-import com.whg.compile.ast.CallExpression;
-import com.whg.compile.ast.NumberLiteral;
-import com.whg.compile.ast.Program;
+import com.whg.compile.ast.token.CallExpression;
+import com.whg.compile.ast.token.NumberLiteral;
+import com.whg.compile.ast.token.Program;
 import com.whg.compile.token.Token;
 
 import java.util.List;
@@ -18,7 +17,7 @@ public class Parser {
         current = 0;
     }
 
-    ASTNode parseAST(){
+    public ASTNode parseAST(){
         Program program = new Program();
         int size = tokens.size();
         while(current < size){
