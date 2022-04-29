@@ -1,5 +1,6 @@
 package com.whg.compile.ast;
 
+import com.whg.compile.transform.ITraverser;
 import com.whg.compile.transform.Traverser;
 
 import java.util.List;
@@ -41,7 +42,7 @@ public class BaseASTNode implements ASTNode{
     }
 
     @Override
-    public void traverse(Traverser traverser) {
+    public void traverse(ITraverser traverser) {
         // do nothing
     }
 

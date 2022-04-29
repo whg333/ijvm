@@ -1,5 +1,6 @@
 package com.whg.compile.ast;
 
+import com.whg.compile.transform.ITraverser;
 import com.whg.compile.transform.Traverser;
 
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class Program extends BaseASTNode {
     }
 
     @Override
-    public void traverse(Traverser traverser) {
+    public void traverse(ITraverser traverser) {
         traverser.traverseList(body);
     }
 

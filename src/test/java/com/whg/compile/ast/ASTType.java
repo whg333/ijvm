@@ -6,6 +6,6 @@ public enum ASTType {
     Program, CallExpression, NumberLiteral,
 
     // transform
-    CalleeExpression, ExpressionStatement, Identifier
+    ExpressionStatement, CalleeExpression, Identifier
 
 }
