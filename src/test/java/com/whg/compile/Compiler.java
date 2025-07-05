@@ -11,16 +11,14 @@ import java.util.List;
 
 public class Compiler {
 
-    String compile(String input){
+    public static String compile(String input){
         List<Token> tokens = Tokenizer.parseTokens(input);
         ASTNode ast = new Parser(tokens).parseAST();
         ASTNode newAst = Transformer.transform(ast);
 
         new BaseTraverser().traverse(newAst); // traverse newAst
 
-        String output = CodeGenerator.generate(newAst);
-
-        return output;
+        return CodeGenerator.generate(newAst);
     }
 
 }
